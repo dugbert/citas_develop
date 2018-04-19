@@ -1,0 +1,33 @@
+Algorithms
+"While data structures help us to use data efficiently, algorithms help us to perform different operations on those data efficiently[...] There can be many different approaches to find solutions of a problem, and each of the approaches can be named as algorithms [...] we can say that for a particular problem or task, there can be multiple ways or algorithms to perform." rahman (2007): 25
+
+"We need algorithms to solve our problem.
+An algorithm is a step by step process which defines the set of instructions to be executed in a certain order to get a desired output. In general, algorithms are not limited to any programming language or platform. They are independent of programming languages. An algorithm must have the following characteristics: 
+	Input: An algorithm must have well-defined input. It can be 0 or more inputs.
+	Output: An algorithm must have well-defined output. It must match the desired output.
+	Precision: All steps are precisely defined.
+	Finiteness: An algorithm must stop after a certain number of steps. It should not run indefinitely.
+	Unambiguous: An algorithm should be clear and should not have any ambiguity in any of the steps.
+	Independent: An algorithm should be independent of any programming language or platforms." rahman (2007): 39
+
+Pseudocode
+"Computer programs are written for machine reading. We have to write them in a certain format which will be compiled for the machine to understand. But often those written codes are not easy to follow for people other than programmers. In order to show those codes in an informal way so that humans can also understand, we prepare pseudocode. Though it is not an actual programming language code, pseudocode has similar structural conventions of a programming language. Since pseudocode does not run as a real program, there is no standard way of writing a pseudocode. We can follow our own way of writing a pseudocode." rahman (2007): 40
+
+Algorithm analysis
+"Though we have written the implementation, we are not sure about how many resources our written code will utilize. When we say resource, we mean both time and storage resource utilized by the running application. We write algorithms to work with any length of the input. In order to understand how our algorithm behaves when the input grows larger and how many resources have been utilized, we usually measure the efficiency of an algorithm by relating the input length to the number of steps (time complexity) or storage (space complexity). It is very important to do the analysis of algorithms in order to find the most efficient algorithm to solve the problem."
+
+	Analysis Stages
+	"We can do algorithm analysis in two different stages. One is done before implementation and one after the implementation. The analysis we do before implementation is also known as theoretical analysis and we assume that other factors such as processing power and spaces are going to be constant. The after implementation analysis is known as empirical analysis of an algorithm which can vary from platform to platform or from language to language. In empirical analysis, we can get solid statistics from the system regarding time and space utilization." rahman (2007): 42
+
+	Complexity Measures
+	"There are two types of complexity we measure in algorithmic analysis: Time complexity: Time complexity is measured by the number of key operations in the algorithm. In other words, time complexity quantifies the amount of time taken by an algorithm from start to finish. Space complexity: Space complexity defines the amount of space (in memory) required by the algorithm in its life cycle. It depends on the choice of data structures and platforms." rahman (2007): 43
+
+	Asymptotical Analysis
+	"If we assume that other operations are fixed, the only variable should be the input size. We can then define a boundary or mathematical equation to define the situation to calculate its runtime performance. We call it asymptotical analysis. Asymptotical analysis is input bound which means if there is no input, other factors are constant. We use asymptotical analysis to find out the best case, worst case, and average case scenario of algorithms:
+		Best case: Best case indicates the minimum time required to execute the program. For our example algorithm, the best case can be that, for each book, we are only searching the first item. So, we end up searching for a very little amount of time. We use Ω notation (Sigma notation) to indicate the best case scenario.
+		Average case: It indicates the average time required to execute a program. For our algorithm the average case will be finding the books around the middle of the list most of the time, or half of the time they are at the beginning of the list and the remaining half are at the end of the list.
+		Worst case: It indicates the maximum running time for a program. The worst case example will be finding the books at the end of the list all the time. We use the O (big oh) notation to describe the worst case scenario. For each book searching in our algorithm, it can take O(n) running time. From now on, we will use this notation to express the complexity of our algorithm." rahman (2007): 43
+
+rahman (2007):
+rahman (2007):
+rahman (2007):

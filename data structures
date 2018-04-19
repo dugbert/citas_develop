@@ -1,0 +1,61 @@
+Data Structures
+"Lots of data are analyzed to prepare simple information, which is delivered to us in real time [...] Computers process these large sets of data and helps us in every technology-dependent task and need. In order to make computer operation efficient, we represent data in different formats or we can call in different structures, which are known as data structures." rahman (2007): 24
+
+	"Programming terms are not generated from outside the world. In fact, the majority of the data structures are inspired from real life and they use the same terms most of the times. Whether we are preparing our task list, contact list, book piles, diet charting, preparing a family tree, or organization hierarchy, we are basically using different arrangement techniques which are known as data structures in the computing world." rahman (2007): 25
+
+		Example: queue	
+		"Let us consider [an] example. We are going to buy tickets for an important football match. There are thousands of people waiting for the ticket booth to open. Tickets are going to be distributed on a first come first served basis [...] if we knew that people were waiting in a structured way, in a line, or queue, then it will be easier to handle the crowd and we will hand over the tickets to whoever came first. This is a common phenomenon known as a queue which is heavily used in the programming world." rahman (2007): 25
+
+	Linear and No-linear Data Structures
+	"In linear data structures, items are structured in a linear or sequential manner. Array, list, stack, and queue are examples of linear structures. In nonlinear structures, data are not structured in a sequential way." rahman (2007): 27
+
+		Struct
+		"Usually, a variable can store a single data type and a single scalar data type can only store a single value. There are many situations where we might need to group some data types together as a single complex data type[...] a struct is a container of values which is typically accessed using names. Though structs are very popular in C programming language, we can use a similar concept in PHP as well." rahman (2007): 28
+
+		Array
+		"Though an array is considered to be a data type in PHP, an array is actually a data structure which is mostly used in all programming platforms. In PHP, the array is actually an ordered map. We can store multiple values in a single array as a single variable. Matrix type data are easy to store in an array and hence it is used widely in all programming platforms. Usually arrays are a fixed size collection which is accessed by sequential numeric indexes. In PHP, arrays are implemented differently and you can define dynamic arrays without defining any fixed size of the array. [...] Arrays can have different dimensions. If an array has only one index to access an element, we call it a single dimension array. But if it requires two or more indexes to access an element, we call it two dimensional or multidimensional arrays respectively." rahman (2007): 29
+
+		Linked List
+		"A linked list is a linear data structure which is a collection of data elements also known as nodes and can have varying sizes. Usually, listed items are connected through a pointer which is known as a link and hence it is known as a linked list. In a linked list, one list element links to the next element through a pointer [...] Linked lists are the most common and simplest form of data structures used by programming languages. In a single linked list, we can only go forward." rahman (2007): 30
+
+		Doubly Linked List
+		"A doubly linked list is a special type of linked list where we not only store what is the next node, but we also store the previous node inside the node structure. As a result, it can move forward and backward within the list. It gives more flexibility than a single linked list or linked list by having both the previous and next pointers." rahman (2007): 31
+
+		Stack
+		"stack is a linear data structure with the LIFO principle. As a result, stacks have only one end to add a new item or remove an item. It is one of the oldest and most used data structures in computer technology. We always add or remove an item from a stack using the single point named top. The term push is used to indicate an item to be added on top of the stack and pop to remove an item from the top [...]" rahman (2007): 32
+
+		Queue
+		"A queue is another linear data structure which follows the FIFO principle. A queue allows two basic operations on the collection. The first one is enqueue which allows us to add an item to the back of the queue. The second one is dequeue which allows us to remove an item from the front of the queue. A queue is another of the most used data structures in computer technology." rahman (2007): 33
+
+		Set
+		"A set is an abstract data type which is used to store certain values. These values are not stored in any particular order but there should not be any repeated values in the set. Set is not used like a collection where we retrieve a specific value from it; a set is used to check the existence of a value inside it. Sometimes a set data structure can be sorted and we call it an ordered set." rahman (2007): 34
+
+		Map
+		"A map is a collection of key and value pairs where all the keys are unique. We can consider a map as an associative array where all keys are unique. We can add and remove using key and value pairs along with update and look up from a map using a key. In fact, PHP arrays are ordered map implementations." rahman (2007): 35
+
+		Tree
+		"A tree is the most widely used nonlinear data structure in the computing world. It is highly used for hierarchical data structures. A tree consists of nodes and there is a special node which is known as the root of the tree which starts the tree structure. Other nodes descend from the root node. Tree data structure is recursive which means a tree can contain many subtrees. Nodes are connected with each other through edges." rahman (2007): 36
+
+		Graph
+		"A graph data structure is a special type of nonlinear data structure which consists of a finite number of vertices or nodes, and edges or arcs. A graph can be both directed and undirected. A directed graph clearly indicates the direction of the edges, while an undirected graph mentions the edges, not the direction. As a result, in an undirected graph, both directions of edge are considered as a single edge. In other words, we can say a graph is a pair of sets (V, E), where V is the set of vertices and E is the set of edges: V = {A, B, C, D, E, F} E = {AB, BC, CE, ED, EF, DB} In a directed graph, an edge AB is different from an edge BA while in an undirected graph, both AB and BA are the same. Graphs are handy to solve lots of complex problems in the programming world." rahman (2007): 37 
+
+		Heap
+		"A heap is a special tree-based data structure which satisfies the heap properties. The largest key is the root and smaller keys are leaves, which is known as max heap. Or, the smallest key is the root and larger keys are leaves, which is known as min heap. Though the root of a heap structure is either the largest or smallest key of the tree, it is not necessarily a sorted structure. A heap is used for solving graph algorithms with efficiency and also in sorting." rahman (2007): 38
+
+Primitive Data Types: storing data
+"PHP has eight primitive data types and those are booleans, integer, float, string, array, object, resource, and null. Also, we have to remember that PHP is a weakly typed language and that we are not bothered about the data type declaration while creating those. Though PHP has some static type features, PHP is predominantly a dynamically typed language which means variables are not required to be declared before using it. We can assign a value to a new variable and use it instantly." rahman (2007): 26
+
+Abstract Data Type: handling data
+"Our primitive data types have one particular objective: storing data. In order to achieve some flexibility in performing operations on those data, we will require using the data types in such a way so that we can use them as a particular model and perform some operations. This particular way of handling data through a conceptual model is known as Abstract Data Type, or ADT. ADT also defines a set of possible operations for the data." rahman (2007):26
+
+	Common ADTs:
+	List, Map, Set, Stack, Queue, Priority, Queue, Graph, Tree.
+
+	Stack & Queue as ADTs
+	"Considering the stack as ADT, it is not only a collection of data but also two important operations called push and pop. Usually, we put a new entry at the top of the stack which is known as push and when we want to take an item, we take from the top which is also known as pop. If we consider PHP array as a stack, we will require additional functionality to achieve these push and pop operations to consider it as stack ADT. Similarly, a queue is also an ADT with two required operations: to add an item at the end of the queue also known as enqueue and remove an item from the beginning of the queue, also known as dequeue. Both sound similar but if we give a close observation we will see that a stack works as a Last-In, First-Out (LIFO) model whereas a queue works as a First-In, First-Out (FIFO) model. These two different mathematical models make them two different ADTs." rahman (2007): 26
+
+ADT vs Data Structures
+"We need to understand that ADTs are mainly theoretical concepts which are used in design and analysis of algorithms, data structures, and software design. In contrast, data structures are concrete representations. In order to implement an ADT, we might need to use data types or data structures or both." rahman (2007): 26
+
+
+

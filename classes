@@ -1,0 +1,62 @@
+http://php.net/manual/en/language.oop5.basic.php
+
+Classes
+Basic class definitions begin with the keyword class, followed by a class name, followed by a pair of curly braces which enclose the definitions of the properties and methods belonging to the class. The class name can be any valid label, provided it is not a PHP reserved word. A valid class name starts with a letter or underscore, followed by any number of letters, numbers, or underscores.
+
+    $this
+    The pseudo-variable $this is available when a method is called from within an object context. $this is a reference to the calling object (usually the object to which the method belongs, but possibly another object, if the method is called statically from the context of a secondary object).
+
+        The pseudo-variable $this is available inside any class method when that method is called from within an object context. $this is a reference to the calling object (usually the object to which the method belongs, but possibly another object, if the method is called statically from the context of a secondary object).
+
+    new Class
+    To create an instance of a class, the new keyword must be used. An object will always be created unless the object has a constructor defined that throws an exception on error. Classes should be defined before instantiation (and in some cases this is a requirement). If a string containing the name of a class is used with new, a new instance of that class will be created. If the class is in a namespace, its fully qualified name must be used when doing this.
+
+    In the class context, it is possible to create a new object by new self and new parent. When assigning an already created instance of a class to a new variable, the new variable will access the same instance as the object that was assigned. This behaviour is the same when passing instances to a function. A copy of an already created object can be made by cloning it.
+
+    Property and method
+    Class properties and methods live in separate "namespaces", so it is possible to have a property and a method with the same name. Referring to both a property and a method has the same notation, and whether a property will be accessed or a method will be called, solely depends on the context, i.e. whether the usage is a variable access or a function call [...] calling an anonymous function which has been assigned to a property is not directly possible. Instead the property has to be assigned to a variable first, for instance. As of PHP 7.0.0 it is possible to call such a property directly by enclosing it in parentheses.
+
+        extends
+        A class can inherit the methods and properties of another class by using the keyword extends in the class declaration. It is not possible to extend multiple classes; a class can only inherit from one base class. The inherited methods and properties can be overridden by redeclaring them with the same name defined in the parent class. However, if the parent class has defined a method as final, that method may not be overridden. It is possible to access the overridden methods or static properties by referencing them with parent::. When overriding methods, the parameter signature should remain the same or PHP will generate an E_STRICT level error. This does not apply to the constructor, which allows overriding with different parameters.
+
+        Properties
+        [...] are defined by using one of the keywords public, protected, or private, followed by a normal variable declaration. This declaration may include an initialization, but this initialization must be a constant value--that is, it must be able to be evaluated at compile time and must not depend on run-time information in order to be evaluated.
+
+        Static vs non-static
+        Within class methods non-static properties may be accessed by using -> (Object Operator): $this->property (where property is the name of the property). Static properties are accessed by using the :: (Double Colon): self::$property. 
+            
+            Static
+            Declaring class properties or methods as static makes them accessible without needing an instantiation of the class. A property declared as static cannot be accessed with an instantiated class object (though a static method can).
+
+                Methods
+                Because static methods are callable without an instance of the object created, the pseudo-variable $this is not available inside the method declared as static.
+
+                Properties
+                
+
+
+
+
+
+
+
+	Abstract classes
+	An Abstract class provides concrete base functions as well as abstract functions that must be implemented by concrete child classes—binding them into a contract so to speak, if they wish to make use of the base functionality. This is a subtle but important point and this is where abstract classes really shine. They can call abstract functions from within base concrete functions.
+
+		Characteristics of abstract classes:
+
+		Single inheritance. Child classes can extend only one class at a time.
+		
+		Abstract classes cannot be instantiated — no new Animal();
+		
+		Abstract classes can define class variables of type const only.
+		
+		Abstract class A can be extended by another abstract class B. Abstract class B can implement none or any of the abstract functions in A.
+		
+		In the previous case, a child class C which extends abstract class B must implement all abstract functions in B as well as the abstract functions in A which have not already been implemented in B.
+		
+		The signature of the concrete functions and abstract functions must be the same. However, if an abstract function is defined as 'abstract function speak($greeting)'; then it is okay to implement it as 'function speak($greeting, $shout = FALSE)'' but not 'function speak($greeting, $shout)'.
+		
+		The visibility of functions in the child classes must be the same or less restrictive than the parent class. Thus, a protected abstract function can be implemented as either protected or public but not private.
+		
+		Declaring functions as static abstract throws a strict warning in PHP 5.2 or earlier, however, as of PHP 5.3 this is allowed.

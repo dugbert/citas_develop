@@ -1,0 +1,30 @@
+Linked Lists
+
+
+Lists vs arrays
+"In most of the programming languages, the array is a fixed size structure. As a result, it cannot grow dynamically, and shrinking or removing an item from a fixed size array is also problematic since we have to shift the array's items to fill up the gap. For this reason, many developers prefer lists instead of arrays. Considering the fact that each array element can have an overhead of some extra bytes, linked lists can be used where memory efficiency is a big factor." rahman (2007): 67
+
+Linked list: collections of nodes
+"A linked list is a collection of objects known as nodes. Each node is connected to the next node with a link, which is nothing but an object reference. [...] A node is an object, meaning it can store any data type as simple as a string, integer, or float, or complex, such as an array, array of arrays, objects, or object arrays. We can store anything as per our need." rahman (2007): 68
+
+Some operations with linked lists
+"We can also perform a wide variety of operations on a linked list, such as the following ones:
+	Checking whether the list is empty
+	Displaying all items in the list
+	Searching an item in the list
+	Getting the size of the list
+	Inserting a new item at the beginning or end of the list
+	Removing an item from the beginning or end of the list
+	Inserting a new item at a specific place or before/after an item
+	Reversing a list." rahman (2007): 68
+
+	Doubly linked lists
+	"In a doubly linked list, there are two links on each node: one to point to the next node and another one to the previous node. Where the singly linked list is unidirectional, the doubly linked list is bidirectional. We can move forward or backward in the list without any problem." rahman (2007): 70
+
+	Circular linked lists
+	"In a singly or doubly linked list, there is no node after the last node, so the last node does not have any subsequent node to iterate on. If we allow the last node to point to the first node, we are making a circle. Such linked lists are known as circular linked lists. We can have both singly and doubly linked lists as circular linked lists." rahman (2007): 71
+
+	Multi-linked lists
+	"A multi-linked list, or multiply linked list, is a special type of linked list that has two or more links linking each node to another node. It can grow multi-directionally based on the purpose of the linked list." rahman (2007): 72
+
+	

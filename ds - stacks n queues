@@ -1,0 +1,23 @@
+ds - stacks n queues
+
+Stacks
+"The stack is a linear data structure that follows the Last-In, First-Out (LIFO) principle. This means that there is only one end for the stack, which is used to add items and remove items from the structure. The addition of new items in the stack is known as push, and push whilst removing an item is known as pop. Since we only have one end to operate, we are always going to push an item at that end, and when we pop, the last item from that end will be popped up. The top most elements in the stack that are also at the very beginning of the stack end are known as the top." rahman (2007): 101
+
+	Operations
+	"[...] we have four basic operations in a stack:
+		
+		Push: add an item at the top of the stack.
+		
+		Pop: remove the top item of the stack.
+		
+		Top: returns the top item of the stack. It is not the same as pop, as 		it does not remove the item, it just gets the value for us.
+		
+		isEmpty: checks whether the stack is empty or not." rahman (2007): 101
+
+	"Since the stack operates at one end that remembers the top of the stack all the time, if we want to search for an item in the stack, it means we have to search through the whole list. It is the same for accessing a particular item in the stack." rahman (2007): 103
+
+Queues
+"The queue is another special linear data structure that follows the First-In, First-Out (FIFO) principle. There are two ends for the operation: one to append to the queue and one to remove from the queue. This is different from a stack, where we used one end for both the add and remove operations. The insertion will always be at the back or rear section. The removal of an element will take place from the frontend. The process of adding a new element to the queue is known as enqueue and the process of removing an element is known as dequeue. The process of looking at the front element of the queue without removing the element is known as a peek" rahman (2007): 108
+
+	Priority queues
+	""

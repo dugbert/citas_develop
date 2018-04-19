@@ -1,0 +1,25 @@
+Glosario web
+
+API: Application Programming Interface, which is a software intermediary that allows two applications to talk to each other.
+
+Abstrac classes: An abstract class is a type of class which we can not create an object from. An abstract class is used like an interface class except we can add functionality into the methods defined in the abstract class. To use the abstract class we will also need to use the extends keyword, we can only implement one abstract class where we can implement multiple interface classes. An abstract class will have abstract methods which are defined by the abstract keyword, these methods are like the methods defined in the interface classes. All methods in abstract classes that you want to override can not be private methods as they will need to be used outside of the class. You will use an abstract class in a similar way you would use an interface but there is common functionality which will be used on all the classes which extend it.
+
+Closure: "In Laravel we have seen the concept of closures. [...] This is nothing but called an anonymous function. It is also called ‘lambdas’. An anonymous function is nothing but a function without a name." sinha (2017): 28
+
+CSRF: cross-site request forgery.
+
+Digital Signature: A digital signature is a mathematical scheme for demonstrating the authenticity of digital messages or documents. A valid digital signature gives a recipient reason to believe that the message was created by a known sender (authentication), that the sender cannot deny having sent the message (non-repudiation), and that the message was not altered in transit (integrity). Digital signatures are a standard element of most cryptographic protocol suites, and are commonly used for software distribution, financial transactions, contract management software, and in other cases where it is important to detect forgery or tampering.
+
+Interface:  a blueprint for your class that can be used to implement a class ( abstract or not); [...] interface cannot have any concrete methods. Concrete methods are those methods which have some code inside them; in one word - implemented. What your interface can have is static members and method signatures. 
+
+MVC: Model–view–controller is an architectural pattern commonly used for developing user interfaces that divides an application into three interconnected parts. This is done to separate internal representations of information from the ways information is presented to and accepted from the user.
+
+ORM: Object Relational Mapper. The mapper part, is because we are mapping our PHP objects or classes to database tables and rows.
+
+REST: Representational State Transfer is an architectural protocol through which we imagine our URLs as nouns and give them common verbs like GET, POST, PUT, or DELETE. Every URL is a representation of an imaginary resource.
+
+URI: A Uniform Resource Identifier is a string of characters used to identify a resource.
+
+URL: A Uniform Resource Locator (URL), colloquially termed a web address,[1] is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it. A URL is a specific type of Uniform Resource Identifier (URI).
+
+

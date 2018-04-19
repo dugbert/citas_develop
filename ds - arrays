@@ -1,0 +1,55 @@
+Arrays
+
+Arrays in PHP
+"PHP arrays are so dynamic and flexible that we have to think about whether it is a regular array, an associative array, or a multidimensional array, as in some other languages. We do not need to define the size and data type of the array we are going to use. [...] the array concept in PHP is not actually the real array, it is actually a HashMap. In other words, a PHP array is not the plain and simple array concept we have from other languages." rahman (2007): 48
+
+	Ordered map
+	"An array in PHP is actually an ordered map. A map is a type that associates values to keys. This type is optimized for several different uses; it can be treated as an array, list (vector), hash table (an implementation of a map), dictionary, collection, stack, queue, and probably more. As array values can be other arrays, trees and multidimensional arrays are also possible." php.net
+
+	Numeric Array
+	"A numeric array does not mean it only holds numeric data. In fact, it means the indexes will be numbers only. In PHP they can either be sequential or non-sequential but they have to be numeric. In numeric arrays, values are stored and accessed in a linear way." rahman (2007):49
+
+	Associative Array
+	"An associative array is accessed by a key which can be any string. In an associative array, values are stored against the key instead of a linear index. We can use an associative array to store any type of data, just like the numeric array.[...] We can add as many keys as we need without any problem. This gives us the flexibility to represent a data structure similar to structure, map, and dictionary using a PHP associative array." rahman (2007): 50
+
+		Foreach loop
+		"We can use both a numeric array and an associative array as a single array in PHP. But in such a case, we have to be very cautious to choose the right way to iterate through the array elements. In such cases, foreach will be a better choice than a for or while loop."
+
+	Multidimensional Array
+	"A multidimensional array contains multiple arrays in it. In other words, it is an array of array(s). [...] they are one of the most popular and efficient ways of storing data for graphs and other tree-type data structures. [...] We can create n-dimensional arrays using PHP as per our needs, but we have to remember one thing: the more dimensions we add, the more complex the structure becomes. We as humans usually visualize three dimensions, so in order to have more than three-dimensional arrays, we must have a solid understanding of how an array works in multiple dimensions." rahman (2007): 51
+
+	Flexible Storage
+	"[...] PHP array as a dynamic, hybrid data structure for storing any type of data [...] gives us a lot more freedom to utilize an array as a flexible storage container for our data. We can mix different data types and different dimensions of data in a single array. We do not have to even define the size or type of array we are going to use. We can grow, shrink, and modify data to and from an array whenever we need to." rahman (2007): 52
+
+		Memory Usage
+		"PHP arrays can grow or shrink as per our demand. This flexibility comes with a great inconvenience regarding memory usage. [...] when we know we only need a certain number of elements in an array, we can use a fixed array to reduce the memory usage." rahman (2007): 54
+
+SplFixedArray vs PHP Arrays
+"The basic difference between a PHP array and SplFixedArray are: 
+SplFixedArray must have a fixed defined size
+The indexes of SplFixedArray must be integers and within the range of 0 to n, where n is the size of the array we defined
+The SplFixedArray method can be very handy when we have a lot of defined arrays with known size or have an upper limit for the maximum required size of the array. But if we do not know the array size, then it is better to use a PHP array." rahman (2007): 54
+
+	Faster execution
+	"SplFixedArray is also faster in execution compared to general PHP array operations such as accessing value, assigning value, and so on." rahman (2007): 55
+
+	No array functions
+	"Though we use the  SplFixedArray object with [] just like the array, PHP array functions will not be applicable for SplFixedArray. We cannot directly apply any PHP array functions such as array_sum, array_filter, and so on." rahman (2007): 55
+
+	Good performace indicator
+	"Since SplFixedArray has a good performance boost indicator, we can utilize it instead of a regular PHP array in most of our data structures and algorithms." rahman (2007): 56
+
+Hash Tables
+"In programming language, a hash table is a data structure which is used to make an array associative. It means we can use keys to map values instead of using an index. A hash table must use a hash function to compute an index into an array of buckets or slots, from which the desired value can be found[...]" rahman (2007): 61
+
+PHP arrays = Hash Tables
+"[...] a PHP array is actually a hash table and hence it supports associative arrays. We need to remember one thing: that we do not need to define a hash function for the associative array implementation. PHP does it internally for us. As a result, when we create an associative array in PHP, we are actually creating a hash table." rahman (2007): 61
+
+PHP arrays as Struct
+"[...] a struct is a complex data type where we define multiple properties as a group so that we can use it as a single data type. We can write a struct using a PHP array and class. [...] It is simply an associative array with keys as string. A complex struct can be constructed using single or more constructs as its properties. [...] The same thing we can achieve using PHP Class." rahman (2007): 62
+
+	As object or array
+	"Since we have seen both ways of defining a struct, we have to choose either one of them to implement a struct. While creating an object might look more convenient, it is slower compared to array implementation. Where an array has an added advantage of speed, it also has a disadvantage as it takes more memory space compared to an object. Now we have to make the decision based on our preference." rahman (2007): 62
+
+PHP arrays as Sets
+"A set is a simply a collection of values without any particular order. It can contain any data type and we can run different set operations such as union, intersection, complement, and so on. As a set only contains values, we can construct a basic PHP array and assign values to it so that it grows dynamically." rahman (2007): 63

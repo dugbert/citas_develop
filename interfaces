@@ -1,0 +1,6 @@
+Interfaces paulund.co.uk/using-interface-and-abstract-classes-in-php
+
+The interface class is common in many design patterns. It will not add any additional functionality but it outlines a standard format to which your classes need to use. Any classes which inherit from an interface class must have at least the same methods as the interface class. The methods placed in the interface class will not have any functionality but will have just the method stubs to be used by the other classes. The methods outlined in the interface must be used by the other classes or it will throw an error.
+
+	Defining
+	Interface classes are defined by using the keyword interface. All the methods in the interface must be public as this is the nature of an interface.
