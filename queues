@@ -1,0 +1,94 @@
+Queues & jobs
+
+Queues
+"Queues allow you to separate chunks of your application's code fromthe synchronous flow of user interactions out to a list of commands to be processed by a "queue worker." This allows your users to resume interactions with your application while slower processes are handled asynchronously in the background." stauffer (2016): 656
+
+Jobs
+"Jobs are classes that are structured with the intention of encapsulating a chunk of application behavior so that it can be pushed onto a queue." stauffer (2016): 656
+
+Events
+"Laravel's event system follows the pub/sub or observer pattern, allowing you to send out notifications of an event from one part of your application, and elsewhere bind listeners to those notifications to define what behavior should happen in response to them. Using WebSockets, events can also be broadcast to frontend clients." stauffer (2016): 656
+
+Scheduler
+"Laravel's scheduler simplifies scheduling tasks. Point an every-minute cron job to php artisan schedule:run and then schedule your tasks with even the most complex of time requirements using the scheduler, and Laravel will handle all the timings for you." stauffer (2016): 656
+
+"Your application adds a "job" to a queue, which is a chunk of code that tells the application how to perform a particular behavior. Then some other separate application structure, usually a "queue worker," takes the responsability for pulling jobs off of the queue one at a time and performing the appropiate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed." stauffer (2016): 600
+
+"Queues make it easy to remove a costly or slow proess from any synchronous call. [...] Sometims you may not just want to save your users time, but you might have a process like a cron job or a webhook that has a lot of work process; rather than letting it all run ar once (and potentially time out), you may choose to queue its individual pieces and let the queue worker process them one at a time. Additionally, if you have some haevy processing that's more than your sercer can handle, you can spin up more than one queue worker to work through your queue faster than your normal application server cpuld on its own." stauffer (2016): 601
+
+"This job could be shaped any way; it could just be a string, or an array, or an object. In Laravel, it's a collection of information containing the job name, the data payload, the number of attempts that have been made so far to process this job, and some other simple metadata. [...] Laravel provides a structure called a job, which is intended to encapsulate a single task -a behavior that your application can be commanded to do -and allow it to be added to and pulled from a queue." stauffer (2016): 605
+
+"There are two primary ways you can push a job onto a queue: the global dispatch() helper and the methods provided by the BispatchesJobs trair, which is imported by default in evry controller. With each, create an instance of your job, attach any necessary data by passing it to the constructir, and pass it to the dispatch() method. There are three settings you can control in order to customize exactly how you dispatch a job: the connection, the queue, and the delay." stauffer (2016): 608-609
+
+	Connection
+	"If you ever have a multiple queue connections in place at once, you can customize the connection by running onConnection() on yout instantiated job." stauffer (2016): 609
+
+	Queue
+	"Withtin the servers, you can specify which named queue you're pushing a job onto. [...] You can customize which queue you're pushing a job onto with onQueue() method." stauffer (2016): 609
+
+	Delay
+	"You can customize the amount of time your queue workers should wait before processing a job with the delay() methid, ehich accepts an interger representing the number of seconds to delay a job." stauffer (2016): 609
+
+Queue worker
+"In Laravel, [a queue worker] it's an Artisan command that stays running forever (until it's stopped manually) and takes the responsibility for pulling down jobs from your queue and running them. [...] This command starts a daemon "listening" to your queue; every time there are jobs on the queue, it will pull down the first job, handle it, delete it, and move on to the next. If at any point there are no jobs, it "sleeps" for a configurable amount of time before checking again to see if thereare any more jobs." stauffer (2016): 610
+	
+	Handling errors
+	"If an exception is thrown, the queue listener will release that job back onto the queue. That job will be released to be processed again and again until it is able to finish successfully or until it has been attempted the maximum number of times allowed by your queue listener." stauffer (2016): 611
+
+	attempts()
+	"If at any point you'd like to check how many times a job has been attempted already, use the attempts() method on th job itself." stauffer (2016): 613
+
+		Infinite retries
+		"If you din't set --tries, or if you set it to 0, the queue listener will allow for infinite retries. That means if there are any circumstances in which a job could just never be satisfied [...] your app will slowly crawl to a halt as it forever retries uncompletable jobs." stauffer (2016): 6013
+
+		Failed jobs
+		"Once a job has exceeded its allowable numbre of retries, it's considered a "failed" job. Before you do anything else -even if all you want to do is limit the number of times a job can be tried -you'll need to create the "failed jobs" database table. [...] Any job that has surpassed its maximum number of allowed attempts willbe dumped there." stauffer (2016): 613
+
+	Controlling the queue
+	"Sometimes, from within the handling of a job, you'll want to add conditions that will potentially either releasethe job to be restarted later or delete the job forever. To release a job back intothe queue, use the release() command." stauffer (2016): 615
+
+Events
+"With jobs, the calling code informs the application that it should do something [...] With an event, the calling coe instead informs the application that something happened [...] Events are notifications that something has taken place. Some of these events may be "fired" by the framework itself. [...] But some events are also manually triggered by the application's code." stauffer (2016): 617
+
+"An event being fired doesn't do anything on its own. However, you can bind event listeners, whose sole purpose is to listen for the broadcasting of specific events and to act in response. Any event can have anywhere from zero to may event listeners. [...] Many events are fired out into the application; some may never be listened for, and others may have a dozen listeners. The events don know or care." stauffer (2016): 617
+
+	Firing events
+	"There are three ways to fire an event. You can use the Event facade, inject the Dispatcher, or use the event() global helper." stauffer (2016): 618
+
+		"SerializeModels work just like with jobs;it allows you to accept Eloquent models as parameters. InteractWithSockets, ShouldBroadcast, and the broadcastOn() method provide thebacking functionality for bradcoasting events using WebSockets[...] But remember, this object exists not to determine a particular action, but just to encapsulate some data. The first piece of data is its name [...] The rest of the data is any data we pass into the constructor and associate with this entity."
+
+	Listening events
+
+		Event subscribers
+		"There's one more structure you can use ti define the relationship between your events and their listeners. Laravel has a concept called an event subscriber, which is a class that contains a collection of methods that act as separate listeners to unique events, and also contains the mapping of which methid should handle which event." stauffer (2016): 621
+
+			Subscribers
+			"Subscribers need to define a subscribe() methid, which is passed an instance of the event dispatcher. [...] any time you see an @ inline like this means the class name is to the left of the @ and the method name is to the right." stauffer (2016): 622
+
+	Broadcasting events
+	"WebSocket is a protocol, popularized by Pusher, that makes it simple to provide near-real-time communication between web devices. Rather than relying on information passing via HTTP requests, WebSockets libraries open a direct connection between the client and the server. WebSockets are behinf tools like the chat boxes in Gmail and Facebook." stauffer (2016): 623
+
+		Queue listeners
+		"In order for event broadcasting to move quicklu, Laravel pushes the instruction to broadcast themonto a queue. That means tou'll need to have a queue worker running (or use the sync queue driver for local development). [...] Laravel suggests a default delay of three seconds bedore the queue worker looks for new jobs. However, with event broadcasting you may notice some events take a second or two to broadcast. To speed this up, update your queue settings to only wait one second before looking for new jobs." stauffer (2016): 625
+
+		Broadcasting an event
+		"To broadcast an event, you need to mark that events as a broadcast event by having it implement the Iluminate\Contracts\Broadcasting interface. This interface requires you to add the broadcastOn() method, which will return an array of either strings or Channel objects, each representing a Web Socket channel." stauffer (2016): 626
+
+		Structure of WebSocket events
+		"Every event you send with WebSockets can have three primary characteristics: the name, the channel, and the data." stauffer (2016): 626
+
+			Name
+			"The name of an event might be something like user-was-subscribed, but Laravel's default is to use the fully qualified class name of the event; ie.e., so something like App\Events\UserSubscribed. You can customize this by passing the name to the optional broadcastAs() method in yout event class." stauffer (2016): 626
+
+			Channel
+			"The channel is the way of describing which clients should receive this message. It's a very common pattern to have a channel for each user (e.g., users.1, users.2, etc.), and possibly a channel for all users (e.g., users), and maybe one for just users who are members of a certain account (e.g., accounts.1). If the channel you're targeting is a private channel, preface the channel name with private-. and if it's a presence channel, preface the channel name with presence-. So, a private Pusher channel named groups.5 should be, instead, private-groups.5. If you use Laravel's PrivateChannel and PresenceChannel objects in your broadcastOn() methid, they'll take care of adding those prefaces to your channel names for you." stauffer (2016): 626
+
+			Data
+			"The data us a payload, usually JSON, of information relevant to the event -the message, maybe, or infotmation about the user or plan that can be acted upon by the consuming JavaScript." stauffer (2016): 626
+
+	Testing
+	"Testing queued jobs (or anything else in the queue) is easy. In phpunit.xml, which is the configuration file for your tests, the QUEUE_DRIVER enviroment variable is set to sync by default. That means your tests will run jobs or other queued tasks synchronously, directly in your code, without relying on a queue system of any sort. You can test them just like any other code." stauffer (2016): 654
+
+		"To test that an event fired, you have three options. First, you can just test that the behavor you expected hapened, without concerning yourself with the event itself. Second, you can explicitly assert that the event fired [...] Finally, you can run a test againt the event that was fired." stauffer (2016): 654
+
+		"Another common scenario is thatyou're testing code that incidentally fires events, and you want to disable the event listeners during that test. You can disable the event system with the withoutEvents() method." stauffer (2016): 655

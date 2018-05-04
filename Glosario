@@ -18,6 +18,8 @@ ORM: Object Relational Mapper. The mapper part, is because we are mapping our PH
 
 REST: Representational State Transfer is an architectural protocol through which we imagine our URLs as nouns and give them common verbs like GET, POST, PUT, or DELETE. Every URL is a representation of an imaginary resource.
 
+Stack trace: also called 'stack backtrace' or 'stack traceback' is a report of the active stack frames at a certain point in time during the execution of a program. When a program is run, memory is often dynamically allocated in two places; the stack and the heap. Memory is contiguously allocated on a stack but not on a heap, thus reflective of their names. Stack also refers to a programming construct, thus to differentiate it, this stack is referred to as the program's runtime stack.
+
 URI: A Uniform Resource Identifier is a string of characters used to identify a resource.
 
 URL: A Uniform Resource Locator (URL), colloquially termed a web address,[1] is a reference to a web resource that specifies its location on a computer network and a mechanism for retrieving it. A URL is a specific type of Uniform Resource Identifier (URI).

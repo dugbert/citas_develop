@@ -1,0 +1,44 @@
+Testing
+
+"Out of the box, Laravel comes with baked-in integrations to PHPUnit (unit testing), Behat (behavior-driven development), Mockery (mocking), and Faker (creating fake data for seeding and testing). It also comes with its own simple and powerful suite of application testing tools, which allow you to "crawl" your site's URIs, click buttons, submit forms, check HTTP status codes, and validate and assert against JSON." stauffer (2016): 441
+
+"Laravel's testing setup even has a sample application test that can run successfully the moment you create a new app. That means you don't have to spend any time configuing your testing enviroment, and that's one less barrier to writing your tests." stauffer (2016): 441
+
+	Unit tests
+	"Unit tests target small, relatively isolated units -a cass or method, usually." stauffer (2016): 441
+
+	Integration tests
+	"Integration tests test the way individual units work together and pass messages." stauffer (2016): 441
+
+	Application tests
+	"Often called acceptance or functional tests, application tests test the entire behavior of the application, usually an outer boundary by employing something like a document object model (DOM) crawler -which is exactly what Laravel's application test suite offers." stauffer (2016): 441
+
+	Testing enviroment
+	"Any time Laravel application is running, it has a current "enviroment" name that represents the enviroment it'srunning in. This name may be ser to local, staging, production, or anything else you want. You can retrive this by running app()->enviroment(), or you can run something like if(app()->enviroment('local')) to test wether the current enviroment matches the passed name." stauffer (2016): 445
+
+	"When you run tests, Laravel automatically sets the enviroment to testing. This means tou can test for if(app()_>enviroment('testing')) to enable or disable certain behaviors in the testing enviroment. Additionally, Laravel doesn't load the normal enviroment variables from .env for testing. If you want to ser any enviroment variables for your tests edit phpunit.xml and, in the <php> section, add a new <env> for each enviroment variable you want to pass in." stauffer (2016): 445
+
+		withoutMiddleware trait
+		"If you import Illuminate\Foundation\Testinf\WithoutMiddleware into yout test class, it will disable all middleware for any test in that class. This means you won't have to worry about the authentication middleware, or CSRF protections, or anything else might be useful in the real application but distracting in a test." stauffer (2016): 447
+
+		databaseMigrations trait
+		"Laravel provides two tools out of the box to keep your database in the right state between tests:the DatabaseMigrations trait and the DatabaseTransactions trait." stauffer (2016): 448
+
+			"If you import the DatabaseMigrations trair, itwill run your entire set of database migrations up before each test and down after each test. Laravel makes this happen by running php artisan migrate in the setup()methid before every test runs and php artisan migrate:rollback in the tearDown()methid after each test finishes." stauffer (2016): 448
+
+			"DatabaseTransactions, on the other hand, expects your database to be properly migrated before your test start. Then, it wraps every test in a database transaction, which it rolls back at the end of each test. This means that, at the end of each test, your database will be returned to the exact same state it was in prior to the test." stauffer (2016): 449
+
+		TestCase
+		"Any application tests should extend the TestCase class (tests/TestCase.php) that's included with Laravel by default. Your application's TestCase class will extend the abstract Illuminate\Foundation\Testing\TestCase class, [...] The first thing the two TestCase classes (yours and its abstract parent) do is handle booting the Illuminate application instance for you, so you have a fully bootstrapped application avaliable. They are also "refresh" the application between each test, which means they're not entirely-creating the application between tests, but rather making sure you don't have any daya lingering." stauffer (2016): 451
+
+			parent TestCase
+			"The parent TestCase also sets up a system of hooks that allow callbacks to be run before and after the application is created, and imports a series of traits that provide you with methods forinteracting with every aspect of your application. These traits include InteractsWithContainer, MakesHttpRequests, InteractsWithConsole, and more, and they bring in a broad variety of custom assertions and testinf methods." stauffer (2016): 451
+
+				"[...] your application tests have access to a fully bootstrapped application instance, application-test-minded custom assertions, and a DOM crawler, with a series of simple and powerful wrappers around each to make them easy to use." stauffer (2016): 451
+
+			"Visiting" routes
+			"The most complex of Laravel's application testing functionality isalso the simplest -and most powerfull -to use. Using these methods, your tests can interact with ("visit") pages in your application like never before. [...] Visiting a route is at the core of Laravel's application testing. When you call $this.>visit('dashboard'), you're mimicking the action the framework takes when a web request comes in for that same route. The application will create a request object for that request, handle it like normal, and store the response object (an instance of Illuminate\Http\Response) in $this->response." stauffer (2016): 454
+
+			"This is the same response object that would normally be returned and displayed to the browser, but it's just catched for Laravel's application testing assertions to check against (or for your code, if you want to interact with the response)." stauffer (2016): 454
+
+			
