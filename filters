@@ -1,0 +1,38 @@
+Filters
+ "Filters are certain sets of rules or actions that can be applied to a route. They can be performed before or after a route’s logic is executed, however, you will find before filters to be more useful. Using before filters we can alter the flow of the application if a certain set of rules or criteria are not met. It’s a great way of protecting our routes." rees (2013): 71
+
+	Route::filter()
+	"We use the Route::filter() method to create a new filter. The first parameter is a friendly name that we will later use to assign the filter to a route. [...]The second parameter to the route is a callback [...] The callback is a function that is called when the filter is executed. If it returns a response type object, [...] then that response will be returned and will be served instead of the result of the route logic. If no response is returned from the filter callback, then the routes logic will continue as normal." rees (2013): 72
+
+	Before vs after filters
+	"The index ‘before’ tells the framework that we want to run our ‘birthday’ filter before the routes logic is executed. [...] We can attach a filter using the ‘after’ option of a route array, this way the filter will be executed after your route logic." rees (2013): 74
+
+	Multiple filters
+	"The pipe | character can be used to separate a list of filters. They will be executed from left to right, and the first that returns a response will end the request, and that response will be delivered as the result. If you like, you can use an array instead to provide your multiple filters." rees (2013): 75
+
+	Parameters
+	"Laravel provides a different set of parameters to ‘before’ and ‘after’ filters. You will notice that both filters receive $route and $request variables." rees (2013): 77
+
+		$route
+		"[...] the first parameter, you will see that it is an instance of Illuminate\Routing\Route. [...] The ‘Route’class represents a route used by the routing layer. This instance represents the current route that is being executed." rees (2013): 77
+
+		$request
+		"[...] the next parameter is an instance of the current request object. The Illuminate\Http\Request instance represents the state of the request being sent to your web server. It contains information about the URL, and data passed with the request, along with a great wealth of additional information." rees (2013): 77
+
+		$response
+		"The after filter receives an additional parameter, an instance of response object that is returned from the route the filter is acting on. This instance is due to be served as the response of the current request." rees (2013): 77
+
+		Syntax
+		"We can accept as many parameters as we like. To provide multiple parameters we must first add a colon : between the filter name and its parameters. The parameters themselves must be separated by a comma , . [...] It’s worth noting that just like functions, filter parameters can be assigned default values, making them optional." rees (2013): 79
+
+	Filter classes
+	"[...] any Laravel feature that requires a Closure will also have an alternative. A PHP Class.[...] First we need to create a filter alias [...] However, this time we will pass a string instead of a closure as the second parameter. [...] The second parameter for the method is a string that identifies the filter class to use." rees (2013): 80-81
+
+	Global filters
+	"[...] inside /app/filters.php you will notice two strange looking filters. These are the global filters and are executed before, and after, every request to your application. [...] They work exactly like normal filters, except that they apply to all routes by default. This means there is no need to add them to the before and after array indexes of our routes." rees (2013): 81-82
+
+	Default filters
+	"In the app/filters.php there are some filters that have already been created for you." rees (2013): 82
+
+	Pattern filters
+	"The pattern filter will allow you to match a before filter to a number of routes by supplying a routing pattern with a wildcard." rees (2013): 83

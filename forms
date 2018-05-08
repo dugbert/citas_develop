@@ -1,0 +1,79 @@
+Forms
+	
+	Opening and closing
+	 "To create our opening form tag, we use the Form::open() generator method. This method accepts only a single parameter, with many parameters. [...] We also use the Form::close() method to close the form, although I see no reason why you would need to do this. I suppose it looks neater next to the other source generator methods? It’s up to you whether you choose to use it, or </form> instead." rees (2013): 151
+
+		Default form
+		"Laravel knows that POST forms are the most popular choice when building web applications. For that reason it will use the POST method by default, overriding the default GET method that HTML assumes. [...] The accept-charset attribute is another useful attribute that Laravel provides for us. It will ensure that ‘UTF-8‘ will be used for character encoding when submitting the form. It’s a sensible default for most situations." rees (2013): 152
+
+		_method
+		"By providing a hidden input called ‘_method’ we can supply a value to represent our non HTML5 compatible HTTP verbs. Laravel’s routing will look at this POST request, see the included ‘_method’ data and route to the appropriate action." rees (2013): 153
+
+		files
+		"Remember how we learned how to upload files and retrieve information about them [...] By providing a new index named files with a boolean value of true , Laravel will add the necessary attribute to allow the uploading of files." rees (2013): 154
+
+		Names and controllers
+		"Instead of using the url index, we use the route index and provide the name of the route as a value. [...] To target our form at a controller action, instead of the url and route indexes, we use the action index and the controller-action pair as its value." rees (2013): 155
+
+	Form fields
+
+			Field labels
+			"Labels can be generated using the Form::label() method. [...] The first parameter of the Form::label() method matches the name attribute of the field that they are describing. The second value, is the text of the label. [...] We should use labels whenever we can to describe our fields. [...] It’s worth noting that we can include other attribute and value pairs within our generated label element by providing a third parameter to the label() method. The third parameter is an array of attribute and value pairs." rees (2013): 156
+
+			Text fields
+			"Text fields can be used to collect string data values.[...] The first parameter for the Form::text() method is the name attribute for the element. This is what we will use to identify the field’s value within our request data collection. The second parameter is an optional one. It is a default value for the input element. [...] ust like the Form::label() method, our Form::text() method can accept an optional third parameter to supply an array of HTML attribute and value pairs." rees (2013): 157
+
+			Textarea fields
+			"The textarea field functions in a similar way to the text input type, except that they allow multiline data. [...] The first parameter is the name attribute for the element, and the second parameter once again is the default value. [...] Laravel has provided some default values, such as the amount of columns and rows for the field. We could easily override these values by adding new values for them to the optional final parameter." rees (2013): 158
+
+			Password fields
+			"[...] if we want our users to be able to type their innermost secrets into our application securely, then we need to make sure that their characters don’t display on screen. The ‘password’ input type is perfect for this. [...] The first parameter for the Form::password() method is the name attribute. As always, there is a final optional parameter for an array of additional element attributes." rees (2013): 159
+
+			Checkboxes
+			"Checkboxes allow for your form to capture boolean values. [...] The first parameter to the Form::checkbox() method is the field name attribute, and the second parameter is the field value . The third, optional value is whether or not the checkbox will be checked by default. The default is for the checkbox to be unchecked." rees (2013): 159-160
+
+			Radio buttons
+			"Radio buttons have an identical method signature to that of checkboxes. The difference is that you can use a number of radio input types to provide a method of selection within a small group of values." rees (2013): 160
+
+			Select boxes
+			"Select boxes, or drop-downs, are another way of providing a choice of values to the user of your application. [...] The Form::select() method accepts a name attribute as the first parameter, and an array of key-value pairs as a second parameter. The key for the selected option will be returned within the request data. The third, optional, parameter is the key for a value that will appear as selected by default." rees (2013): 161-162
+
+				By category
+				"If we want to, we can organise our select box options by category. To enable this option, all we need to do is provide a multidimensional array as the second parameter. The first level of the array will be the category, and the second level will be the list of values just as before." rees (2013): 162
+
+			Email field
+			"The email field type has the same method signature as the Form::text() method. The difference is that the Form::email() method creates a new HTML5 input element that will validate the value provided client side to ensure that a valid email address will be provided. [...] The first parameter to the Form::email() method is the name attribute for our input type. The second parameter is a default value . As always, and I hope you haven’t forgotten, there’s always a last, optional, array of additional element attributes." rees (2013): 164
+
+			File upload field
+			"The first parameter for the Form::file() method is the name attribute of the file upload element, however, in order for the upload to work, we need to ensure that the form is opened with the files option to include the multipart encoding type." rees (2013): 165
+
+			Hidden fields
+			"We can use hidden fields to supply extra data along with our forms. [...] The first parameter to the Form::hidden() method is the name attribute, [...] The second parameter is of course the value ." rees (2013): 165
+
+	Form buttons
+
+			Submit button
+			"The first parameter to the Form::submit() is the value , which in the case of a button is the label used to identify the button. As with all of the input generation methods, the button generation methods will accept an optional last parameter to provide additional attributes." rees (2013): 166
+
+			Normal buttons
+			"When we need a button that won’t be used to submit our form, we can use the Form::button() method. [...] The parameters for the Form::button() method are exactly the same as the Form::submit() method." rees (2013): 167
+
+			Image buttons
+			"Instead of a native button, you could use the HTML5 image button type to submit your form. [...] The first parameter to the Form::image() method is the URL to an image to use for the button. [...] The second parameter is the value of the button." rees (2013): 167
+
+			Reset buttons
+			"The reset button can be used to clear the contents of your form. It’s used by your application’s users when they have made a mistake. [...] The first parameter to the Form::reset() method is the label that you would like to appear on the button." rees (2013):168
+
+	Form macros
+	 "Laravel comes equipped with a method that will allow you to define your own form generators [...] To define a macro we use the Form::macro() method. The first parameter is the name that will be used by the method that generates our form field. I’d suggest making it camelCase for this very reason. The second parameter to the method is a Closure. The value returned from this closure must be the source code required to construct our field. [...] The name of the method matches up to the nickname that we gave to our form macro." rees (2013): 168-169
+
+		Placeholders
+		"By providing placeholders within our macro closure, we can use their values within our rendered source." rees (2013): 170
+
+	Form security
+	 "What we need is a way of making sure that the data that is sent to us belongs to our own website. Not a problem. Laravel can handle this for us. You should probably know that this form of attack is known as ‘Cross Site Request Forgery’ or CSRF for short." rees (2013): 170
+
+	 "To summarise, unless you want external applications and users to be able to post data to your forms, you should use the ‘CSRF’ filter to protect the routes which handle your form data." rees (2013): 172
+
+		_token
+		"It’s been created using the ‘secret’ value from our application config. If we tell Laravel to check for this value within our input data, then we can ensure that the data has been provided by a form that belongs to our application. [...] Laravel has included the csrf filter. [...] By attaching the csrf filter as a before filter to the route that will handle our form data, we can ensure that the _token field is present and correct. If our token is not present, or has been tampered with, then a Illuminate\Session\TokenMismatchException will be thrown, and our route logic will not be executed. [...] If you used Form::open() to create the wrapping form markup, then the security token will be included by default. However, if you want to add the token to manually written forms, then you must simply add the token generator method. [...] The Form::token() method will insert the hidden token field into our form." rees (2013): 171

@@ -1,0 +1,33 @@
+Controllers
+ "In MVC framework controller has a definite role. It primarily controls the flow between model and view. [...] A controller is a transporter. It transports application logic to the presentation layer. A good design principle always encourages you write your application logic in a separate hidden file. A controller will only execute those methods and return a view. It will never know what it carries." sinha (2017): 29
+
+	No-data
+	"Controller will never know from where the data comes. It will do its job and forget about it." sinha (2017): 33
+
+	Actions
+	"The Controller is a class used to house routing logic. Normally, the Controller will contain a number of public methods known as actions. You can think of actions as the direct alternative to the closures [...], they are very similar in both appearance and functionality." rees (2013): 84
+	"In fact, the controller action can contain any code that the Closure can." rees (2013): 85	
+
+	Naming a controller
+	"[...] you can call the Controller whatever you like. As long as your controller extends either BaseController or Controller then Laravel will know what you are trying to do. However, suffixing a controllers name with Controller." rees (2013): 85
+
+	Methods
+	"The class methods of our Controller are what actually contain our logic. Once again you can name them however you like [...]. These methods must be public for Laravel to be able to route to them. You can add additional private methods to the class for abstraction, but they cannot be routed to." rees (2013): 85
+
+	Controller routing
+	"In order to link a URI to a Controller we must define a new route within the /app/routes.php file. We are using the same Route::get() method that we used when routing Closures. However, the second parameter is completely different. This time we have a string. The string consists of two sections that are separated by an at sign ( @ )." rees (2013): 86
+
+	RESTful controllers
+	"We know that we can define the HTTP request verb that we want to match using the routing methods. However, when routing to Controllers you might want to keep the defining of the request verb close to your application logic." rees (2013): 88
+
+		REST
+		"REST (Representational State Transfer) is a an architectural protocol through which we imagine our URLs as nouns and give them common verbs like GET, POST, PUT, or DELETE. Every URL is a representation of an imaginary resource." sinha (2017): 32
+
+		Route::controller() method
+		"This single method will route all of the actions represented by our RESTful controller. [...] using this method to route to your controllers provides a distinct advantage over the original routing method. With this method, you will only have to provide a single routing entry for the Controller, rather than routing to every action independently." rees (2013): 89
+
+			First parameter
+			"The first parameter is the base URL. Normally RESTful routing is used to represent an object, so in most circumstances the base URL will be the name of that object. You can think of it as some what of a prefix to the actions that we have created within our RESTful controller." rees (2013): 89
+
+			Second parameter
+			"The second parameter you will already be familiar with. It’s the controller that we intend to route to. Once again, Laravel will happily accept a namespaced controller as a routing target so feel free to organise your Controllers however suits your needs." rees (2013): 89

@@ -1,0 +1,290 @@
+Eloquent ORM
+ "Object-oriented application design has taught us that we need to identify the objects within our application. [...] Normally we will refer to these application objects as ‘Models’, since they represent part of our applications business model." rees (2013): 260
+
+ 	Eloquent conventions
+ 	"Eloquent has some conventions, which, if followed, will make your life easier. This approach is known as convention over configuration, which means, if you follow these conventions, you will have to do very little configuration for things to "just work"." bean (2015): 47
+
+ 		Naming
+ 		"An Eloquent model is contained in a single class and is the "studly-cased", singular version of your database table's name. Studly-case is similar to camel-casing, but the first letter is uppercase as well. [...] There is no set place in the filesystem to place your Eloquent models; you are free to organize them as you see fit. You can use an Artisan command to create a model stub (a simple class with the basic structure of an Eloquent model). Artisan places new model classes in the app directory. You are free to move your model classes and store them in whatever directory you wish, just be sure to update the namespace declaration at the top of the file to reflect its new location." bean (2015): 47-48
+
+	save()
+	"The save() method would handle the SQL side of things for us. [...] This functionality is provided by object relational mappers, or simply‘ORM’s. ORMs can be used to allow us to map our application objects to database tables, and individual instances of these objects as rows. You can think of the class attributes of these objects as the individual columns for the table. The ORM will take care of object retrieval and persistance for us, we won’t have to write a single line of SQL." rees (2013): 262
+
+	Creating new models
+
+		Eloquent models
+		"Eloquent is clever, by default it will look for the plural form of the model name as the table to use to store instances of our objects. [...] Eloquent models have a basic requirements. A model must have an auto incremental column named id . This is a unique primary key that can be used to identify a single row within the table. You can add this column to the table structure easily by using the increments() method." rees (2013): 263-264
+
+			Eloquent vs other ORM
+			"Many other ORMs will demand that you build an XML map of the database schema, or create annotations for each of the database columns of the table representing the object. We don’t need to do this because Eloquent makes some sensible assumptions." rees (2013): 264
+
+				No-plural form of your model
+				"If you don’t want your database table name to be the plural form of your model then you will need to let Eloquent know about it. Just add the $table public attribute to your model and set its value to the string name of your table. Eloquent will then use the provided table name for all future queries relating to this model." rees (2013): 270
+
+				Namespaces
+				"If you chose to namespace your models you will need to use the $table attribute to provide simple table names. This is because a model with the namespace and class combination of MyApp\Models\Game will result in an expected table name of my_app_models_games to avoid collisions with packages within other namespaces which also use the database. You will also notice that Eloquent is very clever, and will expand a camel cased namespace or model name into its snake cased variant." rees (2013): 270
+
+			timestamps() by default	
+			"When Eloquent creates our new model, it attempts to populate the updated_at and created_at columns of our table with the current time. This is because it expects us to have added the ->timestamps() method when building our table schema. It’s a sensible default, since it never hurts to have a record of creation/update times. However, if you are using an existing database table, or simply don’t wish to have the timestamp columns present within your database table, you may want to disable this functionality. To disable automatic timestamp updates with Eloquent models, just add a new public attribute to your model." rees (2013): 265
+
+				$timestamps disable
+				"The public attribute $timestamps is inherited from the Eloquent base class. It is a boolean value that can be used to enable or disable the automatic timestamp functionality." rees (2013): 265
+
+				$timestamps enable
+				"First we need to alter our database schema. It’s a bad idea to manually modify our database schema, or to update existing migrations. This is because our database state might become ‘out-of-sync’ with our teammates." rees (2013): 266
+
+			id Column
+			"[...] we didn’t have to specify an id value for our object. The id column is automatically incremented, so the database layer will handle the numbering of our rows for us. It’s generally a bad idea to modify the id column of an Eloquent model." rees (2013): 266
+
+	Reading existing models
+
+		Static find() method
+		"The static find() method is inherited from the Eloquent parent class, and does not need to be created within your model." rees (2013): 271
+
+	Updating existing models
+
+		save() method
+		"Just because we have save() d our model instance, it doesn’t have to mean we can’t modify it. We can alter its values directly and call the save() method once more to update the existing row. You see, the first time save() is used on a new object, it will create a new row and assign an auto incremental id column value. Future calls to the save() method will persist only the changes to columns for the existing row in our database. [...] The last saved state of the object will be present within the database." rees (2013): 271-272
+
+	Deleting existing models
+
+		delete() method
+		"Deleting Eloquent models is a simple process. First we need to get our hands on the instance of the model that we wish to delete. [...] we can use the delete() method to remove the row represented by our model from the database." rees (2013): 274
+
+		destroy() method
+		"We can also delete a single instance, or multiple instances of our models from the database using their id column values and the destroy() static method. [...] To destroy multiple records, you can either pass a number of id value as parameters to the destroy() method [...] or an array of id ’s [...]" rees (2013): 275
+
+Eloquent queries
+	
+	SQL functionality
+	"With SQL, we can use a number of complex comparisons and set arithmatic to retrieve only the results that we require. Replicating all of this functionality with Eloquent would be a tremendous task, but fortunately, Eloquent has alternate methods for the most useful of queries. For all the bits that are missing we can use raw queries to provide SQL statements that will return Eloquent ORM result instances." rees (2013): 277
+
+	Eloquent to string
+	 "Objects in PHP can optionally include a __toString() method. [...] This method can be used to control how the object should be represented as a string. [...] Thanks to this method, our Eloquent models can also be expressed as a string. You see, the Eloquent base class that we extend with our own models contains a __toString() method. This method will return a JSON string that will represent the values of our Eloquent model." rees (2013): 280-281
+
+		RESTful API
+		"This is really useful when creating RESTful API’s that serve JSON data. It’s also a great way of expressing the output of our queries [...]" rees (2013): 282
+
+		all() method
+		"Some Eloquent methods will return a number of model instances as a result, instead of the single model instance [...] We use the all() method of our [...] model to retrieve an array of Eloquent model instances that represent the rows of our [...] table." rees (2013): 282
+
+		Collections
+		"[...] Laravel 4 doesn’t return an array from such methods, instead, it returns a Collection. [...] The Collection object implements an interface which allows for the object to be iterable. It can be looped through using the same functionality as standard PHP arrays. [...] the result of any methods that return multiple model instances is represented by an instance of Illuminate\Database\Eloquent\Collection. [...] this object holds an internal array of our model instances called items ." rees (2013): 282-283
+
+			_toString()
+			"[...] the Collection object also includes a __toString() method. This method functions in a similar manner to the one on our model instances, but instead creates a JSON string that will represent our model instances as a multi dimensional array."
+
+	Query structure
+	 "Eloquent queries can be broken down into three parts.
+		The model
+		Query Constraints
+		Fetch methods." rees (2013): 285-286
+
+		"Be sure to remember that the query builder required a trigger method at the end of the join to return a result collection." rees (2013): 357
+
+		Model
+		"The model is the model instance that we wish to perform the query upon." rees (2013): 286
+
+		Fetch methods
+		 "These are the methods that are used to perform the query, and return the result." rees (2013): 286
+
+			JSON expression
+			"Fetch methods can be used to return either a single model instance, or a Collection of model instances. However, as we discovered earlier, both can be expressed in JSON format as the response of a routed Closure or controller action." rees (2013): 287
+
+			find()
+			"The find() method can be used to retrieve a single Eloquent model instance by the id column of its row. If the first parameter of the method is an integer, then only a single instance will be returned. [...] If we instead provide an array of id values, we receive a Collection of model instances." rees (2013): 287-288
+
+			all()
+			"The all() method can be used to return a collection of model instances that represent all rows contained within the table." rees (2013): 288
+
+			first()
+			"In circumstances where a collection of model instances will normally be returned, the first() fetch method can be used to retrieve the first model instance stored within. It’s very useful if you would rather that a query return a single instance, rather than a collection of model instances. Without a constraint, first() will simply return the first row in the database table." rees (2013): 290
+
+			update()
+			"Using the update() method we can update the values of the table rows that are the result of the Eloquent query. Simply pass a key-value array as the first parameter to the update() method to change the column values for each row. The array key represents the name of the column to change, and the value represents the new intended value for the column. The update() method is special, and cannot be used without a constraint [...] The update() method doesn’t retrieve model instances [...]" rees (2013): 291
+
+			delete()
+			"[...] the delete() method will not return any instances. Instead, it will remove the rows that are the result of the query from the database table." rees (2013): 292
+
+			truncate()
+			"If you intend to delete all table rows for a specific model, you might find the truncate() method to be more descriptive." rees (2013): 294
+
+			get()
+			"Get is the most important of our fetch methods. It is used to retrieve the result of the query. [...] The get() method has an optional parameter. You can pass an array of column names to it and the result objects will only contain values for those columns."rees (2013): 294-295
+
+			pluck()
+			"The pluck() method can be used to retrieve a value for a single column. [...] The first and only parameter, is the name of the column that we wish to retrieve the value for. If the query matches multiple results, then only the value of the first result will be returned." rees (2013): 296
+
+			lists()
+			"While the pluck() method will retrieve only one value for a specific column, the lists() method will retrieve an array of values for the specified column across all result instances. [...] the lists() method accepts one single parameter. The name of column that we wish to retrieve all values for." rees (2013): 297
+
+			toSQL()
+			"You can use the toSql() method anywhere where you would normally use a fetch method, typically the end of a query chain, and it will return the SQL that represents the query as a string." rees (2013): 297
+
+				Prepared statements
+				"Laravel’s query builder uses prepared statements. This means that the question marks are placeholders that will be replaced with your actual values or ‘bindings’. The benefit is that your bindings will be escaped before replaced into the string, to avoid an SQL injection attempt." rees (2013): 298
+
+		Query constraints
+		 "Query constraints are rules that are used to match a subset of our table rows. This way we can return only the rows that we are interested in. The most familiar constraint used with SQL is the WHERE clause." rees (2013): 286
+
+		 "In mathematics, set based arithmatic allows us to capture a subset of a much larger set of values. This is essentially what we are trying to accomplish using query constraints [...]" rees (2013): 298
+
+			Optional
+			"All of our queries act upon one of our Eloquent models. The constraint methods are entirely optional [...] Next we have a fetch method. [...] The first method of a query chain is always called statically, with two colons :: . Eloquent queries can consist of no constrains, a single constraint, or many constraints. [...] Constraints are entirely optional, but all queries must begin with a model, and end with a fetch method." rees (2013): 286
+
+			or*() prefix
+			"most of the constraints within this chapter will have an alternative version prefixed with or that will allow an alternate constraint to match." rees (2013): 302
+
+			where()
+			"If you have used SQL in the past, then you will likely have come across the WHERE clause for retrieving table rows by matching the value of their columns." rees (2013): 298
+
+				Parameters
+				"The where() method will accept three parameters. The first parameter is name of the column that we wish to perform the comparison on. [...] The second parameter is the operator to use for the comparison.[...] We could [...] [use] any of the other common comparison operators supported by the SQL, such as < , > , => , =< , etc. [...] The third parameter is value that we will compare with. [...] Once again, the where() method is only a query constraint. We will use the get() method to retrieve a Collection of results." rees (2013): 299
+
+				LIKE
+				"The LIKE SQL operator can be used to compare parts of a string by using a percentage % symbol as a wildcard." rees (2013): 300
+
+				Multiple where()
+				"We can chain multiple where() methods together to retrieve rows based on a number of different criteria. [...] The and is important. Both constraints must match for a row to exist within the result set." rees (2013): 301
+
+					"You can chain together as many where() and orWhere() methods as you need to filter your table rows down to the required result set." rees (2013): 303
+
+				whereRaw()
+				"The whereRaw() method can be used to provide a string of SQL to perform a WHERE condition on the result set. [...] The whereRaw() method accepts a string of SQL as its first paramater. All question ? marks within the string are replaced by array elements from the second parameter to the method in sequential order. If you have ever bound properties to a prepared statement with SQL then this syntax will be familiar to you. The values provided will be escaped to avoid SQL injection attacks." rees (2013): 303-304
+
+					Multiple whereRaw()
+					"You can use the whereRaw() method in circumstances where you require complex SQL in addition to your where() type constraints. Just like the where() method, the whereRaw() method can be chained multiple times and with other constraint methods to limit your result set. Once again the orWhereRaw() method is included to allow for alternate conditions." rees (2013): 304
+
+				whereBetween()
+				"The whereBetween() method is used to check that the value of a column is between two provided values. [...] The first parameter to the whereBetween() method is the name of the column that we wish to compare. The second parameter is an array of two values, a starting value and a limit." rees (2013): 304-305
+
+					Multiple whereBetween()
+					"Just as with the other where() type methods, you can chain as many as you need to, and as always, we have an orWhereBetween() alternative method." rees (2013): 306
+
+				whereNested()
+				"The whereNested() method is a clean way of applying multiple where constraints to a query. Simply pass a Closure as the first parameter to the method, and give the Closure a placeholder parameter named whatever you like. [..] Within the Closure you may apply as many where() type constraints or orWhere() type constraints to the $query object, which will then become part of your main query." rees (2013): 306
+
+					No or*()
+					"Note that there is no orWhereNested() alternative to this method, but here’s the secret... you can also pass a Closure to orWhere()." rees (2013): 307
+
+				whereIn()
+				"The whereIn() method can be used to check that a column value exists within a set of values. It’s really useful when you already have an array of possible values to hand. [...] The first parameter to the whereIn() method is the column that we wish to perform the comparison on. The second value is the array of values to search within. [...] The whereIn() method also has the usual method alternative in the form of orWhereIn() and can be chained multiple times." rees (2013): 308-309
+
+				whereNotIn()
+				"The whereNotIn() method is the direct opposite to the whereIn() method. This time you provide a list of values, and the column value must not exist within the set. [...] we pass the comparison column as the first parameter, and our array of values as the second parameter." rees (2013): 309-310
+
+				whereNull()
+				"The whereNull() constraint can be used when you need to retrieve rows that have a column value of NULL. [...] The single parameter for the whereNull() method is name of the column that you wish to contain a null value. [...] The orWhereNull() method is also available." rees (2013): 311
+
+				whereNotNull()
+				"The whereNotNull() method is the opposite of the whereNull() method, so this time we should be able to see some results. It will return rows that have a column value that isn’t equal to NULL. [...] The first, and only parameter to the method is the column name. [...] the orWhereNotNull() method is available to perform an or type query." rees (2013): 311-312
+
+				orderBy()
+				"The orderBy() method can be used to order the results returned by your query by the value of a specific column. [...] The first parameter to the orderBy() method is the name of the column that we wish to order by. By default, the ordering will be in ascending order." rees (2013): 312-313
+
+					"We add a second parameter to the orderBy() method with a value of desc . This tells Laravel that we wish to retrieve our results in descending order. [...] You can use the orderBy() clause with any combination of the constraints [...] You can also use additional orderBy() methods to provide additional ordering, in the order that the methods are provided." rees (2013): 314
+
+				take()
+				"The take() method can be used to limit the resultset. [...] The first parameter to the take() method is the amount of rows that you wish to limit by. [...] Take can be used in combination with any of the other query constraints." rees (2013): 314-315
+
+				skip()
+				"When using the take() method, the skip() method can be used to provide an offset for the query result set. [...] The skip() method accepts a single parameter to provide an offset." rees (2013): 315-316
+
+				Magic where queries
+				"You can simply append the name of the column that you wish to query on to the where() method. First you must capitalize the first letter of the field that you wish to compare. [...] If our field name is snake cased, for example, shoe_size , then we must uppercase the first letter of each word to whereShoeSize(). The only parameter to the magical where() method is the expected value of the column [...]" rees (2013): 318
+
+		Query scopes
+
+			scope*()
+			"It’s a special method with a specific function, it will help us re-use common queries.All scope methods begin with the word scope, and then an identifier. The method will accept a single parameter, a $query object. This object can be used to construct queries [...]" rees(2013): 319-320
+
+Eloquent collections
+ "Eloquent collections are an extension of Laravel’s Collection class with some handy methods for dealing with query results. The Collection class itself, is merely a wrapper for an array of objects, but has a bunch of other interesting methods to help you pluck items out of the array. [...] you can still iterate through a collection of results with the variety of loops that PHP offers because it inherits some properties of an array, but because the collection is a class, and not native type, there are also methods available on the object." rees (2013): 321
+
+	Collections methods
+	 "Some of the methods are related to inserting, and retrieving elements by their key. However, in the case of Eloquent results, the keys do not match the primary key of the tables that the model instances represent, and so these methods will be very useful to us." rees (2013): 321
+
+		all()
+		"The all() method can be used to get hold of the internal array used by the Collection object." rees (2013): 322
+
+		first()
+		"The first() method of the collection can be used to retrieve the first element in the set. This will be the first element contained within the collections internal array." rees (2013): 323
+
+		last()
+		"The first() method was used to retrieve the first value contained within the collections internal array, this means that the last() method must retrieve the last item of the array." rees (2013): 325
+
+		shift()
+		"The shift() method is similar to the first() method. It will retrieve the first value within the collections internal array. However, unlike the first() method, the shift() method will also remove that value from the array. [...]Remember that the collection inherits many properties of an array, this allows the count() method to act upon it. [...] the instance has not only been returned from the method, but also removed from the array." rees (2013): 327-328
+
+		pop()
+		"[...] it’s also a method on the Eloquent model instances collection. It works in a similar way to the shift() method in that it will return the value from the end of the internal array, and remove it." rees (2013): 329
+
+		each()
+		"Instead of creating a foreach() loop to iterate over our results, we can instead pass a Closure to the each() method. [...] Our Closure accepts a parameter that will be a placeholder for the current object within the iteration. This closure is then passed to the each() method." rees (2013): 330-331
+
+		map()
+		"The map() function works in a similar way to the each() method. However it can be used to iterate and work with our collection elements, returning a new collection as a result. [...] First we ensure that the value of Collection::map() method is assigned to a variable. Then we iterate the collection in the same manner as the each() method, but this time we return each value that we wish to be present within the new collection." rees(2013): 331-332
+
+		filter()
+		"The filter() method can be used to reduce the number of elements contained within the resulting collection by using a Closure. If the result of the Closure is boolean true then the current element of the iteration will be given to the resulting collection. If the Closures iteration returns a false or nothing at all, then that element will not exist within the new collection." rees (2013): 332
+
+		sort()
+		"The sort() method can be used to sort the collection. It hands our Closure to the uasort() PHP method which uses integer values to represent a comparison between two values. Our closure receives two parameters, let’s call them A and B. Then we apply the rules of our sorting to provide an integer result from our closure. If A > B then we return 1. If A < B then we return -1. If A = B then we return 0. [...] This method is descructive. It alters the original collection." rees(2013): 334-335
+
+		reverse()
+		"The reverse() method can be used to reverse() the models contained within the internal array." rees (2013): 336
+
+		merge()
+		"The merge() method can be used to combine two collections. The only parameter to the method is the collection that should be merged." rees (2013): 337
+
+		slice()
+		"The slice() method is the equivelent of the PHP slice() function. It can be used to produce a subset of models using a collection offset. [...] The first parameter is the position that the new sub set is started. Here we are telling it to start slicing at the second element of the array. The second optional parameter is the length of the collection. [...] The slice() method does not wrap around the collection." rees(2013): 338-339
+
+		isEmpty()
+		"The isEmpty() method can be used to check whether or not the container has elements within it. [...] It accepts no value, and returns a boolean result." rees(2013): 339
+
+		toArray()
+		"The toArray() method can be used to return the internal array of the collection. Also, any elements within the array that that can be transformed into an array, for example objects, will be transformed during the process." rees(2013): 340
+
+		toJson()
+		"The toJson() method will tranform the collection into a JSON string that can be used to represent it’s contents. [...] we discovered how to return collections directly from a routed closure or controller action to serve a JSON response. The toString() method allowing the collection to be transformed to JSON makes a call to the toJson() method internally." rees(2013): 341
+
+		count()
+		"[...] count the number of model instances contained within the collection’s internal array." rees (2013): 342
+
+	Best practice
+	 "Some of the methods available to the collection are duplicates of those available on the query builder. For example, we can use the first() method when building eloquent queries to retrieve only a single model instance. We can also use the first() method of the collection to retrieve the first element contained within." rees (2013): 343
+
+Eloquent relationships
+	
+	pivot table
+	"Whenever you need a many_to_many relationship you will find a need for a pivot table. It’s the database table that links the two entities together by using two foreign keys to define the rows from the other tables." rees (2008): 351
+
+			Format
+			"Eloquent required a plural form of the model for its table name (unless we specify otherwise), [...] The default format for the pivot table is the singular form of the two related models separated by an _ underscore. The order of the instances should be alphabetical. [...] All foreign key columns follow a similar naming convention. The singular form of the related model appended with _id ." rees (2013): 352
+
+
+	$this->hasMany() method 
+	"This is one of the many relationship methods that are inherited from the Eloquent base class. The first parameter to the relationship method is the full name of the model to be related. If we decide to namespace our [...] model later, we will need to insert the full namespaced class as a parameter. [...] we can specify the alternative name of the column as an optional second parameter to this method." rees (2008): 354
+
+	$this->belongsTo() method
+	"The first parameter once again is the related model name, and once again we can provide an optional second parameter to use an alternative column name." rees (2008): 355
+
+	$this->belongsToMany() method 
+	" [...] informs Eloquent that it should look at a pivot table for related models. The first parameter is, once again, the name of the related model including namespace if present. This time we have a different set of optional parameters. [...] The second, optional parameter is the name of the pivot table to use for related objects. The third and fourth parameters are used to identify alternate naming schemes for the two foreign keys that are used to related our objects within the pivot table." rees (2008): 355
+	
+		belongs_to_many
+		"When both the relationship and its inverse relationship are has_many then we will need to implement a new type of relationship. First of all, instead of saying has_many we will say belongs_to_many. This way we won’t confuse it with the other relationship. This new type of relationship forms a many_to_many relationship, and requires an additional table." rees (2008): 350
+
+	Reationships method
+	"Inside our Eloquent model definition we have a relationships method. [...] The name of the public method doesn’t require a strict format. It will serve as a nickname that we can use to refer to the relationship. [...] The first parameter to the relationship method is the full name of the model to be related. [...] we will need to insert the full namespaced class as a parameter. [...] then we can specify the alternative name of the column as an optional second parameter to this method." rees (2013): 354
+
+		associate()
+		"The associate method is a helper method available on relationships to create the relation between two objects. It will update the foreign key for the relationship accordingly. [...] Don’t forget to save() the model that you intend to relate, before passing it to the associate() method. The reason for this is that the model instance will require a primary key to create the relation, and the model will only receive a primary key value when it has been saved." rees (2013): 357-358
+
+			many to many relationship
+			"Relating objects that form many to many relationships is handled in a slightly different way. [...] instead of using the associate() method on our relationship, we instead use the save() method, passing the object to relate as the first parameter. The effect is the same, only this time the pivot table will be updated to define the relationship. If you would like to associate a model by its primary key directly, you can use the attach() method which accepts the primary key as the first parameter." rees (2013): 358-359
+
+		detach()
+		"To remove a relationship between two objects you can use the detach() method on the relationship. Just pass either a primary key, or an object as the first parameter. [...] We can remove all associations for an object that has a many to many relationship by calling the detach() method with no parameter on the relationship method." rees (2013): 359-360
+

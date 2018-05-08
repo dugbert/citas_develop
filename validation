@@ -1,0 +1,149 @@
+Validation
+	
+	Simple validation
+	 "A set of validation rules takes the form of an associative array. The array key represents the field that is being validated. The array value will consist of one or many rules that will be used to validate.[...] To perform validation within Laravel, we first need to create an instance of the Validation object." rees (2013): 177
+
+		Validator::make()
+		"We can use the Validator::make() method to create a new instance of our validator. The firstparameter to the make() method is an array of data that will be validated. The second parameter to the method is the set of rules that will be used to validate the data." rees (2013): 178
+
+		passes() vs fails()
+		"To test the result of the validation we can use the passes() method on the validator instance. This method will return a boolean response to show whether or not the validation has passed. A true response indicates that the data conforms to all of the validation rules. A false indicates that the data does not meet the validation requirements. [...] The fails() method returns the boolean opposite to the passes() method." rees (2013): 179-180
+
+		min validation rule
+		"The min validation rule ensures that the value is greater than or equal to the parameter provided. The parameter is provided after the colon : . This validation rule is a little special. It will react differently depending on the data that has been provided. For example, on a string value, our parameter ‘3’ will ensure that the value is at least 3 characters long. On a numerical value, it will ensure that the value is mathematically greater than or equal to our parameter. Finally, on uploaded files, the min validation rule will ensure that the uploaded file’s size in bytes is greater than or equal to the provided parameter." rees (2013): 181
+
+		Multiple validation constrains
+		"[...] we are able to pass a number of validation constraints within the value portion of our rules array by separating them with pipe | characters. [...] there’s an alternative way to provide multiple validation rules. [...] If you like, you can use a multidimensional array to specify additional validation rules." rees (2013): 182
+
+	Validation rules
+
+		accepted
+		"This rule can be used to ensure that a positive confirmation has been provided. It will pass if the
+		value under validation is one of the following values: ‘yes’, ‘on’ or a numeric 1. Its intended purpose
+		is for when you wish to ensure that the user has agreed to something, for example, a terms and
+		conditions checkbox." rees (2013): 184
+
+		active_url
+		"The ‘active_url’ validation will check to make sure that the value is a valid URL. To do this, it uses PHP’s own checkdnsrr() method, which not only checks the structure of the URL but also confirms that the URL is available within your DNS records." rees (2013): 184
+
+		after
+		"The ‘after’ validation rule accepts a single parameter, a string representation of a time. The rule will ensure that the field contains a date that occurs after the given parameter. Laravel will use the strtotime() PHP method to convert both the value and the rule’s parameter to a timestamp for comparison." rees (2013): 184
+
+		alpha
+		"The ‘alpha’ validation rule ensures that the provided value consists entirely of alphabetical
+		characters." rees (2013): 184
+
+		alpha_dash
+		"The ‘alpha_dash’ rule will ensure that the provided value consists of alphabetical characters and also dashes - and/or underscores _ . This validation rule is very useful for validating URL portions such as ‘slugs’." rees (2013): 185
+
+		alpha_num
+		"The ‘alpha_num’ rule will ensure that the provided value consists of alphabetical and numeric characters. I like to use this rule to validate username fields." rees (2013): 185
+
+		before
+		"The ‘before’ rule accepts a single parameter. The value under question must occur before the parameter when both values are converted to timestamps using PHP’s strtotime() method. It is the exact opposite of the ‘after’ rule." rees (2013): 185
+
+		between
+		"The ‘between’ rule accepts two parameters. The value that is being validated must have a size that exists between these two parameters. The type of comparison depends on the type of data being compared. For example, on numerical fields the comparison will be a mathematical one. On a string, the comparison will be based upon the length of the string in characters. On a file, the comparison will be based upon the size of the file in bytes." rees (2013): 185
+
+		confirmed
+		"The ‘confirmed’ validation rule can be used to ensure that another field exists that matches the current name of the current field appended with _confirmation . The value being validated must match the value of this other field. One use for this rule is for password field confirmations to ensure that the user has not inserted a typographical error into either of the fields. The following example will ensure that ‘field’ matches the value of ‘field_confirmation’." rees (2013): 186
+
+		date
+		"The ‘date’ validation rule will ensure that our value is a valid date. It will be confirmed by running the value through PHP’s own strtotime() method." rees (2013): 186
+
+		date_format
+		"The ‘date_format’ validation rule will ensure that our value is a date string that matches the format provided as a parameter. To learn how to construct a date format string, take a look at the PHP documentation for the date() method." rees (2013): 186
+
+		different
+		"The ‘different’ validation rule will ensure that the value being validated is different to the value contained in the field described by the rule parameter." rees (2013): 186
+
+		email
+		"The ‘email’ validation rule will ensure that the value being validated is a valid email address. This rule is very useful when constructing registration forms." rees (2013): 187
+
+		exists
+		"The ‘exists’ validation rule will ensure that the value is present within a database table identified by the rule parameter. The column that will be searched will be of the same name as the field being validated. Alternatively, you can provide an optional second parameter to specify a column name. This rule can be very useful for registration forms to check whether a username has already been taken by another user. [...] Any additional pairs of parameters passed to the rule will be added to the query as additional where clauses." rees (2013): 187
+
+		images
+		"The ‘image’ validation rule will ensure that the file that has been uploaded is a valid image. For example, the extension of the file must be one of the following: .bmp , .gif , .jpeg or .png ." rees (2013): 187
+
+		in
+		"The ‘in’ validation rule will ensure that the value of the field matches one of the provided parameters." rees (2013): 188
+
+		integer
+		"This is an easy one! The ‘integer’ validation rule will ensure that the value of the field is an integer." rees (2013): 188
+
+		ip
+		"The ‘ip’ validation rule will check to make sure that the value of the field contains a well formatted IP address." rees (2013): 188
+
+		max
+		"The ‘max’ validation rule is the exact opposite of the ‘min’ rule. It will ensure that the size of the field being validated is less than or equal to the supplied parameter. If the field is a string, the parameter will refer to the length of the string in characters. For numerical values, the comparison will be made mathematically. For file upload fields the comparison will be made upon the size of the file in bytes." rees (2013): 188
+
+		mimes
+		"This rule will check the mime type of an uploaded file to ensure that it matches one of the parameters provided." rees (2013): 189
+
+		min
+		"The ‘min’ validation rule is the direct opposite of the ‘max’ rule. It can be used to ensure that a field value is greater than or equal to the provided parameter. If the field is a string, the parameter will refer to the length of the string in characters. For numerical values, the comparison will be made mathematically. For file upload fields the comparison will be made upon the size of the file in bytes." rees (2013): 189
+
+		not_in
+		"As the name suggests, this validation rule is the exact opposite of the ‘in’ rule. It will ensure that the field’s value does not exist within the list of supplied parameters." rees (2013): 189
+
+		numeric
+		"The ‘numeric’ rule will check to make sure that the field being validated contains a numeric value." rees (2013): 189
+
+		regex
+		"The ‘regex’ validation rule is the most flexible rule available within Laravel’s validation component. With this rule you can provide a custom regular expression as a parameter that the field under validation must match. [...] You should note that because pipe | characters can be used within regular expressions, you should use nested arrays rather than pipes to attach multiple validation rules when using the ‘regex’ rule." rees (2013): 190
+
+		required
+		"The ‘required’ validation rule can be used to ensure that the current field exists within the validation data array." rees (2013): 190
+
+		required_if
+		"The ‘required_if’ validation rule ensures that the current field must be present only if a field defined by the first parameter of the rule matches the value supplied by the second parameter." rees (2013): 190
+
+		required_with
+		"The ‘required_with’ is used to ensure that the current value is present only if one or more fields defined by the rule parameters are also present." rees (2013): 190
+
+		required_without
+		"The ‘required_without’ rule is the direct opposite to the ‘required_with’ rule. It can be used to ensure that the current field is present only when the fields defined by the rule parameters are not present." rees (2013): 191
+
+		same
+		"The ‘same’ validation rule is the direct opposite of the ‘different’ rule. It is used to ensure that the value of the current field is the same as another field defined by the rule parameter." rees (2013): 191
+
+		size
+		"The ‘size’ rule can be used to ensure that the value of the field is of a given size provided by the rule parameter. If the field is a string, the parameter will refer to the length of the string in characters. For numerical values, the comparison will be made mathematically. For file upload fields the comparison will be made upon the size of the file in bytes." rees (2013): 191
+
+		unique
+		"The ‘unique’ rule ensures that the value of the current field is not already present within the database table defined by the rule parameter. By default, the rule will use the name of the field as the table column in which to look for the value, however, you can provide an alternate column within the second rule parameter. This rule is useful for checking whether a users provide username is unique when handling registration forms. [...] You can provide extra optional parameters to list a number of IDs for rows that will be ignored by the unique rule." rees (2013): 191-192
+
+		url
+		"The ‘url’ validation rule can be used to ensure that the field contains a valid URL. Unlike the ‘active_- url’ validation rule, the ‘url’ rule only checks the format of the string and does not check DNS records." rees (2013): 192
+
+	Error messages
+
+		messages()
+		"we can access the validation error messages object using the messages() method of our validator instance." rees (2013): 193
+
+		$errors
+		"When our view is loaded the $errors variable is added to the view data. It’s always there, and it’s always an error messages container instance, so you don’t have to worry about checking for its existence or contents. If we have used withErrors() to flash our error messages to the session in a previous request then Laravel will automatically add them to the errors object. We can access an array of all error messages by using the all() method on the $errors error messages instance." rees (2013): 196
+
+		get()
+		"We can use the get() method on the validation errors object to retrieve an array of errors for a single field. Simply pass the name of the field as the first parameter to the get() method." rees (2013): 198
+
+		first()
+		"By using the first() method on the validation errors object and passing the field name as a parameter, we can retrieve the first error message for that field." rees(2013): 199
+
+		has()
+		"By default the validation messages instance’s methods return an empty array or null if no messages exist. This means that you can use it without having to check for the existence of messages. However, if for some reason you wish to check whether or not an error message exists for a field, you can use the has() method." rees (2013): 199
+
+		No-empty HTML elements
+		"We can avoid having empty HTML elements appearing in our view source code by passing the containing HTML in string format as the second parameter to the all() and first() methods." rees (2013): 199
+
+	Custom validation rules
+	 "To create a custom validation rule we use the Validator::extend() method. The first parameter to the method is the nickname that will be given to the validation rule. This is what we will use to attach it to a field. The second parameter to the method is a closure. Should the closure return a boolean result of true then the validation attempt will have passed. If a boolean false is returned from the closure then the validation attempt will have failed." rees (2013): 203
+
+		Parameters
+		"The parameters that are handed to the closure are as follows. The first parameter is a string containing the name of the field that is being validated. [...] The second parameter to the extend closure contains the value of the field. The third parameter contains an array of any parameters that have been passed to the validation rule. Use them to customise your validation rules as required." rees (2013): 203
+
+	Custom validation messages
+
+		$messages
+		"The messages array is an optional third parameter to the Validator::make() method. It contains any custom validation messages that you wish to provide and will also override the default validation messages. The key for the validation message array represents the name of the validation rule, and the value is the message to display if the validation rule fails. [...] We can also use this method to provide validation errors for our custom validation rule. Our custom rules won’t have validation error messages by default, so it’s normally a good idea to do so. [...] If we want to provide a custom error message for a specific field, we can do so by providing the name of the field, a period . character, and the type of validation as the key within the array." rees (2013): 206

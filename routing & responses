@@ -1,0 +1,128 @@
+Routing
+ "Routing is the concept of setting up a new URI [...] It’s a static method that accepts two things: a URI and an anonymous function or Closure. [...] Here 'Route' is a class that has a static method ‘get’ that returns a ‘view’ method which presents a web page." sinha (2017): 21
+
+	Route declaration
+	"Routes are defined in the app/routes.php file, [...] Routes are always declared using the Route class." rees (2013): 52
+
+	Verb method
+	"[...] all requests made by a web browser contain a verb. Most of the time, the verb will be GET, which is used to request a web page. A GET request gets sent every time you type a new web address into your web browser. [...] There is also POST, which is used to make a request and supply a little bit of data with it. These are normally the result of submitting a form, where data must be sent to the web server without displaying it in the URL." rees  (2013): 52
+
+		First Parameter
+		"[...] the first parameter to the get() (or any other verb) method [...] defines the URI that you wish the URL to match." rees  (2013): 53
+
+		Second Paramenter
+		"The final parameter is used in this instance to provide the application logic to handle the request." rees (2013): 53
+
+	Parameters
+	"Route parameters can be used to insert placeholders into your route definition. This will effectively create a pattern in which URI segments can be collected and passed to the application’s logic handler." rees (2013): 56
+
+	Named routes
+	"Laravel has provided the named routing ability [...] we can give our routes a nickname. [...] Using the as index of our route array we can assign a nickname to a route. Try to keep it short, yet descriptive. You see, Laravel has a number of methods that help you generate links to the resources served by your application, and many of these have the ability to support route names." rees (2013): 105-106
+
+		route() helper
+		"If we use the route() helper, and then decide to change our URL, we no longer need to modify all of the links. They will all be resolved by their nickname." rees (2013): 106
+
+		Retrieve route's nickname
+		"Also, if you want to retrieve the nickname of the current route, you can use the handy currentRouteName() method on the ‘Route’ class." rees (2013): 107
+
+	Secure routes
+	"You may want your routes to respond to secure HTTP URLs so that they can handle confidential data. HTTPS URLs are layered on top of the SSL or TLS protocol to allow for increased security when you need it. [...] [...] By adding the HTTPS index to our routing array, our route will now respond to requests made to the route using the HTTPS protocol." rees (2013): 107-108
+
+	Route to controllers
+	"Be sure to remember that all of these advanced features are available to Controllers as well as routed Closures. To route to a Controller, simply add the uses parameter to the routing array, along with a controller-action pair." rees (2013): 107
+
+	Parameter constraints
+	"[...] we chain an additional where() method onto the end of our route definition. The ‘where’ method accepts the placeholder name as the first parameter, and a regular expression as the second. [...] You can attach as many conditions to your route as you like."
+
+	Route groups
+	"[...] using the group() method on the ‘Route’ object. The first parameter is an array. It works just like the ones we have been using within our routing methods. It can accept filters, secure indexes, and many of the other routing filters. The second parameter should be a Closure. When you define additional routes within this Closure, the routes inherit the properties of the group." rees (2013): 109
+
+	Route models
+	"The Route::model() method will let Laravel know that any route parameters with the same name as the first parameter to the method will be an Eloquent model instance defined by the second parameter. [...] Laravel will look at the integer supplied as a parameter, and perform a lookup on the model by primary key. It will then pass the appropriate model instance as a parameter to the controller action." rees (2013): 369
+
+	Route prefixing
+	"If many of your routes share a common URL structure, you could use a route prefix to avoid a small amount of repetition. [...] Using the prefix array option of the route group, we can specify a prefix for all of the URIs defined within the group. [...] Use route prefixes to avoid repetition within your routes, and to group them by purpose for organisational or structural value." rees (2013): 110-111
+
+	Domain routing
+	"URI’s are not the only way to differentiate a route. The host can also change. [...] By attaching the ‘domain’ index to the route grouping array, we are able to provide a host name, that must match the current hostname for any of the routes inside to be executed. The host name can either be a subdomain, or a completely different subdomain. As long as the web server is configured to serve requests from each host to Laravel, then it will be able to match them. That’s not all there is to domain based routing. We can also capture portions of the host name to use as parameters." rees (2013): 111-112
+
+		Placeholder
+		"You can provide a placeholder for a domain parameter within the ‘domain’ index by using { curly braces } , just like our URI parameters. The value of the parameter will be passed before any parameters of the routes held within the group. [...] By using a combination of wildcard subdomains, and routing parameters, you could prefix the domain with the username of your application’s users." rees (2013): 113
+
+Responses
+ "Laravel has a number of Response objects that make returning a meaningful reply a whole lot easier." rees (2013): 60
+	
+	Response object
+	"The response object is an instance of a class that can be handed back to Laravel as the result of a routed closure or a controller action to enable the framework to serve the right kind of response to the browser. [...] Response objects generally contain a body, a status code, HTTP headers, and other useful information. [...] The status code for a Redirect would be a 301 . Laravel uses this information to construct a sensible result that can be returned to the browser." rees (2013): 64
+
+		"[...] there's an Illuminate Response object that represents the response your application is sending to the end user, complete with headers, cookies, content, and anything else used for sending the end user's broser instructions on a rendering page. [...] the Illuminate\Http\Response object extends a Symfony class: Symfony\Component\HttpFoundation\Response. This is a base class witha series of properties and methods that make it possible to represent and render a response; Illumionate's Response class decorates it witha fewhelpful shorcuts." stauffer (2016): 400
+
+		"In the end, any response object returned from a route definition will be converted into a HTTP response. It may define specific headers or specific content, set cookies, or whatever else, but eventually it will be converted into a response your user's browsers can parse." stauffer (2016): 401
+
+		Response::make() method
+		"we use the Response::make() method to create a new response object. The first parameter is the content or body of the response and the second parameter is the HTTP status code that will be served with the response." rees (2013): 65
+
+			HTTP headers
+			"HTTP headers are a collection of key-value pairs of data which represent useful information to the web browser that is receiving the response. Normally they are used to indicate the format of the result or how long a piece of content should be cached for. However, we are able to define custom headers as we please. [...] The collection of HTTP headers can be accessed as the headers property of the response object." rees (2013): 65
+
+				$varible->headers->set()
+				"Using the set() method on this collection we can add our own header to the collection by providing a key as a first parameter and the associated value as the second. Once our header has been added we simply return the response object [...] The browser will receive the headers along with the response and can use this information however it wishes." rees (2013): 66
+
+				Content-Type
+				"The Content-Type is a common header key used by browsers to distinguish between the various formats of content that are sent to them." rees (2013): 66
+
+			Symfony 2
+			"Laravel has used some of the more robust components that belong to the Symfony 2 project. The Laravel response object actually inherits most of its content from the Response object belonging to the Symfony HTTPFoundation component." rees (2013): 66-67
+
+	Response Shortcuts
+	"Laravel is more than a friend. It loves you. It really does. Because of this, it has provided a number of response shortcuts to make your life easier." rees (2013): 68
+
+		JSON reponses
+		"Laravel provides a Response::json() method that will configure the response object with a number of details that are specific to JSON results." rees (2013): 68
+
+		Download responses
+		"Serving files directly requires certain headers to be set. [...] The Response::download() method received a path to a file which will be served when the response is returned. You can also provide optional second and third parameters to configure a custom HTTP status code and an array of headers." rees (2013): 69
+
+	Views
+	"A view is just a plain text template that can be returned to the browser, though it’s likely that your views will contain HTML. Views use the .php extension and are normally located within the app/views directory. This means that PHP code can also be parsed within your views." rees (2013): 60
+
+		Templates
+		"The files representing views can be called templates. This may help you distinguish between the View objects and the HTML templates." rees (2013): 60
+
+		"Laravel’s Blade provides a way to build templates that can benefit from inheritance." rees (2013): 97
+			
+			'extends' blade function
+			"First we have the ‘extends’ blade function [...] This tells Blade which layout we will be using to render our content. The name that we pass to the function should look like those that you pass to View::make() [...] Remember that a period ( . ) character represents a directory separator when dealing with views." rees (2013): 99
+
+			'section' blade function
+			"We can use the @section blade function to inject content into sections within the parent template. [...] Everything that is contained between ‘@section’ and ‘@stop’ will be injected into the parent template, where the ‘@yield(‘body’)’ is. [...] we could have as many child templates as we want inheriting from this parent template." rees (2013): 99
+
+			'parent' blade function
+			"we might wish to append to this content, rather than replace it. To do this we can use the @parent helper. [...] The ‘@parent’ helper tells Blade to replace the parent marker, with the default content found within the parent’s section."
+
+		View::make() method
+		"Using the View::make() method we can create a new instance of a View response object. The first parameter we hand to the make() method is the view template that we wish to use. [...] Laravel [...] will by default assume that your views are located in app/views and will look for a file with an appropriate view extension. [...] Laravel will serve the result of our Closure to the web browser." rees (2013): 61
+
+			Second parameter
+			"[...] the second parameter of the make() method accepts an array that is passed to the view template. [...] When the array is passed to the view, the array keys are ‘extracted’ into variables that have the array key as their name and the given value. [...] You can store multidimensional arrays as deep as you like in your view data array." rees (2013): 62
+
+		Control structures
+		"PHP has a number of control structures. If statements, while, for and foreach loops. [...] the PHP opening <? and closing ?> tags are gone. [...] We can also strip out the colons : and semi ; colons. [...] We have prefixed our control statement lines with an at @ symbol. In fact, all blade control structures and helper methods are prefixed with this symbol, so that the template compiler knows how to handle them." rees (2013): 93-94
+
+			{{ }} method
+			"Everything surrounded by {{ double curly brackets }} is transformed into an echo by Blade when the template is processed. This is a much cleaner syntax, and a whole lot easier to type. Since the Blade template directives are translated directly to PHP we can use any PHP code within these brackets, including methods." rees (2013): 92
+
+			{{{ }}} method
+			"If we were to use {{{ three curly brackets }}} instead of {{ two }} then our output will be escaped, the angular brackets will be converted to HTML entities, and the Javascript will show as text within the page." rees (2013): 92
+
+			Unless condition
+			"PHP doesn’t have an ‘unless’ condition. However, Blade has provided a helper to allow it. [...] Unless is the exact opposite of an if statement. An if statement checks if a condition equates to a true value, and then executes some logic. However, the unless statement will execute its logic only if the condition equates to false. You can think of it as a control structure for pessimists." rees (2013): 95-96
+
+			@inlcude()
+			"With PHP, you are able to include() a file into the current file, executing its contents. You could do that with views to break them apart into separate files for organisational purposes. Laravel helps us achieve this goal by providing the @include() Blade helper method to import one view into another, parsing its contents as a Blade template if required. [...] Include takes the name of the view as a parameter, in the same short format as the View::make() method." rees (2013): 96-97
+	
+	Redirects
+	"In some circumstances you may wish to redirect the flow of your application to another route or logic portion. In such a circumstance the Redirect reponse object will be useful. [...] A Redirect is a special type of response object which redirects the flow of the application to another route. [...] This can be really useful when a condition of some kind has failed and you need to redirect the user to a more useful location." rees (2013): 63-64
+
+		Status code
+		"The status code for a Redirect would be a 301 . Laravel uses this information to construct a sensible result that can be returned to the browser." rees (2013): 64

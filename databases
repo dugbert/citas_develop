@@ -1,0 +1,240 @@
+Databases
+
+	Abstraction layer
+	"Laravel provides an abstraction layer, it decouples the framework’s database components from the RAW SQL, providing different queries for different types of databases. Simply put, you don’t have to worry about the SQL syntax, let Laravel take care of it. [...] Another advantage of using Laravel’s database abstraction layer is security. In most situations, unless I indicate otherwise, you won’t have to worry about escaping the values that you send to the database from Laravel. Laravel will escape these values for you, in an effort to prevent various forms of injection attacks." rees (2013): 209
+
+	Configuration
+	 "All of Laravel’s database configuration is contained in the file located at app/config/database.php. [...] When rows are returned from a query that one of Laravel’s database components executes, they will be default be in the form of a PHP stdClass object. [...] However, if you wish to alter the format in which rows are returned you may simply change the fetch option of the database configuration to something more suitable." rees (2013): 209-210
+
+		Individual connection array
+
+			driver
+			"The driver option can be used to specify the type of database that we intend to connect to. [...]
+			Here are the possible values.
+				mysql - MySQL
+				sqlite - SQLite
+				pgsql - PostgreSQL
+				sqlsrv - SQL Server" rees (2013): 213
+
+			host
+			"[...] can be used to specify the network location of the machine that hosts the database server. [...] You can provide either an IP address ( 168.122.122.5 ) or a host name ( database.example.com )." rees (2013): 213
+
+			database
+			"It is a string value used to identify the name of the database which the connection is due to act upon. In the case of an SQLite database, it is used to specify the file that is used to store the database [...]" rees (2013): 213
+
+			username & password
+			"The username and password indexes can be used to provide access credentials for your database connection." rees (2013): 214
+
+			charset
+			"[...] can be used to specify the default character set for a database connection." rees (2013): 214
+
+			collation
+			"You can set the default database collation using the collation index." rees (2013): 214
+
+			prefix
+			"[...] can be used to add a common prefix to your database tables." rees (2013): 214
+
+	Schema builder
+ "Within the database our data can have structure, consist of different types, and have relationships. [...] In order to store our structured data, we first need to define the structure. [...]" rees (2013): 216
+	
+	Creating tables
+	"To create a table we must make use of the create() method of the Schema class. [...] The Schema::create() method accepts two parameters. The first is the name of the table that we wish to create. [...] If the table we are creating will be used to store data representing a type of object, we should name the table in lowercase as the plural of the object. Database columns and tables are commonly named using snake-casing, where spaces are replaced with underscores ( _ ) and all characters are lowercase. [...] The second parameter to the method is a Closure, with a single parameter [...] [that] can be used to build the table structure." rees (2013): 216-217
+
+		Column types
+
+			increments
+			"The increments() method is available on our $table instance to create a new auto incremental column. An auto incremental column will automatically be populated with an integer value that increments as each row is added. It will start at one. This column will also be the primary key for the table. The first parameter to the increments method is the name of the column that will be created." rees (2013): 217
+
+			"The increments method will add an auto incremental integer primary key to the table. This is a very useful method for building the structure for Eloquent ORM models [...] The first and only parameter for the increments() method is the name of the column to create." rees (2013): 218-219
+
+			bigIncrements
+			"the bigIncrements() method will create a big integer, rather than a regular one. [...] the bigIncrements() method will accept a single string parameter as the column name." daylñe (2013): 219
+
+			string
+			"The string() method can be used to create varchar columns, which are useful for storing short string values. [...] The first parameter to string() method is the name of the column to create, however, there is an optional second parameter to define the length of the string in characters. The default value is 255." rees (2013): 219-220
+
+			text
+			"The text() method can be used to store large amounts of text that will not fit into a varchar column type. For example, this column type could be used to contain the body text of a blog post. [...] The text() method accepts a single parameter. The name of the column that will be created." rees (2013): 220
+
+			integer
+			"The integer column type can be used to store integer values [...] integer values are useful when referencing the auto incremented id of another table. We can use this method to create relationships between tables. [...] The first parameter to the integer() method is the name of the column. The second parameter is a boolean value that can be used to define whether or not the column should be auto incremental. The third parameter is used to define whether or not the integer is unsigned. A signed integer can be positive or negative, however, if you define an integer as unsigned, then it can only be postive. Signed integers can contain a range of integers from –2,147,483,648 to 2,147,483,647, where an unsigned integer can hold value from 0 to 4,294,967,295." rees (2013): 220-221
+
+				"The method signature for all of the integer variants is exactly the same as the integer() method [...]" rees (2013): 221 
+
+				bigInteger
+				"Big integer values work exactly like normal integers, only they have a much larger range. A signed inter has a range of –9,223,372,036,854,775,808 to 9,223,372,036,854,775,807, and unsigned integers have a range of 0 to 18,446,744,073,709,551,615." rees (2013): 221
+
+				mediumInteger
+				"The signed range is –8388608 to 8388607. The unsigned range is 0 to 16777215." rees (2013): 222
+
+				tinyInteger
+				"The signed range is –128 to 127. The unsigned range is 0 to 255." rees (2013): 222
+
+				smallInteger
+				"The signed range is –32768 to 32767. The unsigned range is 0 to 65535." rees (2013): 223
+			
+			float
+			"Float column types are used to store floating point numbers. [...] The first value parameter is the name used to identify the column. The optional second and third integer parameters can be used to specify the length of the value, and the number of decimal places to use to represent the value. The defaults for these parameters are 8 and 2 respectively." rees (2013): 223-224
+
+			decimal
+			"The decimal() method is used to store [...] decimal values! It looks very similar to the float() method. [...] The method accepts a column name as the first parameter, and two optional parameters to represent the length and number of decimal places that should be used to define the column. The defaults for the optional parameters are again, 8 and 2." rees (2013): 224
+
+			boolean
+			"Not all values consist of large ranges of digits and characters. Some only have two states, true or false , 1 or 0 . Boolean column types can be used to represent these values. [...] The only parameter for the boolean method is the name given to the column it creates. [...] Tiny integers are used to represent boolean values as 1 or 0 ." rees (2013): 225
+
+			enum
+			"The enumerated type will store strings that are contained within a list of allowed values. [...] The first parameter is the name of the column that will be created. The second parameter is an array of values that are permitted for this enumerated type." rees (2013): 225
+
+			date
+			"[...] the date() method can be used to create columns that store dates. [...] The first and only parameter is used to specify the name of the column that will be created." rees (2013): 226
+
+			dateTime
+			"The dateTime() method will not only store a date, but also the time. [...] Once again, the name of the column to be created is the only parameter." rees (2013): 226-227
+
+			time
+			"Don’t want the date included with your times? Fine! Just use the time() method instead. [...] the first and only parameter to the time() method is the name of the column being created" rees (2013): 227
+
+			timestamp
+			"The timestamp() method can be used to store a date and time in the TIMESTAMP format. [...] The first and only value is the name of the database column that will be created." rees (2013): 227-228
+
+			binary
+			"The binary() method can be used to create columns that will store binary data. These types of columns can be useful for storing binary files such as images. [...] The only parameter to the binary method is the name of the column that is being created." rees (2013): 228
+
+		Special column types
+
+			timestamps()
+			"The timestamps() method can be used to add two ‘TIMESTAMP’ columns to the table. The created_at and updated_at columns can be used to indicate when a row was created, and updated. [...] The timestamps() method doesn’t accept any parameters." rees (2013): 229
+
+			softDeletes()
+			"Occasionally you will want to mark table row as deleted, without actually deleting the data contained within. This is useful if you may wish to restore the data in the future. With the softDeletes() method you can place an indicator column on the row to show that the row has been deleted. The column that is created will be called deleted_at and will be of type ‘TIMESTAMP’. Once again, Laravel’s Eloquent ORM will be able to update this column, without deleting the row when you use the delete method on an ORM instance. [...] The softDeletes() method does not accept any parameters." rees (2013): 229-230
+
+		Column modifiers
+		 "Column modifiers can be used to add extra constraints or properties to the columns that we create with the create() method." rees (2013): 230
+
+		 "[...] the column modifiers can be chained to an existing column definition. Alternatively, the column modifiers can be used in isolation by providing a column name as a parameter." rees (2013): 231
+
+			unique()
+			"By chaining the unique() method on to our column creation method, we have told the database that duplicate values will not be allowed for this column. Our primary key should be used to identify individual rows, so we don’t want to have duplicate values [...]" rees (2013): 230
+
+			primary()
+			"We can mark any column as a primary key using the primary() method. The only parameter to this method a string representing the name of the column to mark as the key. [...] both the primary() key, and the unique() methods are able to act on their own, or fluently chained to an existing value." rees (2013): 231
+
+				Multiple composite keys
+				"If you aren’t satisfied with a single primary key for your table, you can use multiple composite keys by providing an array of column names to the primary() method [...] whereby any combination of the values contained in the columns will be a unique reference to an individual role." rees (2013): 232
+
+			index()
+			"We can speed up our queries by marking columns that are used to lookup information as indexes. We can use the index() method to mark a column as an index. [...] We can also pass an array of column names to the index() method to mark multiple columns as indexes." dayñe (2013): 232-233
+
+			nullable()
+			"Sometimes we want to set a constraint on a column to state whether or not it can contain a null value. We can set a column to nullable using the nullable() method. [...] If we don’t want the column to allow a null value, we can pass boolean false as the first parameter to the nullable() chained method" rees (2013): 234
+
+			default()
+			"If we wish for our columns to contain a default value when a new row is created, we can provide the default value by chaining the default() method onto the new column definition. [...] The first and only parameter to the default() method is the intended default value for the column. [...] If we don’t provide a value for the ‘name’ column when creating a new row, then it will default to ‘John Doe’." rees (2013): 235
+
+			unsigned()
+			"[...] we can use the unsigned() chained method on an integer column to specify that it may not contain negative numbers." rees (2013): 235
+
+		Updating tables
+
+			Schema::rename()
+			"First of all, we can change the name of a table that we have already created quite easily using the Schema::rename() method. [...] The first parameter of the rename() method is the name of the table that we wish to change. The second parameter to the method, is the new name for the table." rees (2013): 236-237
+
+			Schema::table()
+			"If we want to alter the columns of an existing table, we need to use the Schema::table() method. [...] The table() method is almost identical to the create() method we used earlier to create a table. The only difference is that it acts upon an existing table that we specify within the first parameter to the method. Once again, the second parameter contains a Closure with a parameter of a table builder instance." rees (2013): 237
+
+			dropColumn()
+			"If we decide that we no longer wish to have a column on our table, we can use the dropColumn() method to remove it. [...] The dropColumn() method will accept a string parameter, which is the name of the column that we wish to remove. [...] If we wish to remove more than one column at once, we can either provide an array of column names as the first parameter to the dropColumn() method [...] or we can simply provide multiple string parameters for column names." rees (2013): 238-239
+
+			renameColumn()
+			"The renameColumn() method is used to change the name of a column. The first parameter to the method is the name of the column that we wish to rename, and the second parameter is the new name for the column." rees (2013): 240
+
+			dropPrimary()
+			"Using the dropPrimary() method, we supply the name of a column as a parameter. This column will have its primary key attribute removed. [...] To remove a number of composite keys from a table, we can instead supply an array of column names as the first parameter of the dropPrimary() method." rees (2013): 240
+
+			dropUnique()
+			"We can remove the unique attribute for a column by using the dropUnique() method. This method accepts a single parameter, which consists of the table name, column name, and ‘unique’ separated by underscores. [...] we can pass an array of column names in same format to the dropUnique() method if we wish." rees (2013): 241
+
+			dropIndex()
+			"we can drop an index attribute from a table column by using... wait for it... okay you guessed it. We can use the dropIndex() method. Simply provide the column name in the same format as we used with the dropUnique() method, that’s table name, column name, and ‘index’." rees (2013): 242
+
+		Dropping tables
+
+			Schema::drop()
+			"[...] we can drop a table using the Schema::drop() method [...] To drop a table we simply pass the name of the table as the first parameter of the Schema::drop() method." rees (2013): 242-243
+
+			Schema::dropIfExists()
+			"If we try to drop a table that doesn’t exist, then we will get an error. We can avoid this by instead using the dropIfExists() method. [...] the dropIfExists() method accepts a single parameter, the name of the table to drop." rees (2013): 243
+
+		Schema tricks
+
+			Schema::connection()
+			"We can use the Schema::connection() method to perform our schema changes on an alternative database or connection. [...] The connection() method can be placed before any of the Schema class methods to form a chain. The first parameter for the method, is the name of the database connection which subsequent methods will act upon. The connection() method can be very useful if you need to write an application that uses multiple databases." rees (2013): 243-244
+
+			Schema::hasTable()
+			"We can use the hasTable() method to check for the existance of a table. The first parameter to the method is the name of the table that we wish to check." rees (2013): 244
+
+			Schema::hasColumn()
+			"We can use the Schema::hasColumn() method to check if a table has a column. The first parameter to the method is the table, and the second parameter is the name of the column that we want to look for." rees (2013): 245
+
+			Change storage engine
+			"[...] you might want to change the storage engine used by the table. [...] Simply change the value of the engine attribute on the table blueprint to the name of the storage engine that you wish to use. Here are some of the available storange engines for the mySQL database:
+				MyISAM
+				InnoDB
+				IBMDM2I
+				MERGE
+				MEMORY
+				EXAMPLE
+				FEDERATED
+				ARCHIVE
+				CSV
+				BLACKHOLE" rees (2013): 245
+
+			after()
+			"On mySQL databases, you are able to reorder the columns of a table by using the after() method. [...] Simply chain the after() method onto the column that you wish to reposition. The only parameter to the method is the name of the column that you wish for the new column to be placed after." rees (2013): 245-246
+
+Migrations
+ "Migrations are a number of PHP scripts that are used to change the structure or content of your database. Migrations are time stamped, so that they are always executed in the correct order. Laravel keeps a record of which migrations have already been executed within another table on your default database connection. This way, it will only ever execute any additional migrations that have been added. Using migrations, you and your team will always have the same database structure, in a consistant, stable state." rees (2013): 247-248
+
+ 	Creating migrations
+ 	 "To create a migration we need to use the Artisan command line interface. [...] We call the Artisan migrate:make command, and provide a name for our new migration. Laravel has new generated a new migration template within the app/database/migrations directory. The template will be located in a file named after the parameter that you supplied to the migrate:make command, with an attached timestamp." rees (2013): 248
+
+ 		Artisan command
+ 		"Now it’s important that you always use the Artisan command to generate migrations, you don’t want to risk breaking the timestamps and thus the history of your database structure." rees (2013): 249
+
+ 			tinker
+ 			"It’s an artisan command that comes with Laravel and allows us to work directly on Laravel code base through terminal. If we issue this command: php artisan tinker, it just opens up a nice interface on the terminal to work ceaselessly." sinha(2017): 54
+
+	 	--create & --table
+	 	"Using the --create and --table switches on the migrate:make command we can automatically create a stub for the creation of a new table. We simply run...
+	 		php artisan migrate:make create_users --create --table=users" rees (2013): 251
+
+	 	--path
+	 	"We can use the --path switch to define a new location for our migration class. [...] However, when running your migrations, Artisan won’t look in this new location by default, so be sure to let it know where to find you migrations" rees (2013): 252
+
+	 	up() & down()
+	 	"[...] let us go to our 'database/migrations/' folder; we find that two PHP files have already been stored there. These migration files are ‘users’ and ‘password resets’. Laravel comes with them [...] there are only two functions: ‘up’ and ‘down’. The instructions written inside are fairly simple to understand. It tells us about creating columns in ‘users’ table. It mentions the characteristics of the columns: whether it’ll be ‘string’, or ‘text’, or have any extra feature of uniqueness. The method ‘up’ means you generate or update the tables. The method ‘down’ has a significant meaning. It means you can roll back your migrations any time, and generate it again." sinha (2017): 49-50
+
+	 		Bidirectionality
+	 		"Within the migration class we have two public methods, up() and down() [...] Whatever you do in the up() method, you must undo within the down() method. You see, migrations are bi-directional. We can run a migration to update the structure or content of our database, but we can also undo that migration to revert it to its orignal state." rees (2013): 249
+
+	Running migrations
+
+		Migration table
+		"Now you can call the migrations table whatever you like. The configuration for the table name is located within app/config/database.php [...] Simply change the migrations index to the name of the table which you wish to use to track your migration status. A sensible default has been provided. We can install our migrations table by running another Artisan command. [php artisan migrate:install] [...] Laravel will automatically create the table for us if it doesn’t exist when your migrations are executed. It will install the migrations system for you." rees (2013): 252-253
+
+		PHP file generation
+	 	"Remember, whenever you run a migration, a PHP file is generated inside 'database/migrations' folder and it looks like this. Now, it’s our responsibility to add columns into it and again issue the migration command." sinha (2017): 51
+
+	 	Non-standard migrations
+	 	"We just use the --path switch again to specify the location where our migrations are stored relative to the application root." rees (2013): 257
+	
+	Rolling back
+	"When we use the rollback command, Laravel rolls back only the migrations that were ran the last time we used migrate . It’s as if the last time that we ran migrate never happened. If we want to roll back all migrations, we can use the reset command. [...] the reset command will not remove our migrations table." rees (2013): 258
+
+	Migration tricks
+
+		--database
+		"We can perform our migrations on another connection by supplying the --database switch to any of the migration commands [...]" rees (2013): 258
+
+		--pretend
+		"We can execute our migrations without altering the database, and we can see the intended SQL queries that are the result of our migrations. This way we can check to see what the next migration will do, without risking any damage to our database. This is really useful for debugging. To see the intended SQL result of a migration command, just add the --pretend switch." rees (2013): 258
