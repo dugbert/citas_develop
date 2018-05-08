@@ -48,12 +48,12 @@ Queue worker
 	"Sometimes, from within the handling of a job, you'll want to add conditions that will potentially either releasethe job to be restarted later or delete the job forever. To release a job back intothe queue, use the release() command." stauffer (2016): 615
 
 Events
-"With jobs, the calling code informs the application that it should do something [...] With an event, the calling coe instead informs the application that something happened [...] Events are notifications that something has taken place. Some of these events may be "fired" by the framework itself. [...] But some events are also manually triggered by the application's code." stauffer (2016): 617
+ "With jobs, the calling code informs the application that it should do something [...] With an event, the calling coe instead informs the application that something happened [...] Events are notifications that something has taken place. Some of these events may be "fired" by the framework itself. [...] But some events are also manually triggered by the application's code." stauffer (2016): 617
 
-"An event being fired doesn't do anything on its own. However, you can bind event listeners, whose sole purpose is to listen for the broadcasting of specific events and to act in response. Any event can have anywhere from zero to may event listeners. [...] Many events are fired out into the application; some may never be listened for, and others may have a dozen listeners. The events don know or care." stauffer (2016): 617
+ An event being fired doesn't do anything on its own. However, you can bind event listeners, whose sole purpose is to listen for the broadcasting of specific events and to act in response. Any event can have anywhere from zero to may event listeners. [...] Many events are fired out into the application; some may never be listened for, and others may have a dozen listeners. The events don know or care." stauffer (2016): 617
 
 	Firing events
-	"There are three ways to fire an event. You can use the Event facade, inject the Dispatcher, or use the event() global helper." stauffer (2016): 618
+	 "There are three ways to fire an event. You can use the Event facade, inject the Dispatcher, or use the event() global helper." stauffer (2016): 618
 
 		"SerializeModels work just like with jobs;it allows you to accept Eloquent models as parameters. InteractWithSockets, ShouldBroadcast, and the broadcastOn() method provide thebacking functionality for bradcoasting events using WebSockets[...] But remember, this object exists not to determine a particular action, but just to encapsulate some data. The first piece of data is its name [...] The rest of the data is any data we pass into the constructor and associate with this entity."
 
@@ -66,7 +66,7 @@ Events
 			"Subscribers need to define a subscribe() methid, which is passed an instance of the event dispatcher. [...] any time you see an @ inline like this means the class name is to the left of the @ and the method name is to the right." stauffer (2016): 622
 
 	Broadcasting events
-	"WebSocket is a protocol, popularized by Pusher, that makes it simple to provide near-real-time communication between web devices. Rather than relying on information passing via HTTP requests, WebSockets libraries open a direct connection between the client and the server. WebSockets are behinf tools like the chat boxes in Gmail and Facebook." stauffer (2016): 623
+	 "WebSocket is a protocol, popularized by Pusher, that makes it simple to provide near-real-time communication between web devices. Rather than relying on information passing via HTTP requests, WebSockets libraries open a direct connection between the client and the server. WebSockets are behinf tools like the chat boxes in Gmail and Facebook." stauffer (2016): 623
 
 		Queue listeners
 		"In order for event broadcasting to move quicklu, Laravel pushes the instruction to broadcast themonto a queue. That means tou'll need to have a queue worker running (or use the sync queue driver for local development). [...] Laravel suggests a default delay of three seconds bedore the queue worker looks for new jobs. However, with event broadcasting you may notice some events take a second or two to broadcast. To speed this up, update your queue settings to only wait one second before looking for new jobs." stauffer (2016): 625
@@ -86,9 +86,11 @@ Events
 			Data
 			"The data us a payload, usually JSON, of information relevant to the event -the message, maybe, or infotmation about the user or plan that can be acted upon by the consuming JavaScript." stauffer (2016): 626
 
-	Testing
+Testing
 	"Testing queued jobs (or anything else in the queue) is easy. In phpunit.xml, which is the configuration file for your tests, the QUEUE_DRIVER enviroment variable is set to sync by default. That means your tests will run jobs or other queued tasks synchronously, directly in your code, without relying on a queue system of any sort. You can test them just like any other code." stauffer (2016): 654
 
 		"To test that an event fired, you have three options. First, you can just test that the behavor you expected hapened, without concerning yourself with the event itself. Second, you can explicitly assert that the event fired [...] Finally, you can run a test againt the event that was fired." stauffer (2016): 654
 
 		"Another common scenario is thatyou're testing code that incidentally fires events, and you want to disable the event listeners during that test. You can disable the event system with the withoutEvents() method." stauffer (2016): 655
+
+		

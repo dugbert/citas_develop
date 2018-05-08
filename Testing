@@ -4,8 +4,21 @@ Testing
 
 "Laravel's testing setup even has a sample application test that can run successfully the moment you create a new app. That means you don't have to spend any time configuing your testing enviroment, and that's one less barrier to writing your tests." stauffer (2016): 441
 
+	Anatomy of a test
+	"Your application tests will reside in tests/. In this directory, you will find a base test case inside TestCase.php, which is responsible for bootstrapping the application in the testing enviroment. This class extends Laravel's main TestCase class, which inturn extends the PHPUnit_Framework_TestCase class, along with many helpful testing methods." bean (2015): 66
+
+		"In every test. we generally perform the following three distinct tasks:
+		1. We arrange or initialize some data.
+		2. We execute a function to act on this data.
+		3. We assert or verify that the output matches what we expected." bean (2015): 66
+
+		Assertion
+		"Assertions are the fundamental components of unit tests. Simply put, they are used to compare the expected output of a function with its actual output." bean (2015): 68
+
 	Unit tests
 	"Unit tests target small, relatively isolated units -a cass or method, usually." stauffer (2016): 441
+
+		A possitive effect of using testing is that it forces you to split your code into manageable dependencies, so that you can test them inisolation. The testing of these individual classes and method is referred to as unit testing. Since it relies on the PHPUnit testing framework, which already provides a large number of tools to set up test suites, Laravel does not need to provide any additional helpers for this type of testing. bean (2015): 68
 
 	Integration tests
 	"Integration tests test the way individual units work together and pass messages." stauffer (2016): 441
@@ -41,4 +54,9 @@ Testing
 
 			"This is the same response object that would normally be returned and displayed to the browser, but it's just catched for Laravel's application testing assertions to check against (or for your code, if you want to interact with the response)." stauffer (2016): 454
 
-			
+		Mocking
+		"Mocks (and their brethren, spies, and stubs and dummies and fakes and who knows what else) are common tools in testing. [...] Essentially, mocks and other similar toools make it possible to create an object that in some way mimics a real class, but for testing purposes isn't the real class. Sometimes this is done because the real class is too difficult to instantiate just to inject it into a test, or maybe the real class communicates with an external service." stauffer (2016): 469
+
+			"In Laravel, mocks are created using the Mockery library, and they help define the methods that should be called during the test, the argument they should receive, and their return values aswell. Laravel heavily relies on mocks in its own tests. [...] As opposed to stubs,mocks allow us to define which methods need to be called, how many times they should be called, which parameters they should receive, and which parameters they should return. If any of these preconditions are not met, the test will fail. To ensure that we do not have an instance of a mocked object that persists and interferes with future tests, Mockery provides a close() method that needs to be executed after each test. Thanks to this mock, the class can be tested in complete isolation." bean (2015): 70
+
+		"Laravel can work with any modern PHP testing framework, but it brings in a lot of framework-specific power if you use PHPUnit and if your tests extend Laravel's TestCase. [...] The TestCase class brings in a group pf methods that make it easy to customize how your test interact with your datavase, disable the effects of events, and make assertions against framework-level structure like jobs and facades." stauffer (2016): 473
