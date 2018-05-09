@@ -22,6 +22,21 @@ Request data
  			Laravel's kernel
  			"The kernel is the core route of every Laravel application, responsible for taking in a user request, processing it throuh middleware and handling exceptions and passing it to the page router, and then returning the final response. There are actually two kernels, but only one is used for each page request. One of the routers hndles web requests (the HTTP kernel) and the other handles console, cron, and Artisan requests (the console kernel). Each has a handle() methid that's responsible for tacking in an Illuminate Request object and returning an Illuminate Response object. The kernel runs all the bootstraps that need to run before every request, including determining which enviroment the current request is running in (staging, local, production, etc.) and running all of the service providers. The HTTP kernel additionally defines the list of middleware that will wrap each request, including the core middleware responsible for sessions and CSRF protection." stauffer (2016): 387
 
+ 		RESTful API
+ 		"Laravel provides the basic CRUDmethods: create, read, update, delete, and also lists all. Requests that arrive via HTTP to Laravel URL are managed through their verbs and subsequently, the routes.php file, which is located at app/Http/routes.php. There are two ways in which the requests are handled. One way is that the request is hadled directly via a closure, and the code is entirely inside the routes file. Another way is that it routes the reques to a controller, where a method will be executed." pecoraro (2015): 69
+
+ 			Essential CRUD
+ 			 "The first item,which is a GET call to the plural form of the model name, is rather simple; it displays all of the items. Sometimes, this is called a list to differentiate it from the read og a single record. Adding a list would thus expand the acronym to CRUDL. They could be paginated or require authorization.
+ 			 The second item, also GET call, adds the ID of the model to the end ofthe URL, displaying a single model with that corresponding ID. This could also require authentication but not paging.
+ 			 The third item represents the create part of CRUD. It uses the POST verb to create a new model. Note that the URL format is the same as the first item; this demonstrates the importance of the verb to distinguish between the actions.
+ 			 The fourth, fifth, and sixth items use the new HTTP verbs that were not supported by all browswers. Whether or not the verbs are supported, JavaScript libraries and frameworks, such as jQuery, will send the verb in a way that Laravel can properly handle.
+ 			 The fourth item is the update part of CRUD and updates the model using the PUT verb.Note that it has the same URL format as the second, as it needs to know which model to update. It is also idempotent, which means thatthe entire model must be updated.
+ 			 The fifth item is similar to the fourth item; it updates the model,but uses the PATCH verb. This is used to indicate that the model will be partially modifiedm which means that one or more of the model's attributes have to be changed.
+ 			 The sixth item deletes a single model and thus requires the model's ID, using the self-explanatory DELETE verb." pecoraro (2015): 70-71
+
+ 			Bonus features
+ 			"Laravel adds two additional methods that are not usually part of the standard RESTful API. A GET method on the model URL, adding create is used to display a form to create the model. A GET method on the model URL with its ID, adding edit is used to display a form to create the model. These two functions areuseful for providing a URL that will load a form, even though this type of usage is not a standard RESTful." pecoraro (2015): 71
+
  		Service providers
  		"While there's a bit of pricedural code in these bootstraps, almost allof Laravel's bootstrap codeis sepatared into something Laravel calls service providers. A service provider is a class that encapsulates logic that various parts of your application need to run in order to bootstrap their core functionality. [...] many components of your application have bootstrap code that need to run when the application initializes. Service providers are a tool for grouping that bootstrap code into related classes."
 
