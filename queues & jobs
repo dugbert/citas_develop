@@ -1,49 +1,72 @@
 Queues & jobs
 
 Queues
-"Queues allow you to separate chunks of your application's code fromthe synchronous flow of user interactions out to a list of commands to be processed by a "queue worker." This allows your users to resume interactions with your application while slower processes are handled asynchronously in the background." stauffer (2016): 656
+"Queues allow you to separate chunks of your application's code from the synchronous flow of user interactions out to a list of commands to be processed by a "queue worker." This allows your users to resume interactions with your application while slower processes are handled asynchronously in the background." stauffer (2016): 656
+
+    "The primary use for queues is to push jobs onto, but you can also queue mail using the Mail::queue functionality [...] You can also queue Artisan commands [...]" stauffer (2016): 616
+
+Queueing process
+"Your application adds a "job" to a queue, which is a chunk of code that tells the application how to perform a particular behavior. Then some other separate application structure, usually a "queue worker," takes the responsability for pulling jobs off of the queue one at a time and performing the appropiate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed." stauffer (2016): 600
+
+Queues pros
+"Queues make it easy to remove a costly or slow process from any synchronous call. [...] Sometimes you [...] might have a process like a cron job or a webhook that has a lot of work process; rather than letting it all run at once (and potentially time out), you may choose to queue its individual pieces and let the queue worker process them one at a time. Additionally, if you have some heavy processing that's more than your server can handle, you can spin up more than one queue worker to work through your queue faster than your normal application server could on its own." stauffer (2016): 601
 
 Jobs
-"Jobs are classes that are structured with the intention of encapsulating a chunk of application behavior so that it can be pushed onto a queue." stauffer (2016): 656
+    "With jobs, the calling code informs the application that it should do something." stauffer (2016): 617
 
+    "Jobs are classes that are structured with the intention of encapsulating a chunk of application behavior so that it can be pushed onto a queue." stauffer (2016): 656
+
+    "Laravel provides a structure called a Job, which is intended to encapsulate a single task -a behavior that your application can be commanded to do -and allow it to be added to and pulled from a queue." stauffer (2016): 605
+
+    "In Laravel [a job] it's a collection of information containing the job name, the data payload, the number of attempts that have been made so far to process this job, and some other simple metadata." stauffer (2016): 605
+
+    Artisan generated jobs
+    "We [...] get two methods from this template: the constructor,which you'll want to use to attach data to the job, and the handle() method, which iswhere the job's logic should reside (and also the method signature you'll use to inject dependencies). The traits and interface provide the class with the ability to be addedto, and interact with,the queue. Queueable allows you to specify how Laravel should push this job to the queue; InteractsWithQueue allows each job, while being handled, to control its relationship with the queue, including deleting or requeueing itself; and SerializesModels gives the job the aility to serialize and deserialize Eloquent models." stauffer (2016): 606
+
+        Serializing models
+        "The SerializesModels trait gives the jobs the ability to serialize injected models so that your job's handle() method will have access to them. However,because it'stoo difficult to reliably serialize an entire Eloquent object,the trait ensures that just the primery keys of any attached Eloquent objects are serialized when the job ispushed onto the queue. When the job is deserialized and handled, the trait pulls those Eloquent models fresh from the database by their primary key. This means that when your jobs runs it will be pulling a fresh instance of this model, not whatever state it was in when you queued the job." stauffer (2016): 608
+
+    Push a job into a queue
+    "There are two primary ways you can push a job onto a queue: the global dispatch() helper and the methods provided by the BispatchesJobs trair, which is imported by default in evry controller. With each, create an instance of your job, attach any necessary data by passing it to the constructir, and pass it to the dispatch() method. There are three settings you can control in order to customize exactly how you dispatch a job: the connection, the queue, and the delay." stauffer (2016): 608-609
+
+        Customizing connection
+        "If you ever have a multiple queue connections in place at once, you can customize the connection by running onConnection() on yout instantiated job." stauffer (2016): 609
+
+        Customizing queue
+        "Withtin the servers, you can specify which named queue you're pushing a job onto. [...] You can customize which queue you're pushing a job onto with onQueue() method." stauffer (2016): 609
+
+        Customizing delay
+        "You can customize the amount of time your queue workers should wait before processing a job with the delay() methid, ehich accepts an interger representing the number of seconds to delay a job." stauffer (2016): 609
+
+Queue worker ( php artisan queue:work )
+ "In Laravel, [a queue worker] it's an Artisan command that stays running forever (until it's stopped manually) and takes the responsibility for pulling down jobs from your queue and running them. [...] This command starts a daemon "listening" to your queue; every time there are jobs on the queue, it will pull down the first job, handle it, delete it, and move on to the next. If at any point there are no jobs, it "sleeps" for a configurable amount of time before checking again to see if there are any more jobs." stauffer (2016): 6102
+
+    Setting up
+     "You can define how many seconds a job should be able to run before the queue listener stops it (--timeout), how many seconds the listener should "sleep"when there are no jobs left (--sleep), how many tries each job should be allowed before being deleted (--tries), which connection the worker should listen to (the first parameter after queue:work), and which queues it should listen to (--queue=)." stauffer (2016): 610
+
+    Handling errors
+     "If an exception is thrown, the queue listener will release that job back onto the queue. That job will be released to be processed again and again until it is able to finish successfully or until it has been attempted the maximum number of times allowed by your queue listener. [...] The maximum number of tries is defined by the --tries switch passed to the queue:listen of queue:work Artisan commands." stauffer (2016): 611
+
+        attempts()
+        "If at any point you'd like to check how many times a job has been attempted already, use the attempts() method on th job itself." stauffer (2016): 613
+
+        Infinite retries
+        "If you don't set --tries, or if you set it to 0, the queue listener will allow for infinite retries. That means if there are any circumstances in which a job could just never be satisfied [...] your app will slowly crawl to a halt as it forever retries uncompletable jobs. The documentation and Laravel Forge both show 3 as the default starting point for the maximum number of retries." stauffer (2016): 613
+
+    Failed jobs
+     "Once a job has exceeded its allowable numbre of retries, it's considered a "failed" job. Before you do anything else -even if all you want to do is limit the number of times a job can be tried -you'll need to create the "failed jobs" database table. [...] Any job that has surpassed its maximum number of allowed attempts will be dumped there." stauffer (2016): 613
+
+        Handling failed jobs
+        "[...] there are quite a few things you can do with your failed jobs. First, you can define a failed() method on the job itself, which will run when that job fails [...] Next, you can register a global handler for failed jobs. Somewhere in the application's bootstrap -if you don't know where to put it, just put it in the boot() method of AppServiceProvider -place the code [...] to define a listener." stauffer (2016): 614
+
+        Artisan tools
+        "There is also a suite of Artisan tools for interacting with the failed jobs table. queue:fauled shows you a list of your failed jobs. [...] From there, you can grab the ID of any individual failed job and retry it with queue:retry [...] If you'd rather retry all of the jobs, pass all instead of an ID [...] You can delete an individual failed job with queue:forget [...] And you can delete all of your failed jobs with queue:flush." stauffer (2016): 614
+
+    Controlling the queue
+    "Sometimes, from within the handling of a job, you'll want to add conditions that will potentially either release the job to be restarted later or delete the job forever. To release a job back into the queue, use the release() command. [...] If you want to delete a job during its handling, you can just return at any point [...] that's the signal to the queue thatthe job was handled appropriately and shouldnot be returned to the queue." stauffer (2016): 615
 
 Scheduler
 "Laravel's scheduler simplifies scheduling tasks. Point an every-minute cron job to php artisan schedule:run and then schedule your tasks with even the most complex of time requirements using the scheduler, and Laravel will handle all the timings for you." stauffer (2016): 656
 
-"Your application adds a "job" to a queue, which is a chunk of code that tells the application how to perform a particular behavior. Then some other separate application structure, usually a "queue worker," takes the responsability for pulling jobs off of the queue one at a time and performing the appropiate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed." stauffer (2016): 600
-
-"Queues make it easy to remove a costly or slow proess from any synchronous call. [...] Sometims you may not just want to save your users time, but you might have a process like a cron job or a webhook that has a lot of work process; rather than letting it all run ar once (and potentially time out), you may choose to queue its individual pieces and let the queue worker process them one at a time. Additionally, if you have some haevy processing that's more than your sercer can handle, you can spin up more than one queue worker to work through your queue faster than your normal application server cpuld on its own." stauffer (2016): 601
-
-"This job could be shaped any way; it could just be a string, or an array, or an object. In Laravel, it's a collection of information containing the job name, the data payload, the number of attempts that have been made so far to process this job, and some other simple metadata. [...] Laravel provides a structure called a job, which is intended to encapsulate a single task -a behavior that your application can be commanded to do -and allow it to be added to and pulled from a queue." stauffer (2016): 605
-
-"There are two primary ways you can push a job onto a queue: the global dispatch() helper and the methods provided by the BispatchesJobs trair, which is imported by default in evry controller. With each, create an instance of your job, attach any necessary data by passing it to the constructir, and pass it to the dispatch() method. There are three settings you can control in order to customize exactly how you dispatch a job: the connection, the queue, and the delay." stauffer (2016): 608-609
-
-	Connection
-	"If you ever have a multiple queue connections in place at once, you can customize the connection by running onConnection() on yout instantiated job." stauffer (2016): 609
-
-	Queue
-	"Withtin the servers, you can specify which named queue you're pushing a job onto. [...] You can customize which queue you're pushing a job onto with onQueue() method." stauffer (2016): 609
-
-	Delay
-	"You can customize the amount of time your queue workers should wait before processing a job with the delay() methid, ehich accepts an interger representing the number of seconds to delay a job." stauffer (2016): 609
-
-Queue worker
-"In Laravel, [a queue worker] it's an Artisan command that stays running forever (until it's stopped manually) and takes the responsibility for pulling down jobs from your queue and running them. [...] This command starts a daemon "listening" to your queue; every time there are jobs on the queue, it will pull down the first job, handle it, delete it, and move on to the next. If at any point there are no jobs, it "sleeps" for a configurable amount of time before checking again to see if thereare any more jobs." stauffer (2016): 610
-	
-	Handling errors
-	"If an exception is thrown, the queue listener will release that job back onto the queue. That job will be released to be processed again and again until it is able to finish successfully or until it has been attempted the maximum number of times allowed by your queue listener." stauffer (2016): 611
-
-	attempts()
-	"If at any point you'd like to check how many times a job has been attempted already, use the attempts() method on th job itself." stauffer (2016): 613
-
-		Infinite retries
-		"If you din't set --tries, or if you set it to 0, the queue listener will allow for infinite retries. That means if there are any circumstances in which a job could just never be satisfied [...] your app will slowly crawl to a halt as it forever retries uncompletable jobs." stauffer (2016): 6013
-
-		Failed jobs
-		"Once a job has exceeded its allowable numbre of retries, it's considered a "failed" job. Before you do anything else -even if all you want to do is limit the number of times a job can be tried -you'll need to create the "failed jobs" database table. [...] Any job that has surpassed its maximum number of allowed attempts willbe dumped there." stauffer (2016): 613
-
-	Controlling the queue
-	"Sometimes, from within the handling of a job, you'll want to add conditions that will potentially either releasethe job to be restarted later or delete the job forever. To release a job back intothe queue, use the release() command." stauffer (2016): 615
-
 Testing
-	"Testing queued jobs (or anything else in the queue) is easy. In phpunit.xml, which is the configuration file for your tests, the QUEUE_DRIVER enviroment variable is set to sync by default. That means your tests will run jobs or other queued tasks synchronously, directly in your code, without relying on a queue system of any sort. You can test them just like any other code." stauffer (2016): 654
+    "Testing queued jobs (or anything else in the queue) is easy. In phpunit.xml, which is the configuration file for your tests, the QUEUE_DRIVER enviroment variable is set to sync by default. That means your tests will run jobs or other queued tasks synchronously, directly in your code, without relying on a queue system of any sort. You can test them just like any other code." stauffer (2016): 654
