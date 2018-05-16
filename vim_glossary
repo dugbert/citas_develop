@@ -1,0 +1,231 @@
+Vim glossary
+
+General
+    [count]: specifies the number of times s the command will be iterated, defaults to one
+
+    <Del>: deletes the last character behind the cursor
+
+    yank: stores text, but does not modify text (copy text)
+
+    mark: hidden positions set within a file for navigation purposes
+
+    `<mark>: places cursor directly on the mark
+    ‘<mark>: places cursor on first non-blank character of the mark’s line
+    register: specified storage in memory for text. There are nine types:
+
+    The unnamed register “”
+    Numbered registers “0-”9
+    Small delete register “-
+    Named registers “a-”z
+    Black hole register “_
+    Four read-only registers “;/”,/”%/”#
+    The expression register “=
+    The selection and drop registers “*/”+/”~
+    The Last search pattern “/
+    nu, nonu: show the line number in front of each line in the text
+
+    :set nu: shows line numbers
+    :set nonu: hides line numbers
+    :set nu!: toggle line numbers
+    :set nonu!: toggle line numbers.
+
+Main
+    Esc: escape key — exits current mode into “command mode”
+
+    i: insert mode for inserting text
+
+    :: last line mode for inserting commands (saving document, help)
+
+    q: allows you to exit or quit vi
+
+    q!: force quits
+
+    wq: quits, writing out modified file to original file
+
+Scrolling
+    [count]h: moves the cursor one space to the left
+
+    [count]j: moves the cursor one space down
+
+    [count]k: moves the cursor one space up
+
+    [count]l: moves the cursor one space to the right
+
+    [count]w: moves the cursor to the start of the next word (punctuation considered as individual words)
+
+    [count]W: moves the cursor to the start of the next word (words are sequences of characters/punctuation delimited by spaces)
+
+    e: moves the cursor to the end of the next word (punctuation considered as individual words)
+
+    E: moves the cursor to the end of the next word (words are sequences of characters/punctuation delimited by spaces)
+
+    [count]b: moves the cursor to the start of the previous word (punctuation considered as individual words)
+
+    [count]B: moves the cursor to the start of the previous word (words are sequences of characters/punctuation delimited by spaces)
+
+    0: moves the cursor to the start of the line
+
+    ^: moves the cursor to the first non-blank character of the line
+
+    [count]$: moves to the end of the line or [count]-1 lines
+
+    [count]f{char}: moves the cursor to the [count]th occurrence of {char} to the right
+
+    [count]F{char}: moves the cursor to the [count]th occurrence of {char} to the left
+
+    [count]t{char}: moves the cursor one space before the [count]th occurrence of {char} to the right
+
+    [count]T{char}: moves the cursor one space after the [count]th occurrence of {char} to the left
+
+    [count];: repeat the last f/F/t/T command
+
+    [count],: repeat the last f/F/t/T command in the opposite direction
+
+Navigation (around the document)
+    [count](: navigates to the start of the previous sentence (a sentence ends in ‘.’, ‘!’, or ‘?’ followed by a space or line break)
+
+    [count]): navigates to the start of the next sentence (a sentence ends in ‘.’, ‘!’, or ‘?’ followed by a space or line break)
+
+    [count]{: moves the cursor to the empty line before the current paragraph
+
+    [count]}: moves the cursor to the empty line before the next paragraph
+
+    [count]gg: navigates to the [count]th line in the document, by default goes to the first line
+
+    [count]G: navigates to the first non-blank character on the [count]th line in the document, by default goes to the start of the last line
+
+    [count][{, [(, ]), ]}: goes to the previous (or next) unmatched ‘{‘ ‘)’ starting at, but not including, the current cursor position
+
+    [count]|: moves the cursor to the [count]th column in the current line
+
+Navigation (around the window)
+    z: redraws the cursor line to:
+
+    zt: top of the window
+    zz: middle of the window
+    zb: bottom of the window
+    [count]H: to the first non-blank character on the [count]th line from the first line on the window without scrolling the screen
+
+    M: to the first non-blank character on the middle line of the window
+
+    [count]L: to the first non-blank character on the [count]th line from the last line on the window
+
+Search
+    *: searches forward for the [count]th occurrence of the word nearest to the cursor in the current line. The word searched for is the first of
+
+    the keyword (A-Z, a-z, 0–9, _, @) under the cursor
+    the first keyword after the cursor
+    the non-blank word under the cursor
+    the first non-blank word after the cursor
+    #: same as * but searches backwards
+
+    [count]/{pattern}: searches forward for pattern, defaults to last pattern
+
+    [count]?{pattern}: searches backwards for pattern, defaults to last pattern
+
+    [count]n: repeats the last “/” or “?” search
+
+    [count]N: repeats the last “/” or “?” search in the opposite direction
+
+    %: find the next item on the line or after that and jump to its match (includes ( [ { } ] ) /* */ #if #ifdef #else #elif #endif)
+
+Selection
+    Note: Abridged, see text-object for more details
+
+    [count]aw: selects a word and the white space after it unless the cursor was in the white space before a word (then the white space before is included)
+
+    [count]aW: selects a WORD and the white space after it unless the cursor was in the white space before a WORD (then the white space before is included)
+
+    [count]iw: selects a word (white spaces count as words)
+
+    [count]iW: selects a WORD(white spaces count as WORDs)
+
+    [count]as: selects a sentence and the white space after it unless the cursor was in the white space before(then the white space before is included)
+
+    [count]is: selects a sentence (white spaces count as sentences)
+
+    [count]ap: selects a paragraph and the white space after it unless the cursor was in the white space before(then the white space before is included)
+
+    [count]ip: selects a paragraph (white spaces count as paragraphs)
+
+Deletion
+    [count]x: deletes characters under and after the cursor in the current line
+
+    [count]X: deletes characters before the cursor in the current line
+
+    [count]r{char}: replaces the character under the cursor with {char}
+
+    d{motion}: deletes characters/words that {motion} moves over
+
+    [count]dd: deletes entire line, regardless of cursor position in the line
+
+    [count]D: deletes characters under the cursor until the end of the line and [count]-1 more lines
+
+    [count]~: switches the case of the character under the cursor and moves the cursor to the right
+
+    :delm {args}, :delmarks {args}, :delm!, :delmarks!: deletes specified marks including a-z, A-Z; for !, all existing a-z marks are deleted
+
+Text Modification
+    [count]p: places text from specified register after the cursor. When no register is specified, use the unnamed register (“) containing the last text deleted, changed, or yanked
+
+    [count]P: places text from specified register before the cursor. When no register is specified, use the unnamed register (“) containing the last text deleted, changed, or yanked
+
+    [count].: repeat the last simple change, defaults to the count of the last change (if the last change included a numbered register, the register number will be incremented)
+
+Insert Mode Commands
+    Note: Esc exits insert mode
+
+    [count]i{text}: inserts text before the cursor
+
+    [count]I{text}: inserts text before the first non-blank char in the line
+
+    [count]a{text}: appends text after the cursor, if the cursor is in the first column of an empty line then insert begins there
+
+    [count]A{text}: appends text to the end of the line
+
+    [register]c{motion}: deletes over motion
+
+    [register][count]cc: deletes lines into register and starts insert (linewise)
+
+    [register][count]C: deletes from the cursor position to the end of the line and [count]-1 more lines into the register and starts insert
+
+    [register][count]s: deletes or substitutes characters into the specified register and starts insert (not linewise), synonym for “cl”
+
+    [register][count]S: synonym for cc
+
+    [count]o{text}: begin a new line below the cursor and insert text
+
+    [count]O{text}: begin a new line above the cursor and insert text
+
+Yanking
+    [register]y{motion}: yanks {motion} text into a register, by default stores in “0 register
+
+    [register][count]yy: yanks the line into a register, cursor position in the line doesn’t matter
+
+    [register][count]Y: synonym for yy
+
+Undo/Redo
+    [count]CTRL+R, :redo: redo changes that were undone
+
+    [count]u, :undo: undo changes
+
+Registers
+    :reg {arg}: displays the content of the numbered and named registers specified by {arg}, or lists all by default
+
+Text Objects
+    word: a sequence of letters/digits/underscores OR non-blank characters separated by white space (space, tabs, <EOL>), including an empty line
+
+    WORD: a sequence of non-blank characters separated by white space (space, tabs, <EOL>), including an empty line
+
+    sentence: a series of words that ends in ‘.’, ‘!’, or ‘?’ followed by a space or line break
+
+    paragraph: a series of sentences that ends in a line break
+
+    text-object: two characters used after an operate to specify range of operation. The first character is either ‘a’ (an object, including white space) or ‘i’ (inner object without white space or just white space). The second character determines the object type
+        w, W, s, p (word, WORD, sentence, paragraph)
+        “, ‘, ` (quoted string)
+        {, }, B ({} block)
+        (, ), b (() block)
+        [, ] ([] block)
+        <, > (<> block)
+        t (HTML/XML tag block))

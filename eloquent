@@ -288,3 +288,11 @@ Eloquent relationships
 		detach()
 		"To remove a relationship between two objects you can use the detach() method on the relationship. Just pass either a primary key, or an object as the first parameter. [...] We can remove all associations for an object that has a many to many relationship by calling the detach() method with no parameter on the relationship method." rees (2013): 359-360
 
+Accessors & mutators
+"Laravel accessors and mutators are custom, user defined methods that allow you to format Eloquent attributes. Accessors are used to format attributes when you retrive them from the database." https://medium.com/@secmuhammed/laravel-observers-e68c69a8c8c6
+
+	Defining accessors
+	"To define an accessor, create a getFooAttribute method on your model where Foo is the "studly" cased name of the column you wish to access [...] the original value of the column is passed to the accessor, allowing you to manipulate and return the value." https://laravel.com/docs/5.6/eloquent-mutators
+
+	Defining mutators
+	"To define a mutator, define a setFooAttribute method on your model where Foo is the "studly" cased name of the column you wish to access [...] The mutator will receive the value that is being set on the attribute, allowing you to manipulate the value and set the manipulated value on the Eloquent model's internal $attributes property." https://laravel.com/docs/5.6/eloquent-mutators

@@ -1,6 +1,32 @@
-rees, dayle. "laravel: code bright", lean publishing, 2013.
-kilicdagi, arda & yilmaz, ibrahim. "laravel design patterns and best practices", packt publishing, 2014.
+--------------------------------------------
+| Laravel                                  |
+--------------------------------------------
 bean, martin. "laravel 5 essentials", packt publishing, 2015.
+
 dockins, kelt. "design patterns in php and laravel", springer, 2017.
-rahman, mizanur. "php 7 data structure and algorithms", packt publishing, 2017.
+
+kilicdagi, arda & yilmaz, ibrahim. "laravel design patterns and best practices", packt publishing, 2014.
+
+rees, dayle. "laravel: code bright", lean publishing, 2013.
+
 sinha, sanjib. "beginning laravel 5.3" springer, 2017.
+
+    --------------------------------------------
+    | Observers                                |
+    --------------------------------------------
+    https://appdividend.com/2018/01/02/laravel-model-observers-tutorial-example/
+
+    https://laracasts.com/discuss/channels/laravel/events-vs-observers
+
+    --------------------------------------------
+    | Accesors and mutators                    |
+    --------------------------------------------
+    https://medium.com/@secmuhammed/laravel-observers-e68c69a8c8c6
+
+    https://laravel.com/docs/5.6/eloquent-mutators
+
+--------------------------------------------
+| PHP                                      |
+--------------------------------------------
+rahman, mizanur. "php 7 data structure and algorithms", packt publishing, 2017.
+

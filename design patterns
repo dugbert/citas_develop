@@ -1,8 +1,10 @@
 Design patterns
 
-"Design patterns were first introduced by Eric Gamma and his three friends in 1994. A design pattern is basically a pattern of software design that is implemented on multiple projects, and its intended success gives an idea to prove this pattern as a solution of commonly recurring problems. [...] In software engineering, a design pattern is a general repeatable and optimized solution to a commonly occurring problem within a given context in software design. It is a description or template for how to solve a problem, and the solution can be used in different instances." kilicdagi & yilmaz (2014): 6-7
+ "Design patterns were first introduced by Eric Gamma and his three friends in 1994. A design pattern is basically a pattern of software design that is implemented on multiple projects, and its intended success gives an idea to prove this pattern as a solution of commonly recurring problems. [...] In software engineering, a design pattern is a general repeatable and optimized solution to a commonly occurring problem within a given context in software design. It is a description or template for how to solve a problem, and the solution can be used in different instances." kilicdagi & yilmaz (2014): 6-7
 
-	The following are some of the benefits of using design patterns:
+ "Modern PHPframeworks like Laravel make use of several design patterns [...] It's important that one knows the principles and why these patterns are used to be able to apply them effectively when faced with similar problems that can best be solved with design patterns." https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
+
+    "The following are some of the benefits of using design patterns:
 	 Maintenance
 	 Documentation
 	 Readability
@@ -72,8 +74,46 @@ Design patterns
 			Iterator pattern
 			Mediator pattern
 			Memento pattern
-			Observer pattern
-			State pattern
+			
+            Observer pattern
+             "Design patterns itself, are repeatable solutions to commonly ocurring problems in software design, one of which is observer pattern and usually applicable to an abstraction with two aspects such that a change in one object requires a change in one or multiple objects. [...] Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically [...]" https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
+
+             "The observer pattern is used when you want objects to react to specific events on a subject object. When the subject changes, it notifies observers. [...] PHP already has built-in interfaces for the observer pattern: SplSubject and SplObserver." dockins (2017): 181
+
+                Debugging
+                "Observer pattern favors decoupling of a relationship between publisher (observable) and observers but debugging can be a bottleneck because flow of control is implicity between observers and publisher." https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
+
+             "All Eloquent models have the observer pattern baked in." dockins (2017): 188
+
+                Abstract Structure
+                SplSubject
+                "SplSubject is an abstract class or interface. When using an abstrctclass, you might place an array here to keep up with the attached observers. The SplSubject contains three methods. The attach method adds observers to this subject. The detach method takes away observers. The notify method usually contains aloop that iterates over all the attached observers and calls their update method." dockins (2017): 181
+
+                SplObserver
+                "SplObserver is an abstract class or interface. The SplObserver interface contains one method called update which is triggered by the SplSubject whenever the subject updates." dockins (2017): 181
+
+                    Four methods
+                    "There are four methods that can be implemented in the interfaces defined above and they are the primary way we can register or associate an observer (subscriber) with a subject(publisher) and detach() is used to detacha disinterested observer from a publisher. Method notify() notifies all subscribed observers of state change which them calls update()on each observer." https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
+
+                    observable_subject_publisher implementation
+                    "First, we define attach() method that accepts an observer instance as an argument. Just like the name implies, it associates an observer with th subject. Weimplement detach() methid which is used to detach an observer from the subject. The notify() function loops through the linked list, obtains subscriber's key, use the key to find respective observer and then calls update() on the observer. Note that the linked list is sorted to ensure that an observer withhighest priority is notified first. Function setEvent() accepts an argument of an event we want to broadcast and then calls notify() which in turn calls update() ineach observer." https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
+
+                observer_subscriber implementation
+                "Our observer instance accepts two arguments: observer name and priority. We then implement function update() which accepts SplSubject as argument, calls getEvent() and output the result to console." https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
+
+                RealSubject
+                "RealSubject is an implementation of the SplSubject. It will contain the storage object (array/collection/etc.) needed to hang on the attached observers. Some implementations actually create an abstract class in place of SplSubject and place the storage object in the abstract class instead. Since SplSubject is an interface, you can't do this. There is nothing stopping you from creating your own abstract class instead of using an interface, though." dockins (2017): 181
+
+                RealObserver
+                "RealObserver is an implementation of the SplObserver interface. It's update method will be passed an instance of SplSubject. This class handles the specific logic needed to execute whenever the subject is updated." dockins (2017): 182
+
+                SplObjectStorage
+                "Take note of the SplObjectStorage bject. Note that when you want to detach an observer, you merely call detach on the SplObjectStorage object [...] if you had just used arrays [...] You would have to loop through the observers array and find the observer to remove. Then you would have to unset it. The SplObjectStorage is a neat helper class." dockins (2017): 184
+
+                Downside
+                "This two classes, RealSubject and RealObsercer, are about as generic as it gets. It's difficult to look at these two classes and derive any business meaning behind them. This is one of the downsides of using SplSubject and SplObserver. You are stuck with generic methods. You also cannot type hint anything other than SplSubject to the update method. It is almost not worth using them." dockins (2017): 184
+
+            State pattern
 			Strategy pattern
 			Template pattern
 			Visitor pattern

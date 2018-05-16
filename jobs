@@ -1,0 +1,55 @@
+Jobs
+ "With jobs, the calling code informs the application that it should do something." stauffer (2016): 617
+
+    "Jobs are classes that are structured with the intention of encapsulating a chunk of application behavior so that it can be pushed onto a queue." stauffer (2016): 656
+
+    "Laravel provides a structure called a Job, which is intended to encapsulate a single task -a behavior that your application can be commanded to do -and allow it to be added to and pulled from a queue." stauffer (2016): 605
+
+    "In Laravel [a job] it's a collection of information containing the job name, the data payload, the number of attempts that have been made so far to process this job, and some other simple metadata." stauffer (2016): 605
+
+    ( php artisan make:command )
+    "Jobs come in the form of commands. Commands can be either self-handling or not. In the latter case, a corresponding handler class would take the data from the command class and then act upon it. Command classes reside in the app\Commands directory, and command handler classes can be found in the app\Hanlders\Commands directory. Classes for a command and its handler can be generated with an Artisan command [...]"
+
+        Commands
+        "Commands are simple classes that contain the data needed to execute an action -the handler then performs the actual processing at a later stage using the data provided by the command." bean (2015): 116
+
+        --handler
+        "The handler option tells Artisan to create a handler class (omitting this option would create a self-handling command class only), and the --queued option designates that this should be added to the queue, instead of being handled synchronously." bean (2015): 115
+
+        "As a command handlers are resolved via the service container, we can type-hint dependencies." bean (2015): 117
+
+        command bus
+        "Alternatively, you can dispatch commands using the command bus. The command bus is set up by default in controllers using the DispatchesCommands trait. This means in your controller actions you could use the dispatch method." bean (2015): 115
+
+    Job expiration
+    "In your config/queue.php configuration file, each queue connection defines a retry_after option. This option specifies how many seconds the queue connection should wait before retrying a job that is being processed. For example, if the value of retry_after is set to 90, the job will be released back onto the queue if it has been processing for 90 seconds without being deleted. Typically, you should set the retry_after value to the maximum number of seconds your jobs should reasonably take to complete processing." https://laravel.com/docs/5.6/queues
+
+    Artisan generated jobs (queueability)
+    "[...] there's an Artisan command [...] php artisan make:job [...] this template imports the Queueable, InteractWithQueue, and SerializesModels traits, and implements the ShouldQueue interface. [...] We also get two methods from this template: the constructor, which you'll want to use to attach data to the job, and the handle() method, which is where the job's logic should reside (and also the method signature you'll use to inject dependencies). The traits and interface provide the class with the ability to be added to, and interact with,the queue. Queueable allows you to specify how Laravel should push this job to the queue; InteractsWithQueue allows each job, while being handled, to control its relationship with the queue, including deleting or requeueing itself; and SerializesModels gives the job the aility to serialize and deserialize Eloquent models." stauffer (2016): 606
+
+        Serializing models
+        "The SerializesModels trait gives the jobs the ability to serialize injected models so that your job's handle() method will have access to them. However,because it'stoo difficult to reliably serialize an entire Eloquent object,the trait ensures that just the primery keys of any attached Eloquent objects are serialized when the job ispushed onto the queue. When the job is deserialized and handled, the trait pulls those Eloquent models fresh from the database by their primary key. This means that when your jobs runs it will be pulling a fresh instance of this model, not whatever state it was in when you queued the job." stauffer (2016): 608
+
+    Push a job into a queue
+    "There are two primary ways you can push a job onto a queue: the global dispatch() helper and the methods provided by the DispatchesJobs trait, which is imported by default in every controller. With each, create an instance of your job, attach any necessary data by passing it to the constructor, and pass it to the dispatch() method. There are three settings you can control in order to customize exactly how you dispatch a job: the connection, the queue, and the delay." stauffer (2016): 608-609
+
+        Customizing connection
+        "If you ever have a multiple queue connections in place at once, you can customize the connection by running onConnection() on yout instantiated job." stauffer (2016): 609
+
+        Customizing queue
+        "Withtin the servers, you can specify which named queue you're pushing a job onto. [...] You can customize which queue you're pushing a job onto with onQueue() method." stauffer (2016): 609
+
+        Customizing delay
+        "You can customize the amount of time your queue workers should wait before processing a job with the delay() methid, ehich accepts an interger representing the number of seconds to delay a job." stauffer (2016): 609
+
+    Listening to a queue
+     "The following are the functions used for listening toa queue and executing jobs:
+        - We can listen to the default queue as follows: php artisan queue:listen
+        - We can specify the connection on which to listen as follows: php artisan queue:listen connection
+        -We can specify multiple connections in the order of their priority as follows: php artisan queue:listen important, not so important
+     The queue:listen command has to run in the background in order to process the jobs as they arrive from the queue. To make sure that it runs permanently, you have touse a process control system such as forever or supervisor." bean (2015): 117
+
+    Queues without background process
+    "Push queues do not require a background process but they only work with the iron.io driver. Push queues will call an endpiunt in your application when a job is received, rather than to a queue that is handled by a constantly-running worker process. This is handy if you do not have the ability to define the processes, which run on your application's server (such as is the case on shared hosting packages)." bean (2015): 118
+
+        "After signing up for an account on iron.io and adding your credentials to app/config/queue.php, you use them by defining a POST route that receives all the incoming jobs. This route calls Queue::marshal(), which is the method responsible for firing the correct job handler [...] This route then need to be registered as a subscriber with the queue:subscribe command [...] Once the URL is subscribed on http://iron.io/, any newly created jobs with Queue::push() will be sent from Iron back to your application via a POST request." bean (2015): 118

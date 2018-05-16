@@ -1,0 +1,56 @@
+Queues
+ "Queues allow you to defer the execution of functions without blocking the script. They can be used to run all sorts of functions, from e-mailing a large number of users to generating PDF reports." bean (2015) 1: 115
+
+ "Queues allow you to separate chunks of your application's code from the synchronous flow of user interactions out to a list of commands to be processed by a "queue worker." This allows your users to resume interactions with your application while slower processes are handled asynchronously in the background." stauffer (2016): 656
+
+    "The primary use for queues is to push jobs onto, but you can also queue mail using the Mail::queue functionality [...] You can also queue Artisan commands [...]" stauffer (2016): 616
+
+    Queue drivers
+    "Laravel 5 is compatible with the following queue drivers:
+        - Beanstalkd, with the pda/pheanstalk package
+        - Amazon SQS, with the aws/aws-sdk-php package
+        - IronMQ, with the iron-io/iron_mq package
+    Each queue system has its advantages. Beanstalkd can be installed on your own server; Amazon SQS might be more cost-effective and require less maintenance, as will IronMQ, which is also cloud-based. The latter lets you set up push queues, which are great if you cannot run background jobs on your server." bean (2015): 115
+
+Queueing process
+
+Queues pros
+"Queues make it easy to remove a costly or slow process from any synchronous call. [...] Sometimes you [...] might have a process like a cron job or a webhook that has a lot of work process; rather than letting it all run at once (and potentially time out), you may choose to queue its individual pieces and let the queue worker process them one at a time. Additionally, if you have some heavy processing that's more than your server can handle, you can spin up more than one queue worker to work through your queue faster than your normal application server could on its own." stauffer (2016): 601
+
+Queue worker ( php artisan queue:work )
+ "In Laravel, [a queue worker] it's an Artisan command that stays running forever (until it's stopped manually) and takes the responsibility for pulling down jobs from your queue and running them. [...] This command starts a daemon "listening" to your queue; every time there are jobs on the queue, it will pull down the first job, handle it, delete it, and move on to the next. If at any point there are no jobs, it "sleeps" for a configurable amount of time before checking again to see if there are any more jobs." stauffer (2016): 6102
+
+    "[...] a "queue worker," takes the responsability for pulling jobs off of the queue one at a time and performing the appropiate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed." stauffer (2016): 600
+
+    Setting up ( php artisan queue:work redis --timeout:00 --sleep=15 --tries=3 --queue=high,medium )
+     "You can define how many seconds a job should be able to run before the queue listener stops it (--timeout), how many seconds the listener should "sleep"when there are no jobs left (--sleep), how many tries each job should be allowed before being deleted (--tries), which connection the worker should listen to (the first parameter after queue:work), and which queues it should listen to (--queue=)." stauffer (2016): 610
+
+    Handling errors
+     "If an exception is thrown, the queue listener will release that job back onto the queue. That job will be released to be processed again and again until it is able to finish successfully or until it has been attempted the maximum number of times allowed by your queue listener. [...] The maximum number of tries is defined by the --tries switch passed to the queue:listen of queue:work Artisan commands." stauffer (2016): 611
+
+        attempts()
+        "If at any point you'd like to check how many times a job has been attempted already, use the attempts() method on th job itself." stauffer (2016): 613
+
+        Infinite retries
+        "If you don't set --tries, or if you set it to 0, the queue listener will allow for infinite retries. That means if there are any circumstances in which a job could just never be satisfied [...] your app will slowly crawl to a halt as it forever retries uncompletable jobs. The documentation and Laravel Forge both show 3 as the default starting point for the maximum number of retries." stauffer (2016): 613
+
+        Workers timeout
+        "The queue:work Artisan command exposes a --timeout option. The --timeout option specifies how long the Laravel queue master process will wait before killing off a child queue worker that is processing a job. Sometimes a child queue process can become "frozen" for various reasons, such as an external HTTP call that is not responding. The --timeout option removes frozen processes that have exceeded that specified time limit" https://laravel.com/docs/5.6/queues
+
+    Failed jobs
+     "Once a job has exceeded its allowable number of retries, it's considered a "failed" job. Before you do anything else -even if all you want to do is limit the number of times a job can be tried -you'll need to create the "failed jobs" database table. [...] Any job that has surpassed its maximum number of allowed attempts will be dumped there." stauffer (2016): 613
+
+        Handling failed jobs ( php artisan queue:failed-table )
+        "[...] there are quite a few things you can do with your failed jobs. First, you can define a failed() method on the job itself, which will run when that job fails [...] Next, you can register a global handler for failed jobs. Somewhere in the application's bootstrap -if you don't know where to put it, just put it in the boot() method of AppServiceProvider -place the code [...] to define a listener." stauffer (2016): 614
+
+        Artisan tools ( php artisan queue:failed )
+        "There is also a suite of Artisan tools for interacting with the failed jobs table. queue:failed shows you a list of your failed jobs. [...] From there, you can grab the ID of any individual failed job and retry it with queue:retry [...] If you'd rather retry all of the jobs, pass all instead of an ID [...] You can delete an individual failed job with queue:forget [...] And you can delete all of your failed jobs with queue:flush." stauffer (2016): 614
+
+    Controlling the queue
+    "Sometimes, from within the handling of a job, you'll want to add conditions that will potentially either release the job to be restarted later or delete the job forever. To release a job back into the queue, use the release() command. [...] If you want to delete a job during its handling, you can just return at any point [...] that's the signal to the queue that the job was handled appropriately and should not be returned to the queue." stauffer (2016): 615
+
+Scheduler
+"Laravel's scheduler simplifies scheduling tasks. Point an every-minute cron job to php artisan schedule:run and then schedule your tasks with even the most complex of time requirements using the scheduler, and Laravel will handle all the timings for you." stauffer (2016): 656
+
+Testing
+    "Testing queued jobs (or anything else in the queue) is easy. In phpunit.xml, which is the configuration file for your tests, the QUEUE_DRIVER enviroment variable is set to sync by default. That means your tests will run jobs or other queued tasks synchronously, directly in your code, without relying on a queue system of any sort. You can test them just like any other code." stauffer (2016): 654

@@ -1,77 +1,137 @@
 Events
 
 What is an event?
+ "Events are actions that are driven by whatever the programmer wants. If you want to fire an event when somebody loads a page, you can do that. Unlike observers events can also be queue, and ran via laravels cron heartbeat. Events are programmer defined effectively. They give you the ability to handle actions that you would not want a user to wait for." https://laracasts.com/discuss/channels/laravel/events-vs-observers
+
  "With an event, the calling code [...] informs the application that something happened [...] Events are notifications that something has taken place. Some of these events may be "fired" by the framework itself. [...] But some events are also manually triggered by the application's code." stauffer (2016): 617
 
-	Laravel's events
-	"Laravel's event system follows the pub/sub or observer pattern, allowing you to send out notifications of an event from one part of your application, and elsewhere bind listeners to those notifications to define what behavior should happen in response to them. Using WebSockets, events can also be broadcast to frontend clients." stauffer (2016): 656
+    Laravel's events (observer pattern)
+    "The concept of events in Laravel is based on a very popular software design pattern -the observer pattern. In this pattern, the system is supposed to raise events when something happens,and you could define listeners that listen to these events and react accordingly. It's a really useful feature in a way that allows you to decouple components in a system that otherwise would have resulted in tightly coupled code." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
 
-	Binding events
-	"An event being fired doesn't do anything on its own. However, you can bind event listeners, whose sole purpose is to listen for the broadcasting of specific events and to act in response. Any event can have anywhere from zero to many event listeners. [...] Many events are fired out into the application; some may never be listened for, and others may have a dozen listeners. The events don't know or care." stauffer (2016): 617
+    "Laravel's event system follows the pub/sub or observer pattern, allowing you to send out notifications of an event from one part of your application, and elsewhere bind listeners to those notifications to define what behavior should happen in response to them. Using WebSockets, events can also be broadcast to frontend clients." stauffer (2016): 656
 
-	Firing events
-	"There are three ways to fire an event. You can use the Event facade, inject the Dispatcher, or use the event() global helper." stauffer (2016): 618
+    "Laravel-events and listeners [...] [are] based on the observer pattern that allows you to raise application-wide events and allow other modules to listen to those events and react accordingly." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
 
-		Serializing events
-		"SerializeModels work just like with jobs;it allows you to accept Eloquent models as parameters. InteractWithSockets, ShouldBroadcast, and the broadcastOn() method provide the backing functionality for bradcoasting events using WebSockets [...] But remember, this object exists not to determine a particular action, but just to encapsulate some data. The first piece of data is its name [...] The rest of the data is any data we pass into the constructor and associate with this entity."
+        Event driven programming
+        "Event-driven programming is a programming paradigm in which the flow of the program is determined by events such as user actions, sensor outputs, or messages from other programs/threads. Event-driven programming is the dominant paradigm used in graphical user interfaces and other applications that are centered on performing certain actions in response to user input. [...] The major downside to event-driven applications is that it can be hard to really understand the flow of the application." https://en.wikipedia.org/wiki/Event-driven_programming
+
+    Binding events
+     "An event being fired doesn't do anything on its own. However, you can bind event listeners, whose sole purpose is to listen for the broadcasting of specific events and to act in response. Any event can have anywhere from zero to many event listeners. [...] Many events are fired out into the application; some may never be listened for, and others may have a dozen listeners. The events don't know or care." stauffer (2016): 617
+
+     "Firing an event won't do anything on its own; we have to listen for the event that has been fired and respond accordingly. Laravel events are comprised of two parts: Event Handler and Event Listener. The Event Hanlder contains the information associated with the event fired. The Event Listener, on the other hand, simply listens for the event instance and responds to it accordingly. Within the Listener is where we'll implement the event implementation logic. Event classes are typically stored in the app/Events directory, while their listeners are stored in app/Listeners." https://blog.pusher.com/event-driven-laravel-applications/
+    
+        Firing events
+        "There are three ways to fire an event. You can use the Event facade, inject the Dispatcher, or use the event() global helper." stauffer (2016): 618
+
+        Serializing events
+        "SerializeModels work just like with jobs; it allows you to accept Eloquent models as parameters. InteractWithSockets, ShouldBroadcast, and the broadcastOn() method provide the backing functionality for bradcoasting events using WebSockets [...] But remember, this object exists not to determine a particular action, but just to encapsulate some data. The first piece of data is its name [...] The rest of the data is any data we pass into the constructor and associate with this entity."
 
 Model events
  "The basic concept is really simple
-	- In the EventServiceProvider class, you can add a special event listener and bind it to a certain closure.
-	- In this closure, you will be able to specify your new behavior without touching the model code.
-	- This binding must be placed in the boot() method of the class" malatesta (2015): 127
+    - In the EventServiceProvider class, you can add a special event listener and bind it to a certain closure.
+    - In this closure, you will be able to specify your new behavior without touching the model code.
+    - This binding must be placed in the boot() method of the class" malatesta (2015): 127
 
-	Operations (moments)
-	"You can create a new instance, update and existing instance, or delete it. [...] Eloquent triggers some events when something happens in the model lifecycle, [...] For every operation, you have two separate events [...] they refer to separate moments. Let's pick the create operation for our example. You have the creating event, that you can read as "the create operation is going to happen." Then, you have created that means "the create operation just happened". [creating is about the t - 1 moment; created is related to the t + 1 moment] [...] So, you have two events for three basic operations: create, update, and delete." malatesta (2015): 126-127
+    "Using Model events, you can call any method right after the event is fired. [...] Models hold the following methods: creating, created, updating, updated, saving, saved, deleting, deleted, restoring, and restored. Whenever a new item is being saved for the first time, the creating and created events will fire. If you are updating a current item on the Model, the updating/updated events will fire. Whether you are creating a new item or updating a current one, the saving / saved events will fire. If false is returned from the creating , updating , saving , or deleting event, the action will be canceled." kilicdagi & yilmaz (2014):29
 
-		Past and present participle differences
-		"The difference in the past and present participles is that events such as creating are fired before the model is created, whereas created is fired after the model has been created. Therefore, if you were to halt execution withtin a handler for creating event, the record will not be savec; whereas, if you halted execution within a handler for the created event, the record would still be persisted to the database." bean (2015): 61
+    Operations (moments)
+     "You can create a new instance, update and existing instance, or delete it. [...] Eloquent triggers some events when something happens in the model lifecycle, [...] For every operation, you have two separate events [...] they refer to separate moments. Let's pick the create operation for our example. You have the creating event, that you can read as "the create operation is going to happen." Then, you have created that means "the create operation just happened". [creating is about the t - 1 moment; created is related to the t + 1 moment] [...] So, you have two events for three basic operations: create, update, and delete." malatesta (2015): 126-127
 
-		Stop the current operation
-		"Another interesting feature is the possibility to stop the current operation with the pre methods. In fact, if you are using any of the following:
-			- creating
-			- updating
-			- saving
-			- restoring
-			. deleting
-		You can decide to return the Boolean value false if you want to abort the operation."
+     "[...] we can capture all the events [...] by set up in model's property called $dispachesEvents or we can setup an observer to capture all the events."  https://blog.nasrulhazim.com/2017/11/laravel-observer/
 
-	Save and restore
-	"Also, you can see two more operations: save and restore. [...]
-		- Save: All you have to know is that the save operation is related both to create and update. Let's assume that you want to add a behavior, whether or not the application is creating a record or saving an existing record. [...] Just use the "save" generic operation and you're done.
-		-Restore: The restore operation is used when you have the soft deletes feature enabled for a certain model, and you undo a delete operation on it." stauffer (2016): 127
+        Past and present participle differences
+        "The difference in the past and present participles is that events such as creating are fired before the model is created, whereas created is fired after the model has been created. Therefore, if you were to halt execution withtin a handler for creating event, the record will not be savec; whereas, if you halted execution within a handler for the created event, the record would still be persisted to the database." bean (2015): 61
+
+        creating/created
+        "creating is called before a model is first created in database. You can trigger this by calling save on a frechly constructed model or by using create statically. Note that this method is not triggered when a new model is constructed or retrieved from database. If the method returns false, the model will not be created. created is called after the model has been created in the database." dokins (2017): 189
+
+        updating/updated
+        "updating is called before existing models are saved in the database. If the method returns false, the model is not updated. updated is called after existing models are saved in the database." dokins (2017): 189
+
+        saving/saved
+        "saving is called before a model is createdor updated in the database. If the method returns false, the model is not saved. saved is called after a model is deleted from the database. If method returns false, the model is not deleted." dokins (2017): 189-190
+
+        deleting/deleted
+        "deleting is called before a model is deleted from the database. If the method returns false, the model is not deleted. deleted is called after a model is deleted from the database." dokins (2017): 190
+
+        restoring/restored
+        "restoring is called before a modelis restored in the database. A restore is noly available for models that use Laravel's soft deletes. This removes the date from this record's deleted_at column in the database. If the method returns false, the model is not restored. restored is called after a model is restored in the database." dokins (2017): 190
+
+            Stop the current operation
+            "Another interesting feature is the possibility to stop the current operation with the pre methods. In fact, if you are using any of the following:
+                - creating
+                - updating
+                - saving
+                - restoring
+                . deleting
+            You can decide to return the Boolean value false if you want to abort the operation."
+
+            "[...] a recurring pattern with these out-of-the-box observer events. Each one offers an observer the ability to hook into before and after events on the Eloquent model."
+
+        Save and restore
+        "Also, you can see two more operations: save and restore. [...]
+            - Save: All you have to know is that the save operation is related both to create and update. Let's assume that you want to add a behavior, whether or not the application is creating a record or saving an existing record. [...] Just use the "save" generic operation and you're done.
+            -Restore: The restore operation is used when you have the soft deletes feature enabled for a certain model, and you undo a delete operation on it." stauffer (2016): 127
 
 Registering event listeners
-"It's quite open-ended as to where to register listeners for model events. One place is in the boot method within EventServiceProvider class [...] Eloquent models provide a method for each event that you can pass an anonymous function to. This anonymous function receives an instance of the model that you can then act upon." bean (2015): 61-62
+ "Listeners handle all the activities mentioned in an event that is being registered. The artisan command event:generate creates all the listeners in the app/listeners directory. The Listeners folder includes a file EventListener.php which has all the methods required for handling listeners." https://www.tutorialspoint.com/laravel/laravel_event_handling.htm
+
+ "It's quite open-ended as to where to register listeners for model events. One place is in the boot method within EventServiceProvider class [...] Eloquent models provide a method for each event that you can pass an anonymous function to. This anonymous function receives an instance of the model that you can then act upon." bean (2015): 61-62
+
+    EventServiceProvider
+    "Laravel provides a built-in EventServiceProvider.php class that allows us to define event listener mappings for an application." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
+
+    $listen property
+    "[...] the $listen property [...] allows you to define an array of events and associated listeners. The array keys correspon to events in a system, and their values correspon to listeners that will be triggered when the corresponding event is raised in a system. Laravel allows you to create a template code of a listener using the artisan command. 'php artisan event:generate' This command generates event and listener classes listed under the $listen property." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
+
+        handle()
+        "[...] the handle method that will be invoked with appropiate dependencies whenever the listener is triggered." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
+
+    event()
+    "The event helper function is used to raise an event from anywhere within an application. When the event is raised, Laravels calls all listeners listening to that particular event." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
 
 Model observers
 "As you add more and more model event handlers to your EventServiceProvider class, you may find it becoming overcrowded and difficult to mantain. This is where an aternative to handling model events comes into play - model observers. Model observers are standalone classes that you attach to a model, and implement methods for as many events as you need to listen out for." bean (2015): 62
 
+    "If you are listening to many events on a given model, you may use observers to group all of your listeners into a single class. Observers classes have method names which reflect the Eloquent events you wish to listen for. Each of this methods receives the model as their only argument. Laravel does not include any default directory for observers, so you may create any folder you like to house your observer classes." https://appdividend.com/2018/01/02/laravel-model-observers-tutorial-example/
+
+    "An observer watches for specific things that happen within eloquent such as saving, saved, deleting, deleted [...] Observers are specifically bound to a model." https://laracasts.com/discuss/channels/laravel/events-vs-observers
+
 Event subscribers
  "There's one [...] structure you can use to define the relationship between your events and their listeners. Laravel has a concept called an event subscriber, which is a class that contains a collection of methods that act as separate listeners to unique events, and also contains the mapping of which method should handle which event." stauffer (2016): 621
 
-	"Subscribers need to define a subscribe() method, which is passed an instance of the event dispatcher. [...] any time you see an @ inline like this means the class name is to the left of the @ and the method name is to the right. [...] in App\Providers\EventServiceProvider, we need to add our subscriber's class name to the $subscribe property [...]" stauffer (2016): 622
+    "The event subscriber allows you to subscribe multiple event listeners in a single place. Whether you want to logically group event listeners or you want to contain growing events in a single place, it's the event subscriber you're looking for." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
+
+    "The event subscriber class won't be picked up automatically. You need to register in the EventServiceProvider.php class under the $subscriber property." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
+
+       subscribe()
+       "Subscribers need to define a subscribe() method, which is passed an instance of the event dispatcher. [...] any time you see an @ inline like this means the class name is to the left of the @ and the method name is to the right. [...] in App\Providers\EventServiceProvider, we need to add our subscriber's class name to the $subscribe property [...]" stauffer (2016): 622
+
+       "It's the subscribe method that is responsible for regitering listeners. The first argument og the subscribe method is the instance of the Illuminate\Events\Dispatcher class that youcould use to bind events withlisteners using the listen method." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
+
+       listen()
+       "The first argument of the listen method is an event that you want to listen to, and the second argument is a listener that will be called when the event is raised." https://code.tutsplus.com/tutorials/custom-events-in-laravel--cms-30331
 
 Broadcasting events
  "WebSocket is a protocol, popularized by Pusher, that makes it simple to provide near-real-time communication between web devices. Rather than relying on information passing via HTTP requests, WebSockets libraries open a direct connection between the client and the server. WebSockets are behinf tools like the chat boxes in Gmail and Facebook." stauffer (2016): 623
 
-	Queue listeners
-	"In order for event broadcasting to move quicklyS, Laravel pushes the instruction to broadcast themonto a queue. That means tou'll need to have a queue worker running (or use the sync queue driver for local development). [...] Laravel suggests a default delay of three seconds bedore the queue worker looks for new jobs. However, with event broadcasting you may notice some events take a second or two to broadcast. To speed this up, update your queue settings to only wait one second before looking for new jobs." stauffer (2016): 625
+    Queue listeners
+    "In order for event broadcasting to move quicklyS, Laravel pushes the instruction to broadcast themonto a queue. That means tou'll need to have a queue worker running (or use the sync queue driver for local development). [...] Laravel suggests a default delay of three seconds bedore the queue worker looks for new jobs. However, with event broadcasting you may notice some events take a second or two to broadcast. To speed this up, update your queue settings to only wait one second before looking for new jobs." stauffer (2016): 625
 
-	Broadcasting an event
-	"To broadcast an event, you need to mark that events as a broadcast event by having it implement the Iluminate\Contracts\Broadcasting interface. This interface requires you to add the broadcastOn() method, which will return an array of either strings or Channel objects, each representing a Web Socket channel." stauffer (2016): 626
+    Broadcasting an event
+    "To broadcast an event, you need to mark that events as a broadcast event by having it implement the Iluminate\Contracts\Broadcasting interface. This interface requires you to add the broadcastOn() method, which will return an array of either strings or Channel objects, each representing a Web Socket channel." stauffer (2016): 626
 
-	Structure of WebSocket events
-	"Every event you send with WebSockets can have three primary characteristics: the name, the channel, and the data." stauffer (2016): 626
+    Structure of WebSocket events
+    "Every event you send with WebSockets can have three primary characteristics: the name, the channel, and the data." stauffer (2016): 626
 
-		Name
-		"The name of an event might be something like user-was-subscribed, but Laravel's default is to use the fully qualified class name of the event; ie.e., so something like App\Events\UserSubscribed. You can customize this by passing the name to the optional broadcastAs() method in yout event class." stauffer (2016): 626
+        Name
+        "The name of an event might be something like user-was-subscribed, but Laravel's default is to use the fully qualified class name of the event; ie.e., so something like App\Events\UserSubscribed. You can customize this by passing the name to the optional broadcastAs() method in yout event class." stauffer (2016): 626
 
-		Channel
-		"The channel is the way of describing which clients should receive this message. It's a very common pattern to have a channel for each user (e.g., users.1, users.2, etc.), and possibly a channel for all users (e.g., users), and maybe one for just users who are members of a certain account (e.g., accounts.1). If the channel you're targeting is a private channel, preface the channel name with private-. and if it's a presence channel, preface the channel name with presence-. So, a private Pusher channel named groups.5 should be, instead, private-groups.5. If you use Laravel's PrivateChannel and PresenceChannel objects in your broadcastOn() methid, they'll take care of adding those prefaces to your channel names for you." stauffer (2016): 626
+        Channel
+        "The channel is the way of describing which clients should receive this message. It's a very common pattern to have a channel for each user (e.g., users.1, users.2, etc.), and possibly a channel for all users (e.g., users), and maybe one for just users who are members of a certain account (e.g., accounts.1). If the channel you're targeting is a private channel, preface the channel name with private-. and if it's a presence channel, preface the channel name with presence-. So, a private Pusher channel named groups.5 should be, instead, private-groups.5. If you use Laravel's PrivateChannel and PresenceChannel objects in your broadcastOn() methid, they'll take care of adding those prefaces to your channel names for you." stauffer (2016): 626
 
-			Data
-			"The data us a payload, usually JSON, of information relevant to the event -the message, maybe, or infotmation about the user or plan that can be acted upon by the consuming JavaScript." stauffer (2016): 626
+            Data
+            "The data us a payload, usually JSON, of information relevant to the event -the message, maybe, or infotmation about the user or plan that can be acted upon by the consuming JavaScript." stauffer (2016): 626
 
 Testing events
 "To test that an event fired, you have three options. First, you can just test that the behavor you expected hapened, without concerning yourself with the event itself. Second, you can explicitly assert that the event fired [...] Finally, you can run a test againt the event that was fired." stauffer (2016): 654
