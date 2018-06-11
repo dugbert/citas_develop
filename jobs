@@ -53,3 +53,17 @@ Jobs
     "Push queues do not require a background process but they only work with the iron.io driver. Push queues will call an endpiunt in your application when a job is received, rather than to a queue that is handled by a constantly-running worker process. This is handy if you do not have the ability to define the processes, which run on your application's server (such as is the case on shared hosting packages)." bean (2015): 118
 
         "After signing up for an account on iron.io and adding your credentials to app/config/queue.php, you use them by defining a POST route that receives all the incoming jobs. This route calls Queue::marshal(), which is the method responsible for firing the correct job handler [...] This route then need to be registered as a subscriber with the queue:subscribe command [...] Once the URL is subscribed on http://iron.io/, any newly created jobs with Queue::push() will be sent from Iron back to your application via a POST request." bean (2015): 118
+
+    Failed jobs
+     "Once a job has exceeded its allowable number of retries, it's considered a "failed" job. Before you do anything else -even if all you want to do is limit the number of times a job can be tried -you'll need to create the "failed jobs" database table. [...] Any job that has surpassed its maximum number of allowed attempts will be dumped there." stauffer (2016): 613
+
+        Handling failed jobs ( php artisan queue:failed-table )
+        "[...] there are quite a few things you can do with your failed jobs. First, you can define a failed() method on the job itself, which will run when that job fails [...] Next, you can register a global handler for failed jobs. Somewhere in the application's bootstrap -if you don't know where to put it, just put it in the boot() method of AppServiceProvider -place the code [...] to define a listener." stauffer (2016): 614
+
+            "You may define a failed method directly on your job class, allowing you to perform job specific clean-up when a failure occurs. This is the perfect location to send an alert to your users or revert anya ctions performed by the job. The Exception that caused the job to fail will be passed to the failed method." https://laravel.com/docs/5.6/queues#failed-job-events
+
+            Failed job events
+            "If you would like to register an event that will be called when a job fails, you may use the Queue::failing method. This event is a great opportunity to notify your team via email or Stride." https://laravel.com/docs/5.6/queues#failed-job-events
+
+        Artisan tools ( php artisan queue:failed )
+        "There is also a suite of Artisan tools for interacting with the failed jobs table. queue:failed shows you a list of your failed jobs. [...] From there, you can grab the ID of any individual failed job and retry it with queue:retry [...] If you'd rather retry all of the jobs, pass all instead of an ID [...] You can delete an individual failed job with queue:forget [...] And you can delete all of your failed jobs with queue:flush." stauffer (2016): 614

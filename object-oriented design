@@ -1,0 +1,90 @@
+Object-oriented design
+"An object-oriented system is made up of classes. It is important to decide the nature of these players in your system. Classes are made up, in part, of methods; so in defining your classes, you must decide which methods belong together. [...] though, classes are often combined in inheritance relationships to conform to common interfaces. It is these interfaces, or types, that should be your first port of call in designing your system." zandstra (2016): 133
+
+"There are other relationships that you can define for your classes. You can create classes that are composed of other types or that manage lists of other type instances. You can design classes that simply use other objects. The potential for such relationships of composition or use is built into your classes (e.g., though the use of type declarations in method signatures), but the actual object relationships take place at runtime, which can add flexibility to your design." zandstra (2016): 133
+
+Object-oriented vs procedural programming
+"One core difference between object-oriented and procedural code can be found in the way that resposibility is distributed. Procedural code takes the form of a sequential series of commands and methods calls. The controlling code tends to take responsibility for handling differing conditions. This top-down control can result in the development of duplications and dependencies across a project. Object-oriented code tries to minimize these dependencies by moving responsibility for handling tasks away from client code and toward the objects in the system." zandstra (2016): 134
+
+    No fixed criterion
+    "Very few design rules are entirely inflexible. You will sometimes see code for saving object data in an otherwise unrelated class, for example. Although this would seem to violate the rule that a class should have a singular responsibility, it can be the most convenient place for the functionality to live because a method has to have full access to an instance's fields. Using local methods for persistence can also save us from creating a parallel hierarchy of persistence classes mirroring our savable classes, and therby introducing unavoidable coupling." zandstra (2016): 140
+
+    Polymorphism
+    "Polymorphism, or class switching, is a common feature of object-oriented systems. [...] Polymorphism is the maintenance of multiple implementations behind a common interface. [...] The need for polymorphism is often signaled by the presence of extensive conditional statements in your code." zandstra (2016): 140
+
+        "It is important to note that polymorphism doesn't banish conditionals. [...] PHP enforces the interfaces defined by abstract classes. This is useful because we can be sure that a concrete child class will support exactly the same method signatures as those defined by an abstract parent. This includes type declarations and access controls. Client code can, therefore, treat all children of a common superclass interchangeably (as long it only relies on only functionality defined in the parent)." zandstra (2016): 141
+
+    Encapsulation
+    "Encapsulation simply means the hiding of data and functionality from a client. [...] On the simplest lecel, you encapsulate data by declaring properties private or protected. By hiding property from client code, you enforce an interface and prevent the accidental corruption of an object's data. Polymorphism illustrates another kind of encapsulation. By placing different implementations behind a common interface, you hide these underlying strategies from the client. This means that any changes that are made behind this interface are transparent to the wider system. You can add new classes or change the code in a class without causing errors. The interface is what matters, not the mechanisms working beneath it. The more independent these mechanism are kept, the less chance that changes or repairs will have a knock-on effect in your projects." zandstra (2016): 142
+
+        "Encapsulation is, in some ways, the key to object-oriented programming. Your objective should be to make each part as independent as possible from its peers. Classes and methods should receive as much information as is necessary to perform their allotted tasks, whoch should be limited in scope and clearly identified." zandstra (2016): 142
+
+    Code duplication
+    "Duplication is one of the great evils in code. If you get a strange sense of deja vu as you write a routine, chances are you have a problem. Take a look at the instances of repetition in your system. [...] Duplication generally means tight coupling. If you change somehting fundamental about one routine, will the similar routines need amendment? If this is the case, they probwably belong in the same class." zandstra (2016): 143
+
+    Global variables
+    "Global variables have their place, but they do need to be viewed with some level of suspicion. [...] By using a global variable, or by giving a class any kind of knowledge about its wider domain, you anchor it into its context, making it less reusable and dependent on code beyond its control. Remember, you want to decouple your classes and routines and not create interdependence. Try to limit a class's knowledfe of it's context." zandstra (2016): 143
+
+    All in one
+    "Is your class trying to do too many things at once? If so, see if you can list the responsibilities of the class. You may find that one of them will form the basis of a good class itself. LEaving an overzealous class unchanged can cause particular problems if you create subclasses. Which responsibility are you extending with the subclass? What would you do if you needed a subclass for more than one responsibility? You are likely yo end up with too many subclasses or an over-reliance on conditional code." zandstra (2016): 144
+
+    Conditional statements
+    "You will use 'if' and 'switch' statements with perfectly good reason throughout your projects. Sometimes though, such structures can be a cry for polymorphism. If you find that you are testing for certain conditions frequently within a class, especially if you find these tests mirrored across more than one method, this could be a sign that your one class should be two or more. See whether the structure of the conditional code suggests responsibilities that could be expressed in classes. The new classes chould implement a shared abstract base class. Chances are that you will then have to work out how to pass the right class to client code." zandstra (2016): 144
+
+    Unified Modeling Language
+    "UML stands for Unified Modeling Language. The initials are correctly used with the definite article. This isn't just a unified modeling language, it is the Unified Modeling Langauge. [...] According to MArtin Fowler, the UML emerged as a standard only after long years of intellectual and bureaucratic sparring among the great and good of the object-riented design community. The result of this struggle is a powerful graphical syntax for describing object-oriented systems." zandstra (2016): 144
+
+        Class Diagrams
+        "Class diagrams in particular can describe structures and patterns so that their meaning shines through. This luminous clarity is often harder to find in code fragments and bullet points. [...] they are particularly useful describing object-oriented relationships." zandstra (2016): 144
+
+            Classes
+            "[...] classes are the main constituents of class diagrams. A class is represented by a named box. [...] The class is divided unto three sections, with the name displayed in the first. These dividing lines are optional when se present no more information than the class name. In designing a class diagram, we may find that [this] level of detail [...] is enough for some classes. We are not obligated to represent every field and method, or even every class in a class diagram." zandstra (2016): 144-145
+
+            Abstrac classes
+            "Abstract classes are represented either by italicizing the class name or by adding {abstract} to the class name. The first method is the more common of the two, but the second is more useful when you are making notes." zandstra (2016): 145
+
+                Constraint
+                "The {abstract} syntax is an example of a constraint. Constraints are used in class diagrams to describe the way in which specific elements should be used. There is no special structure for the text between the braces; it should simply provide a short clarification of any conditions that may apply to the element." zandstra (2016): 145
+
+            Interfaces
+            "Interfaces are defined in the same way as classes, except that they must include a stereotype (that is, an extension to the UML)." zandstra (2016): 145
+
+            Attributes
+            "Broadly speaking attributes describe a class's properties. Attributes are listed in the section directly beneath the class name. [...] The initial symbol represents the level of visibility, or access control, for the attribute. [...] The visibility symbol is followed by the name of the attribute. [...] A colon is used to separate the attribute name from its type (and optionally its default value)." zandstra (2016): 146
+
+                Visibility symbols
+                    +       Public          Avaliable to all code
+                    -       Private         Avaliable to the current class only
+                    #       Protected       Avaliableto the current class and its subclasses only
+
+            Operatiosn
+            "Operations describe methods; or, more properly, they describe the calls that can be made on an instance of a class. [...] operations use a similar syntax to that used by attributes. The visibility symbol precedes the method name. A list of parameters is enclosed in parentheses. The method's return type, if any, is delineated by a colon. Parameters are separated by commas and follow the attribute syntax, with the attribute name separated from its type by a colon. [...] this syntax is relatively flexible. You can omit the visibility flag and the return type. PArameters are often represented by their type alone, as the argument name is not usually significant." zandstra (2016): 146-147
+
+            Inheritance
+            "The UML describes the inheritance relationship as generalization. This relationship is signified by a line leading from the subclass to its parent. The line is tipped with an empty closed arrow." zandstra (2016): 147
+
+            Implementation
+            "The UML describes the relationship between an interface and the classes that implement it as realization." zandstra (2016): 147
+
+            Associations
+            "Inheritance is only one of a number of relationships in an object-oriented system. An association occurs when a class property is declared to hold a reference to an instance (or instances) of another class. [...] This relationship may or may not be reciprocal. You can use arrows to describe the direction of the association. [...] This association [...] is called unidirectional [...] If each class has a reference to the other, you can use a double-headed arrow to describe a bidirectional relationship [...] You can also specify the number of instances of a class that are referenced by another in an association. You do this by placing a number or range beside each class. You can also use an asterisk (*) to stand for any number." zandstra (2016): 147-148
+
+            Aggregation and composition
+            "Aggregation and composition are similar to association. All describe a situation in which a class holds a permanent reference to one or more instances of another. With aggregation and composition, though, the referenced instances form an intrinsic part of the referring object." zandstra (2016): 149
+
+                Aggregation
+                "In the case of aggregation, the contained objects are a core part of the container, but they can also be contained by other objects at the same time. The aggregation relationship is illustrated by a line that begins with an unfilled diamond." zandstra (2016): 149
+
+                Composition
+                "Composition represents an even stronger relationship than this, In composition, the contained object can be refernced by its container only. It should be deleted when the container is deleted. Composition relationships are depicted in the same way as aggregation relationships, except that the diamond should be filled." zandstra (2016): 149
+
+            Use
+            "The use relationship is described as a dependency in the UML. It is the most transient of the relationships [...] because it does not describe a permanent link between classes. A used class may be passed as an arguemnt or acquired as a result of a method call. [...] The use relationship is shown by [a] broken line and opern arrow that connects the two." zandstra (2016): 150
+
+            Notes
+            "Class diagrams can capture the structure of a system, but they provide no sense of process [...] a note consists of a box with a folded corner. It will often contain scraps of pseudo-code." zandstra (2016): 151
+
+        Sequence diagrams
+        "A sequence diagram is object-based rather than class-based. It is used to model a process in a system step-by-step. [...] A sequence diagram presents the participants of a system from left to right. [...] If I had more than one instance of the same class working independently in my diagram, I would include an object name using the format, label:class. [...] You show the lifetime of the process you are modeling from top to bottom. [...] The vertical broken lines represent the lifetime of the objects in the system. The larger boxes that follow the life lines represent the focus of a process. [...] The arrow represent the messages sent from one object to another. Return values are often left implicit (although they can be represented by a broken line, passing from the invoked object to the message originator). Each message is labeled using the relevant method call. You can be quite flexiblewith your labeling, although there is some syntax. Square brackets represent a condition [...] An asterisk is used to indicate a repetition; optionally, further clarification can be in suqre brackets. [...] sequence diagrams can model processes, freezing slices of dynamic interaction and presenting them with surprising clarity." zandstra (2016): 153
+
+        

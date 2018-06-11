@@ -1,6 +1,21 @@
 Interfaces paulund.co.uk/using-interface-and-abstract-classes-in-php
 
-The interface class is common in many design patterns. It will not add any additional functionality but it outlines a standard format to which your classes need to use. Any classes which inherit from an interface class must have at least the same methods as the interface class. The methods placed in the interface class will not have any functionality but will have just the method stubs to be used by the other classes. The methods outlined in the interface must be used by the other classes or it will throw an error.
+"The interface class is common in many design patterns. It will not add any additional functionality but it outlines a standard format to which your classes need to use. Any classes which inherit from an interface class must have at least the same methods as the interface class. The methods placed in the interface class will not have any functionality but will have just the method stubs to be used by the other classes. The methods outlined in the interface must be used by the other classes or it will throw an error." Interfaces paulund.co.uk/using-interface-and-abstract-classes-in-php
 
-	Defining
-	Interface classes are defined by using the keyword interface. All the methods in the interface must be public as this is the nature of an interface.
+    Defining
+    "Interface classes are defined by using the keyword interface. All the methods in the interface must be public as this is the nature of an interface." Interfaces paulund.co.uk/using-interface-and-abstract-classes-in-php
+
+Interfaces
+"Although abstract classes let you provide some measure of implementation, interfaces are pure templates. An interface can only define functionality; it can never implement it. An interface is declared with th interface keyword- It can contain properties and method declarations but not method bodies." zandstra (2016): 53
+
+    "[...] an interface looks very much like a class. Any class that incorporates this interface commits to implementing all the methods it defines, or it must be declared abstract. A class can implement an interface using the implements keyword in its declaration. Once you have done this, the process of implementing an interface is the same as extending an abstract class that contains only abstract methods. [...] An implementing class takes on the type of the class it extends and the interface that it implements." zandstra (2016): 54
+
+    "Because any class can implement an interface (in fact, a class can implement any number of interfaces), interfaces effectively join types that are otherwise unrelated." zandstra (2016): 55
+
+    "[...] interfaces help you manage the fact that, like JAva, PHP does not support multiple inheritance. In other words, a class in PH can only extend a single partent. However, you can make a class comprise to implement as many interfaces as you like; for each interface it implements, the class takes on the corresponding type." zandstra (2016): 55
+
+Traits
+"A trait is a class-like structure that cannot itself be instantiated but can be incorporated into classes. Any methods defined in a trait become avaliable as part of any class that uses it. A trait changes the structure of a class, but doesn't change its type. Think of traits as includes for classes." zandstra (2016): 56
+
+    Access rights to trait methods
+    "You can, of course, declare a trait method public, private, or protected. However, you can also change this access from within the class that uses the trait. [...] the as operator can be used to alias a methdd names. If you use an access modifier on the right-hand side of this operator, it will change the method's access level rather than its name." zandstra (2016): 64

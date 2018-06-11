@@ -28,6 +28,104 @@ Algorithm analysis
 		Average case: It indicates the average time required to execute a program. For our algorithm the average case will be finding the books around the middle of the list most of the time, or half of the time they are at the beginning of the list and the remaining half are at the end of the list.
 		Worst case: It indicates the maximum running time for a program. The worst case example will be finding the books at the end of the list all the time. We use the O (big oh) notation to describe the worst case scenario. For each book searching in our algorithm, it can take O(n) running time. From now on, we will use this notation to express the complexity of our algorithm." rahman (2007): 43
 
-rahman (2007):
-rahman (2007):
-rahman (2007):
+    Recursive Algorithms
+
+Recursion
+"Recursion is a wasy to solve larger problems by dividing them into smaller problems. In other words, recursion is breaking the big problem into smaller similar problems to solve them and get the actual results. Often recursion is termed as a function calling itself [...] the fact is the function must call itself when it is in recursion." rahman (2017): 221
+
+Properties of recursive algorithms
+"When we are writing a recursive solution, we have to make sure it has the following properties:
+    1. Each recursive call should be on a smaller subproblem. [...]
+    2. It must have a base case. When the base case is reached, there will be no further recursion, and the base case must be able to solve the problem without any further recursive call. [...]
+    3. There should not be any cycle. If each recursive call makes a call to the same problem, then there will be a never-ending cycle. After some repetitions, the computer will show a stack overflow error." rahman (2017): 223
+
+Recursion vs iteration
+"Recursion manage a call stack for managing function calls. As a result, recursion will take more memory and time to complete compared to iteration. Also, in iteration, each step, we can have a result, but for recursion, we have to wait until the base case to execute to get any result [...] there is a local variable [...] to store the calculation of each step. However,in recursion, there is no need for local variables or assignment." rahman (2017): 225
+
+    Linear recursion
+    "One of the most commonly used recursions in the programming world is linear recursion. When a function calls itself once in each run, we will call it a linear recursion. [...] when we are breaking the big calculationto smaller ones until the base condition is reached, we call it winding. When we are returning from the base condition to the first recursive call, we call it unwinding." rahman (2017): 230
+
+    Binary recursion
+    "In binary recursion, the function calls itself twice in each run. AS a result, the calculation depends on two results from two different recursive calls to itself. [...] we have commonly ised binary recirsions in the programming world, such as binary search, divide and conquer, merge sort, and so on." rahman (2017): 231
+
+    Tail recursion
+    "A recursion method is tail recursive when there is no pending operation to be performed on return. [...] Tail recursion is also a form of linear recursion." rahman (2017): 232
+
+    Mutual recursion
+    "It might be the case that we may require to call two different methods recursively from two different methods in an alternate fashion. For example, function A() calls function B() and function B() calls function A() in each call. This is known as mutual recursion." rahman (2017): 233
+
+    Nested recursion
+    "When a recursove function call has itself as the parameter, then it is caled nested recursion." rahman (2017): 234
+
+    Analyzing recursive algorithms
+    "Analysis of recursive algorithms depends on the type of recursion we are using. [...] We have to analyze it on a case-by-case basis." rahman (2017):247
+
+Sorting Algorithms
+"Sorting means a sorted order of the data. Often, our data is unsorted, which means we need a way to sort it. Usually, sorting is done by comparing different elements with each other and coming up with the ranking. In most cases, without the comparison, we cannot decide on the sorting part. After the comparison, we also need to swap the elements so that we can reorder them. A good sorting algorithm has the characteristics of making a minimum number of comparisons and swapping. There is also non-comparison based sorting, where no comparison is required to sort a list of items." rahman (2017): 311
+
+"Sorting can be classified into different types based on the typeof data set, direction, computational complexities, memory usage, space usage, and so on. Here are few of the sorting algorithms:
+    -Bubble sort
+    -Insertion sort
+    -Selection sort
+    -Quick sort
+    -Merge sort
+    -Bucket sort" rahman (2017): 311
+
+    Bubble sort
+    "Bubble sort is the most commonly used sorting algorithm in the programming world. [...] It is a comparison-based sorting algorithm, which is always referred to as one of the most inefficient sorting algorithms. It requires maximum number of comparisons, and the average, and worst case complexity are the same. In the bubble sort, each item of the list is compared with the rest of the items and swapped if required. This continues for each item inthe list. We can sort either in ascending or descending order." rahman (2017): 313
+
+    Selection sort
+    "Selection sort is another comparison-based sorting algorithm, which looks similar to bubble sort. The biggest difference is that it takes fewer swapping than bubble sort. In selectionsort, we first find the minimum/maximum item of the array and place it in the first place. If we are sorting in descending order, then we will take the maximum value from the array. For ascending order, we will take the minimum value. In the second iteration, we will find the second-most maximum or minimum value of the array and place it in second place. This goes on until we place each number into a correctly sorted position. This is known as selection sort." rahman (2017): 325
+
+    Insertion sort
+    "As name suggest, insertion sort works on the principle of inserting the number to its correct place on the left-hand side. It starts from the second item of the array and checks whether the items that are left to it are smaller than the current value or not. If so, it shifts the item and stores the smaller item in its correct position. Then, it moves to the next item, and the same principle continues until the full array is sorted." rahman (2017): 330
+
+    Divide-and-conquer technique for sorting
+    "With this method, we will divide a problem into two or more subproblems or sets, and then solve the smaller problems before combining all those results from the subproblems to get the final result." rahman (2017): 336
+
+        Merge sort
+        "[...] merge sort applies the divide-and-conquer approach to solvethe sorting problem, we need to find out two processes to addewss the issue. The first one is to divide the problem set into smaller enough problems to solve easily, and then combine those results." rahman (2017): 338
+
+        Quick sort
+        "Quicl sort is another efficient sorting algorithm that applies the divide-and-conquer method. Although it does not divide into equal halves like merge sort, it creates dynamic partitions to sort the data. This is how quick sort works:
+            1. Pick a random value from the array, which we will call pivot.
+            2. Reorder the array so that the item that is smaller than the pivot goes to the left ofit, and the items that are greater than, or equal to, the pivot go to the right of it. This is known as partitioning.
+            3. Recursively call steps 1 and 2 to solve the two subarrays (left and right of pivot) until all items are sorted." rahman (2017): 343
+
+        Bucket sort
+        "The bucket sort is also known as bin sort. Bucket sort is a distribution sorting system where array elements are placed in different buckets. Each bucket is then sorted individually by either another sorting algorithm, or by applying recursive bucket sorting." rahman (2017): 348
+
+Searching methods
+
+Linear searching
+"One of the most common ways of performing a search is to compare each item with one we are lookingfor. This is known as linear search or sequential search. It is the most basic way of performing a search. If we consider that we have n items in a list, in the worst case, we have to search n items to find a particular item. We can iterate throught a list or array to find an item." rahman (2017): 355
+
+Binary search
+"Binary searchis a very popuñar search algorithm in the programming world. In sequential search, we started from the beginning and scanned through each item to find the desired one. However, if the list is already sorted, then we do not need to searhc drom the beginning or the end of the list. In a binary search algorithm, we start with the middle of the list, check whether the item in the middle is smaller or greater than the item we are looking for, and decide which way to go. This way, we divide the list byhalf and discard one half completely." rahman (2017): 358
+
+    Binary vs linear
+    "[...] binary searching is definitely faster than linear searching. However, the major prerequisite is to have the list sorted before applying binary search. Applying binary search in an unsorted array will lead us to inaccurate results. There can be situations where we receive an array and we are not sure whether the array is sorted or not." rahman (2017): 371
+
+    "Over the years, the binary search algorithm evolved and came up with different variations. Instead of choosing the middle index every time, we can make calculative decisions to choose which index we should usenext. That is what makes these variations work efficiently." rahman (2017): 374
+
+    Interpolation search
+    "In binary search algorithm, we always start with the middle of the array to start the searching process. If an array is uniformly distributed and we are looking foran item, which, may be close to the end of array, then searching fromthe middle moght not sound like a good choice to us. [...] Interpolation search is an improvement over binary serach algorithm. Interpolation search may go to different location based on the value of the searched key." rahman (2017): 375
+
+    Exponential search
+    "In binary search, we are searching the whole list for a given key. Exponential search improves binary search by deciding the lower and upper bound of the search so that we do not end up searching the whole list. It improves the number of comparisons we need to find and element. The search is done in the following two steps:
+        1. We determine the bound size by looking for the first exponent k where the value of 2[superindice]k is greater than the search item. Now 2[superindice]k y 2[superindice]k-"1 become the ipper bound and lower bound, respectively.
+        2. Apply binary search algorithm for the bound 2[superindice]k and 2[superindice]k-1." rahman (2017): 378
+
+Hash table search
+"Hash table can be a very efficient data structure when it comes to search operations. Since hash tables store data in an associative manner, if we know where to look for the data, we can easily get the data quickly. In the hash table, each data has a unique index associated with it. If we know which index to look at, we can find the key very easily. Usually, in other programming lenguages, we have to use a separate hash function to calculate the hash index to store the value. The hash function is designed to generate the same index for the same key and also avoid collision." rahman (2017): 380
+
+    PHP hash tables
+    "[...] one of the great features of PHP is that PHP array itself is a hash table, in its underlying C implementation. Since an array is dynamic, we do not have to worry about the size of array or overflow array with many values. We need to store the values in an associative array so that we can associate the value with a key. The key can be the value itself if it is a string or an integer." rahman (2017): 380
+
+Tree searching
+
+Breadth first search
+"In a tree structure, a root us connected to its child node, and each child node can be represented as a tree. [...] In a breadth first search, popularly known as BFS, we start from a node (mostly root node) and first visit all adjacent or neighbor nodes before visiting the other neighbor nodes. In other words, we have to move level by level while we are applying BFS. As we search level by level, this technique is knwon as breadth first seach." rahman (2017): 384
+
+Depth first search
+"DEpth first search, or DFS, is a search technique where we startsearching from a node and go as deep as possible to the node from the target node through the branches. DFS is different from BFS, and we try to dig deeper instead of spreading out first. DFS grows vertically and backtracks when it reaches the end of the branch and moves the next avaliable adjacent nodes until the search os over." rahman (2017): 390

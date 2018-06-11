@@ -1,0 +1,82 @@
+GitHub
+
+Git vs others
+"The major difference between Git and any other VCS (Subversion and friends included) is the way Git thinks about its data. Conceptually, most other systems store information as a list of file-based changes. These other systems (CVS, Subversion, Perforce, Bazaar, and so on) think of the information they store as a set of files and the changes made to each file over time(this is commonly described as delta-based versio control). [...] Instead, Git thinks of its data more like a series of snapshots of a miniature filesystem. With Git, every time you commit, or save the state of your project, Git basically takes a picture of what all your files looklike at that moment and stores a reference to that snapshot. To be efficient, if files have not changed, Git doesn't store the file again, just a link to the previous identical file it has already stored. Git think about its data more like a stream of snapshots." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+    "This is an importatn distinction between Git and nearly all other VCSs. It makes Git reconsider almost every aspect of version control that most other systems copied from the previous generation. This makes Git more like a mini filesystem with some incredibly powerful tools built on top of it, rather than simply a VCS." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+Local work
+"Most operations in Git need only local files and resources to operate - generally no information is needed from another computer on your network. [...] Because you have the entire history of the project right there on your local disk, most operationsseem almost instantaneous." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+    Browse project history
+    "Git doesn't need to go out to the server to get the history and display it for you - it simply reads it directly from your local database. This means you see the project history almost instantly. If you want to see the changes introduced between the current version of a file and the file a month ago, Git can look up the file a month ago and do a local difference calculation, instead of having to either ask a remote server to do it or pull an older version of the file from the remote server to do it locally." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+    Offline work
+    "This also means that there is very little you can't do if you're offline of off VPN. [...] In many other sustems, doing so is either impossible or painful." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+Branching
+"Branches are used to develop features isolated from each other. The master branch is the "default" branch when you create a repository. Use other branches for development and merge them back to the master branch upon completion." http://rogerdudler.github.io/git-guide/
+
+The three states
+"Git has three main states that yout files can reside in: committed, modified,and staged:
+    -Committed means that the data is safely stored in your local database.
+    -Modified means that you have changed the file but have not commited it to your database yet.
+    -Staged means that you have marked a modified file in its current version to go into your next commit snapshot." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+    
+    Workflow
+     "The basic Git workflow goes something like this:
+        1. You modify files in your working tree.
+        2. You selectively stage just those changes you want to be part of your next commit, which adds only those changes to the staging area.
+        3.You do a commit, which takes the files as they are in the staging area and stores that snapshot permanently to your Git directory.
+     If a particular version of a file is in the Git directory, it's considered commited. If it has been modified and was added to the staging area, it is staged. And if it was changed since it was checked out but has not been staged, it is modified." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+     "Your local repository consists of three "trees" mantained by git. The firstone is your Working Directory which holds the actualfile. The second one is the Index which acts as a staging area and finally the HEAD which point to thelas commit you've made." http://rogerdudler.github.io/git-guide/
+
+        .git directory
+        "The Git directory is where Git stores the metadata and object database for your project. This is the most important part of Git, and it is what is copied when you clone a repository from another computer." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+        Working directory
+        "The working tree is a single checkout of one version of the project. These files are pulled out of the compressed database in the Git directory and placed on disk for you to use or modify." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+        Staging area
+        "The staging area is a file, generally contained in your Git directory, that stores information about what will go into your next commit. Its technical name in Git parlance is the "index", but the phrase "staging area" works just as well." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+
+
+
+
+
+
+File's state
+ "[...] each file in your working directory can be in one of two states: tracked or untracked. Tracked files are files that were in the last snapshot; they can be unmodified, modified, or staged.Untracked files are everything else- any files in your working directory that were not in your lasr snapshot and are not in your staging area. When you first clone a repository, all of your files will be tracked and unmodified because you just checked them out and haven't edited anything. As you edit files, Git sees them as modified, because you've changed them since your last commit. You staged these modified files and then commit all your staged changed, and the cycle repeats." https://git-scm.com/book/en/v1/Git-Basics-Recording-Changes-to-the-Repository
+
+    Untracked files
+    "Untracked basically means that Git sees a file you didn't have in the previous snapshot (commit); Git won't stat including it in your commit snapshots until you explicitly tell it to do so. It does this so you don't accidentally begin including generated binary files or other files that you did not mean to include." https://git-scm.com/book/en/v1/Git-Basics-Recording-Changes-to-the-Repository
+
+    Staged file
+    "You can tell [...] [a file]'s staged because it's under the "Changes to be commited" heading. If you commit at this point, the version of the file at the time you ran git add is what will be in the historical snapshot." https://git-scm.com/book/en/v1/Git-Basics-Recording-Changes-to-the-Repository
+
+        Staging modified files
+        "If you change a previously tracked file [...] The [...] file appears under a section named "Changes not staged for commit" - which means that a file that is tracked has been modified in the working directory but not yet staged. To stage it, you run the git add command. [...] If you modify a file after you run git cadd, you have to run git add again to stage the latest version of the file." https://git-scm.com/book/en/v1/Git-Basics-Recording-Changes-to-the-Repository
+
+    Ignoring files ( .gitignore )
+    "Often, you'll have a class of files that you don't want Git to automatically add or even show you as being untracked. These are generally automatically generated files such as log files or files produced by your build system. In such cases, you can create a file listing patterns to match them named .gitignore." https://git-scm.com/book/en/v1/Git-Basics-Recording-Changes-to-the-Repository
+
+        Settingup rules
+        "Setting up a .gitignore file before you get goingis generally a good idea so you don't accidentally commit files that you really don't want in your Git repository. The rules for the patterns you can put in the .gitignore file are as follows:
+            -Black lines or lines starting with # are ignored.
+            -Standard glob patterns work.
+            -You can end patterns with a foward slash (/) to specify a directory.
+            -You can negate a pattern by starting it with an exclamation point(!)." https://git-scm.com/book/en/v1/Git-Basics-Recording-Changes-to-the-Repository
+
+            Glob patterns
+            "Glob patterns are like simplified regular expressions that shellsuse. An (*) matches zero or more characters; [abc] matches any character inside the brackests; a question mark (?) matches a single character; and brackets enclosing characters separated by a hyphen ([0-9]) matches any character in the range." https://git-scm.com/book/en/v1/Git-Basics-Recording-Changes-to-the-Repository
+
+Integrity
+"Everythong in Git is check-summed before it is stored and is then referred to by that checksum. This means it's impossible to change the contents of any file or directory without Git knowing about it. This functionality is built into Git at the lowest levels and is integral to its philosophy. You can't lose information in transit or get file corruption without Git being able to detect it." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+    SHA-1
+    "The mechanism that Git uses for this checksumming is called a SHA-1 hash. This is a $0-character string composed of hexadecimal characters (0-9 and a-f) and calculated based on the contents of a file or directory structure in Git. [...] In fact, Git stores everything in its database not by file name but by the hash value of its contents." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics
+
+Adding data
+"It is hard to get the system to do anything that is not undoable or to make it erase data in any way. As with any VCS, you can lose or mess up changes you haven't commited yet, but after you commit a snapshot into Git, it is very difficult to lose, especially if you regularly push your database to another repository." https://git-scm.com/book/en/v2/Getting-Started-Git-Basics

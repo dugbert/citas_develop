@@ -17,10 +17,24 @@ Queueing process
 Queues pros
 "Queues make it easy to remove a costly or slow process from any synchronous call. [...] Sometimes you [...] might have a process like a cron job or a webhook that has a lot of work process; rather than letting it all run at once (and potentially time out), you may choose to queue its individual pieces and let the queue worker process them one at a time. Additionally, if you have some heavy processing that's more than your server can handle, you can spin up more than one queue worker to work through your queue faster than your normal application server could on its own." stauffer (2016): 601
 
-Queue worker ( php artisan queue:work )
- "In Laravel, [a queue worker] it's an Artisan command that stays running forever (until it's stopped manually) and takes the responsibility for pulling down jobs from your queue and running them. [...] This command starts a daemon "listening" to your queue; every time there are jobs on the queue, it will pull down the first job, handle it, delete it, and move on to the next. If at any point there are no jobs, it "sleeps" for a configurable amount of time before checking again to see if there are any more jobs." stauffer (2016): 6102
+Queue worker 
+ "workers [...] [are] a simple PHP process that runs in the background with the purpose of extracting jobs from a storage space and runthem with respect to several configuration options." https://laravel.com/docs/5.6/queues#failed-job-events
 
-    "[...] a "queue worker," takes the responsability for pulling jobs off of the queue one at a time and performing the appropiate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed." stauffer (2016): 600
+ "[...] a "queue worker," takes the responsability for pulling jobs off of the queue one at a time and performing the appropiate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed." stauffer (2016): 600
+
+    ( php artisan queue:work )
+    "In Laravel, [a queue worker] it's an Artisan command that stays running forever (until it's stopped manually) and takes the responsibility for pulling down jobs from your queue and running them. [...] This command starts a daemon "listening" to your queue; every time there are jobs on the queue, it will pull down the first job, handle it, delete it, and move on to the next. If at any point there are no jobs, it "sleeps" for a configurable amount of time before checking again to see if there are any more jobs." stauffer (2016): 610
+
+        "Running this command will instruct Laravel to create an instance of your application and start executing jobs, thisinstance will stay alive indefinitely which means the action of starting your Laravel application happens only once when the command was run & the same instance will be use dto execute your jobs, that means the following: 
+            -You save server resources by avoiding booting up the whole app on every job.
+            -You have to manually restart the worker to reflect any code change you made in your application." https://laravel.com/docs/5.6/queues#failed-job-events
+
+    ( php artisan queue:listen )
+    "The queue:listen command simply runs the queue:work --once command inside an infinite loop, this will cause the following:
+        -An instance of the app is booted upon every loop.
+        -The assigned worker willpick a single job and execute it.
+        -The worker process will be killed.
+    Using queue:listen ensures that a new instance of the app is created for every job, that means you don't have to manually restart the worker in case you made changes to your code, but also means more server resources will be consumed" https://laravel.com/docs/5.6/queues#failed-job-events
 
     Setting up ( php artisan queue:work redis --timeout:00 --sleep=15 --tries=3 --queue=high,medium )
      "You can define how many seconds a job should be able to run before the queue listener stops it (--timeout), how many seconds the listener should "sleep"when there are no jobs left (--sleep), how many tries each job should be allowed before being deleted (--tries), which connection the worker should listen to (the first parameter after queue:work), and which queues it should listen to (--queue=)." stauffer (2016): 610

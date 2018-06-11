@@ -1,0 +1,63 @@
+Trees
+
+Hierarchical data
+"[...] the complexities of linear data structure operations, and most of the time, the insertion and deletion can be performed with 0(1) complexity. However, the searching is a little complicated and takes 0(n) complexity. [...] In order to solve this problem, we can use a hierarchical data structure instead of the linear one. Hierarchical data can solve many issues that a linear data structure cannot solve easily. Whenever we are talking about family tree, organization structure, and network connectivity diagrams, we are actually talking about hierarchical data." rahman (2017): 255
+
+"Trees are a special Abstract Data Type (ADT) that represents hierarchical data. Unlike a linked list, which is also an ADT, trees are hierarchical compared to the linear nature of linked lists." rahman (2017): 255
+
+Definition and properties
+"A tree is a hierarchical collection of nodes orvertices connected by edges. Trees cannot have cycles, and only edges will exist between a node and its descended nodes or child nodes. Two child nodes of a same parent cannot have any edges in between them. Each node can have a parent other than the top node, which is also known as the root node. There can be only one root node per tree. Each node can have zero or more child nodes. [...] The node that does not have any children is known as a leaf. [...] Leaf nodes are also known as external nodes or terminal nodes. A node, other than the root, having at least one child, is known as an internal node." rahman (2017): 257
+
+    Description
+    "Here are some other common terms we use when describing tree data structure;
+        -Descendent: This is a node that can be reached froma parent node by repeated proceedings. [...]
+        -Ancestor: This is a node that can be reached from a child node to a parent node by a repeated way. [...]
+        -Degree: The total number of child nodes of a particular parent node is known as its degree.[...]
+        -Path: The sequence of nodes and edges from a source node to a target node is known as the path between two nodes. [...]
+        -Height of node: The height of a node is defined by the number of edges between the node and the deepest level of the descendent node. [...]
+        -Level: The level represents the generation of nodes. If a parent node is in level n, its child node will be in the n+1 level. So, the levelis defined by 1+number of edges between the node and the root. [...]
+        -Height of tree: The height of a tree is defined by the height of its root node. [...]
+        -Subtree: In a tree structure, each child forms a cubtree recursively. In other words, a tree consists of many subtrees. [...]
+        -Depth: The depth of a node is determined by the number of edges between the node and the root node. [...]
+        -Forest: A forest is a set of zero or more disjoint trees.
+        -Traverse: This indicates the process of visiting nodes in a specific order. [...]
+        -Keys: A key is a value from the node that is used for searching purposes." rahman (2017): 257-260
+
+    Binary tree
+    "Binary is the most basic form of tree structure where each node has a maximum of two child nodes. The child nodes are jnown as left and right nodes." rahman (2017): 267
+
+        Binary search tree
+        "A binary search tree (BST) is a special type of binary tree where the nodes are stored in a sorted manner. It is sorted in such a way that at any given point, a node value most be greater than or equal to the left child node value and smaller than the right child node value. Each node has to satisfy this property to consider it as a binary search tree. Since the nodes are sorted in a particular order, the binary search algorithm can be applied to search items in a BST in logarithmic tree. It is always better than linear searching, which takes O(n) time [...]" rahman (2017): 268
+
+        "BST is a sorted binary tree. If it is sorted, then we can have the performance improvement compared to a regular binary tree. Each binary tree node can havea maximum of two child nodes, which are known as the left child node and right child node. However, based on the type of binary tree, there can be zero, one, or two child nodes." rahman (2017): 274
+
+            Full binary tree
+            "A full binary tree is a tree that has either zero or two child nodes on each node. A full binary tree is also known as a proper tree or a plane binary tree." rahman (2017): 274
+
+            Perfect binary tree
+            "A perfect binary tree is a binary tree in which all internal nodes have exactly two child nodes and all leaves have the same level or depth." rahman (2017): 274
+
+            Complete binary tree
+            "A complete binary tree is a binary tree in which all levels, except the last level, are completely filled and all nodes are as far left as possible." rahman (2017): 274
+
+            Self-balanced binary search tree
+            "A self-balanced binary search tree or height-balance binary search tree is a special type of binary search tree that attempts to keep the height or number of levels of the tree as small as possible all the time by adjusting automatically. [...] A height-balanced tree is always better as it helps search operations faster compared to a regular BST. There are different implementations of self-balanced or height-balanced binary search trees. Some of the popular ones are as follows:
+                -AA tree
+                -AVL tree
+                -Red-black tree
+                -Spacegoat tree
+                -Splay tree
+                -2-3 tree
+                -Treap" rahman (2017):269
+
+                AVL tree
+                "An AVL tree is a self-balancing binary search tree where the heights of two child subtrees of a node will differ by a maximum of 1. If the height increases, in any case, there will be a rebalace to make the heignt difference to 1. This gives the AVL tree an added advantage of logarithmic complexity for different operations." rahman (2017): 270
+
+                Red-black tree
+                "A red-black tree is a self-balanced binary searchtree with some extra properties which is the color. Each node in the binary tree stores one extra bit of information, ehich is known as color and can have either red or black as values. Like an AVL tre, a red-black tree is also used for real-time applications as the average and worst case complexity is also logarithmic." rahman (2017): 271
+
+                B-tree
+                "A B-tree is a special type of binary tree, which is self-balanced. This is not the same as a self-balanced binary search tree. The key difference is that in a B-tree, we can have any number of nodes as child nodes, not just two. A B-tree is used for a large set of data and is mainly used in filesystems and databases. The complexity of different operations in a B-tree is logarithmic." rahman (2017): 272
+
+                N-ary tree
+                "An N-ary tree is a special type of tree where a node can have maximum N children. This is also known as a k-way tree of M-ary tree. A binary tree is an N-ary tree where the value of N is 2." rahman (2017): 273

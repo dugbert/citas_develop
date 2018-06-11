@@ -1,80 +1,151 @@
 Design patterns
 
+Christopher Alexander
+"[...] it is illegal, accoding to international law, to write about patterns without quoting Christopher Alexander, an architect academic whose work heavily influenced the original object-oriented pattern advocates. He states in A Pattern Language (Oxford University Press, 1977):
+    Each pattern describes a problem which occurs over and over again in our enviroment, and then describes the core of the solution to that problem,  in such a way that you can use this solution a million times overm without ever doing itthe same way twice." zandstra (2016): 158
+
+    "By providing developers with names for techniques, patterns make communication richer. [...] Patterns, or the techniques they decribe, tend to interoperate. [...] without a pattern languagem we would still use thesetechniques. They precede their naming and organization. If pattern did not exist, they would evolve on their own, anyway. Any tool that is used sufficiently will eventually acquire a name." zandstra (2016): 169
+
+    "Patterns represent best practice in an object-oriented context. To somehighly experienced programmers, this may seem an exercise in repackaging the obvious. To the rest of us, patterns provide access to problems and solutions we would otherwise have to discover the hard way. PAtterns make design accessible. As pattern catalogs emerge for more and more specializations, even the highly experienced can find benefits as they move into new aspects of their fields." zandstra (2016): 162
+
+    Collaboration
+    "By their nature, patterns should be generative and composable. This means that you should be able to apply one pattern and thereby create conditions suitable for the application of another. In other words,in using a pattern you may find other doors opened for you. Pattern catalogs are usually designed with this kind of collaboration in mind, and the potential for pattern composition is always documented in the pattern itself." zandstra (2016): 162
+
  "Design patterns were first introduced by Eric Gamma and his three friends in 1994. A design pattern is basically a pattern of software design that is implemented on multiple projects, and its intended success gives an idea to prove this pattern as a solution of commonly recurring problems. [...] In software engineering, a design pattern is a general repeatable and optimized solution to a commonly occurring problem within a given context in software design. It is a description or template for how to solve a problem, and the solution can be used in different instances." kilicdagi & yilmaz (2014): 6-7
+
+ "Most problems we encounter as programmers have been handled time and again by others in our community. Design patterns can provide us with the means to mine that wisdom. Once a pattern becomes a common currency, it enriches our languages, making it easy to share design ideas and their consequences. Design patterns simply distill common problems, define tested solutions, and describe likely outcomes." zandstra (2016): 157
 
  "Modern PHPframeworks like Laravel make use of several design patterns [...] It's important that one knows the principles and why these patterns are used to be able to apply them effectively when faced with similar problems that can best be solved with design patterns." https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
 
+    Criticism
+    "There has been some criticism in recent years that design patterns have been overused, especially by inexperienced programmers. This is often a sign that solutions have been applied where the problem and context are not present. Patterns are more than a particular organization of classes and objects, cooperating in a particular way. Patterns are structured to define the conditions in which solutions should be applied and to discuss the effects of the solution." zandstra (2016): 158
+
+Pattern language
+"A pattern language is a catalog of problems and solutions organized together so that they complement one another, forming and interrelated whole. There are pattern languages for other problem spaces, such as visual design and project management (and architecture, of course)." zandstra (2016): 159
+
+ Practice rooted
+ "Patterns are (or should be) essentially bottom-up and not top-down. They are rooted in practice and not in theory. That is not to say that there isn't a strong theoretical element to design patterns, but patterns are based on real-world techniques used by real programmers. Renowned pattern-hatcher MArtin Fowler says that he discovers patterns, he does not invent them." zandstra (2016): 158
+
+ "A catalog of patterns is not a cookbook. Recipes can be followed slavishly; code can be copied and slotted into a project with minor changes. You do not always need even to understand all the code used in a recipe. Design patterns inscribe approaches to particular problems. The details of implementation may vary enormously according to the wider context. This context might include the programming language you are using, the nature of your application, the size of your project, and the specifics of the problem." zandstra (2016): 158
+
     "The following are some of the benefits of using design patterns:
-	 Maintenance
-	 Documentation
-	 Readability
-	 Ease in finding appropriate objects
-	 Ease in determining object granularity
-	 Ease in specifying object interfaces
-	 Ease in implementing even for large software projects
-	 Implements the code reusability concept" kilicdagi & yilmaz (2014): 7
+     Maintenance
+     Documentation
+     Readability
+     Ease in finding appropriate objects
+     Ease in determining object granularity
+     Ease in specifying object interfaces
+     Ease in implementing even for large software projects
+     Implements the code reusability concept" kilicdagi & yilmaz (2014): 7
 
-	Elements of design patterns
-	 Name: This is a handle we can use to describe the problem
-	 Problem: This describes when to apply the pattern
-	 Solution: This describes the elements, relationships, responsibilities, and collaborations, in a way that we follow to solve a problem
-	 Consequences: This details the results and trade-offs of applying the pattern
+    Elements of design patterns
+     Name: This is a handle we can use to describe the problem
+     "Names matter. They enrich the language of programmers; a few short words can stand in for quite complex problems and solutions. They must balance brevity and description. The Gang pof Four claims "Finding good names has been one of the hardest parts of develping our catalog". MArtin Fowler agrees: "PAttern names are crucial, because part of the purpose of patterns is to create a vocabulary that allows developers to communicate more effectively." " zandstra (2016): 159
 
-	Clasification of design patterns
-	 Design patterns are generally divided into three fundamental groups:
-		
-		Creational patterns
-		 "Creational patterns are a subset of design patterns in the field of software development; they serve to create objects. They decouple the design of an object from its representation. Object creation is encapsulated and outsourced (for example, in a factory) to keep the context of object creation independent from concrete implementation. This is in accordance with the rule: "Program on the interface, not the implementation." kilicdagi & yilmaz (2014): 9
+        "The very act of naming a pattern is valuable; it contributes to the kind of common vocabulary that has arisen naturally over the years in older crafts and professions. Such shorthand greatly aids collaborative design as alternative approaches and their various consequences are weighed and tested. [...] this bundle of concepts and consequences has a handle, which makes for a useful shorthand."
 
-			Generic instantiation
-			"This allows objects to be created in a system without having to identify a specific class type in code (Abstract Factory and Factory pattern)." kilicdagi & yilmaz (2014): 9
+     Problem: This describes when to apply the pattern
+     "No matter how elegant the solution (and some are very elegant indeed), the problem and its context are the grounds of a pattern. Recognizing a problem is harder than applying any one of the solutions in a pattern catalog. This is one reason that some pattern solutions can be misapplied or overused. Patterns describe a problem space with great care. The problem is described in brief and then contextualized, often with a typical example and one or more diagrams. It is broken down into its specifics, its various manifestations. Any warning signs that might help in identifying the problem are described." zandstra (2016): 159
 
-			Simplicity
-			"Some of the patterns make object creation easier, so callers will not have to write large, complex code to instantiate an object (Builder (Manager) and Prototype pattern)." kilicdagi & yilmaz (2014): 9
 
-			Creation constraints
-			"Creational patterns can put bounds on who can create objects, how they are created, and when they are created." kilicdagi & yilmaz (2014): 9
+     Solution: This describes the elements, relationships, responsibilities, and collaborations, in a way that we follow to solve a problem
+     "The solution is summarized initially in conjunction withthe problem. It is also described in detail, often using UML class and interaction diagrams. The pattern usually includes a code example. Although code may be presented, the solution is never cut-and-paste. The pattern describes an approach to a problem. There may be hundreds of nuances in its implementation. Think about instructions for sowing a food crop. If you simply follow a set of steps blindly, you are likely to go hungry come harvest time. More useful would be a pattern-based approach that covers the various conditions that may apply. The basic solution to the problem (making your crop grow) will always be the same (prepare soil, plant seeds, irrigates, harvest crop), but the actual steps you take will depend on all sorts of factors, such as your soil type, your location, the orientation of your landm local pest, and so on." zandstra (2016): 159-160
 
-				The Abstract Factory pattern
-				The Factory pattern
-				The Builder (Manager) pattern
-				The Prototype pattern
-				The Singleton pattern
+     Consequences: This details the results and trade-offs of applying the pattern
+     "Every design decision ou make will have wider consequences. This should include the satisfactory resolution of the problem in question, of course. A solution,once deploye, may be ideally suited to work withother patterns. There may also be dangest to watch for." zandstra (2016): 160
 
-		Structural patterns
-		 "In software engineering, design patterns structure patterns facilitate easy ways for communications between various entities." kilicdagi & yilmaz (2014): 9
+    The gang of four format
+    -Intent: A brief statement of the pattern's purpose. You should be able to see the point of the pattern at a glance.
+    -Motivation: The problem described, often in terms of a typical situation. The anecdotal approach can help make the pattern easy ti grasp.
+    -Applicability: An examination of the different situations in which you might apply the pattern. While the motivation describes a typical problem, this section defines specific situations and weighs the merits of the solutionin the context of each.
+    -Structure/Interaction: These sections may contain UML class and interaction diagrams describing describing the relationships among classes and objects in the solution.
+    -Implementation: This section looks at the details of the solution. It examines any issues that may come up when applying the technique and provides tips for deployment.
+    -Sample Code: The example is often chopped down to the basics in order to lay the solution bare. It could be in any object-oriented language.
+    -Known Uses: These describe real systems in which the pattern (problem,context, and solution) occurs. Some people sya that for a pattern to be genuine, it must be found in at least three publicly available contexts. This is sometimes called the "rule of three".
+    -Related Patterns: Some patterns imply others. In applying one solution, you can create the context in which another becomes useful. This section examines these synergies. It may also discuss patterns that have similarities to the problem or the solution, as well as any antecedents (ie., patterns defined elsewhere on which the current pattern builds).
 
-			Composition
-			"This composes objects into a tree structure (whole hierarchies). Composition allows customers to be uniformly treated as individual objects according to their composition." kilicdagi & yilmaz (2014):10
-			
-			Decorator
-			"This dynamically adds options to an object. A Decorator is a flexible alternative embodiment to extend functionality." kilicdagi & yilmaz (2014): 10
-			
-			Flies
-			"This is a share of small objects (objects without conditions) that prevent overproduction." kilicdagi & yilmaz (2014): 10
-			
-			Adapter
-			"This converts the interface of a class into another interface that the clients expect. Adapter lets those classes work together that would normally not be able to because of the different interfaces." kilicdagi & yilmaz (2014): 10
-			
-			Facade
-			"This provides a unified interface meeting the various interfaces of a subsystem. Facade defines a higher-level interface to the subsystem, which is easier to use." kilicdagi & yilmaz (2014): 10
-			
-			Proxy
-			"This implements the replacement (surrogate) of another object that controls access to the original object." kilicdagi & yilmaz (2014):10
 
-			Bridge
-			"This separates an abstraction from its implementation, which can then be independently altered." kilicdagi & yilmaz (2014): 10
+    Clasification of design patterns
+     Design patterns are generally divided into three fundamental groups:
+        
+        Creational patterns
+         "Creational patterns are a subset of design patterns in the field of software development; they serve to create objects. They decouple the design of an object from its representation. Object creation is encapsulated and outsourced (for example, in a factory) to keep the context of object creation independent from concrete implementation. This is in accordance with the rule: "Program on the interface, not the implementation." kilicdagi & yilmaz (2014): 9
 
-		Behavioral patterns
-		 "Behavioral patterns are all about a class' objects' communication. Behavioral patterns are those patterns that are most specifically concerned with communication between objects." kilicdagi & yilmaz (2014): 10
+            Generic instantiation
+            "This allows objects to be created in a system without having to identify a specific class type in code (Abstract Factory and Factory pattern)." kilicdagi & yilmaz (2014): 9
 
-			Chain of Responsibility pattern
-			Command pattern
-			Interpreter pattern
-			Iterator pattern
-			Mediator pattern
-			Memento pattern
-			
+            Simplicity
+            "Some of the patterns make object creation easier, so callers will not have to write large, complex code to instantiate an object (Builder (Manager) and Prototype pattern)." kilicdagi & yilmaz (2014): 9
+
+            Creation constraints
+            "Creational patterns can put bounds on who can create objects, how they are created, and when they are created." kilicdagi & yilmaz (2014): 9
+
+                Abstract factory pattern
+                 "This is your problem: you need to generate a different set of objects according to thecircumstances, andyou want this to be more or less transparent to otehr components in the system. It just so happens that the Gang of Four defined the following problem in their book's summary page for the pattern Abstract Factory, "Provide an interface for creating families of related or dependent objects withpur specifying their concrete classes". [...] That fits nicely. It is the nature of our problem that determines and shapes our use of this pattern. [...]" zandstra (2016): 158
+
+                The Factory pattern
+                 "Object-oriented design emphasizes the abstract class over the implementation. That is, it works with generalizations rather than specializations. The Factory Method pattern address the problem of how to create object instances when your code focuses on abstract types." zandstra (2016): 188
+
+                    The problem
+                    "[...] let's summarize the problem [...]:
+                        -Í do not know until runtime the kind of object I need to produce.
+                        -I need to be able to add new product types with relative ease
+                        -Eachproduct type is associated with a context that requires other customized operations
+                    [...] The Factory Method pattern enables you to use inheritance and polymorphism to encapsulate the creation of concrete products." zandstra (2016): 190-191
+
+                The Builder (Manager) pattern
+
+                The Prototype pattern
+
+                The Singleton pattern
+                    Global variables
+                    "The global variable is one of the great bugbears of the object-oriented programmer. [...] Global variables tie classes into their context, undermining encapsulation. A class that relies on global varibable becomes impossible to pull out of one application and use in another, without first ensuring that the new application itself defines the same global variables. [...] Once you start relying on global variables, it is perhaps just a matter of time before one of your librarires declares a global that clashes with another declared elsewhere. [...] PHP will not warn you when globals collide. The first you will know about ir is when your script begins to behave oddly. [...] By using globals, though, you potentially leave your user exposed to new and interesting conflicts when they attemt to deploy your library alongside others." zandstra (2016): 184
+
+                        "Globals remain a temptation, however. This is because there are times when the sin inherent in global access semems a price worth paying in order to give all of your classes access to an object. [...] namespaces provide some protection from this. You can atleast scope variables to a packages, which means that third-party libraries are less likely to clash with your own system. Even so, the risk of collision exists within the namespace itself." zandstra (2016): 184
+
+                    The problem
+                    "Well-designed systems generally pass object instances around via method calls. Each class retains its independence from a wider context, collaborating wiht other parts of the system via clear lines of communication. Sometimes, though, you find that this forces you to use some classes as conduits for objects that do not concern them, introducing dependencies in the name of good design." zandstra (2016): 184
+
+                    Implementation
+                    "To address this problem, I can start by asserting control over object instantiation. [...] I can use a static method and a stativc property to mediate object instantiation. [...] A static method cannot access object properties because it is, by definition, invoked in a class and not an object context. It can, however, access a static property." zandstra (2016): 185-186
+
+                    Consequences
+                    "Both Singletons and global variables are prone to misuse. Because Singletons can be accessedfrom anywhere in a system, they can serve to create dependencies that can be hard to debug. Change a Singleton, and classes that use it may be affected. Dependencies are not a problem in themselves. After all, we create a dependency everytime we declare that a method requires an argument of a particular type. The problem us that the global nature of the Singleton is used, the dependency is hidden away inside a method and not declared in its signature. This can make it harder to trace the relationship within a system. Singleton classes should therefore be deployed sparingly and with care. [...] Singletons represent an improvement over global variables in an object-oriented context. You cannot overwrite a Singleton with the wrong kind of data." zandstra (2016): 187
+
+        Structural patterns
+         "In software engineering, design patterns structure patterns facilitate easy ways for communications between various entities." kilicdagi & yilmaz (2014): 9
+
+            Composition
+            "This composes objects into a tree structure (whole hierarchies). Composition allows customers to be uniformly treated as individual objects according to their composition." kilicdagi & yilmaz (2014):10
+            
+            Decorator
+            "This dynamically adds options to an object. A Decorator is a flexible alternative embodiment to extend functionality." kilicdagi & yilmaz (2014): 10
+            
+            Flies
+            "This is a share of small objects (objects without conditions) that prevent overproduction." kilicdagi & yilmaz (2014): 10
+            
+            Adapter
+            "This converts the interface of a class into another interface that the clients expect. Adapter lets those classes work together that would normally not be able to because of the different interfaces." kilicdagi & yilmaz (2014): 10
+            
+            Facade
+            "This provides a unified interface meeting the various interfaces of a subsystem. Facade defines a higher-level interface to the subsystem, which is easier to use." kilicdagi & yilmaz (2014): 10
+            
+            Proxy
+            "This implements the replacement (surrogate) of another object that controls access to the original object." kilicdagi & yilmaz (2014):10
+
+            Bridge
+            "This separates an abstraction from its implementation, which can then be independently altered." kilicdagi & yilmaz (2014): 10
+
+        Behavioral patterns
+         "Behavioral patterns are all about a class' objects' communication. Behavioral patterns are those patterns that are most specifically concerned with communication between objects." kilicdagi & yilmaz (2014): 10
+
+            Chain of Responsibility pattern
+            Command pattern
+            Interpreter pattern
+            Iterator pattern
+            Mediator pattern
+            Memento pattern
+            
             Observer pattern
              "Design patterns itself, are repeatable solutions to commonly ocurring problems in software design, one of which is observer pattern and usually applicable to an abstraction with two aspects such that a change in one object requires a change in one or multiple objects. [...] Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all of its dependents are notified and updated automatically [...]" https://codeburst.io/observer-pattern-object-oriented-php-4e669431bcb9
 
@@ -114,222 +185,222 @@ Design patterns
                 "This two classes, RealSubject and RealObsercer, are about as generic as it gets. It's difficult to look at these two classes and derive any business meaning behind them. This is one of the downsides of using SplSubject and SplObserver. You are stuck with generic methods. You also cannot type hint anything other than SplSubject to the update method. It is almost not worth using them." dockins (2017): 184
 
             State pattern
-			Strategy pattern
-			Template pattern
-			Visitor pattern
+            Strategy pattern
+            Template pattern
+            Visitor pattern
 
-	What is MVC?
-	 "The MVC triad of classes were used to build user interfaces in Smalltalk-80 in 1988. MVC is an architectural pattern that is used in software engineering, whose fundamental principle is based on the idea that the logic of an application should be separated from its presentation. It divides a given software application into three interconnected parts, so as to separate internal representations of information from the way that information is presented to or accepted from the user." kilicdagi & yilmaz (2014): 11
+    What is MVC?
+     "The MVC triad of classes were used to build user interfaces in Smalltalk-80 in 1988. MVC is an architectural pattern that is used in software engineering, whose fundamental principle is based on the idea that the logic of an application should be separated from its presentation. It divides a given software application into three interconnected parts, so as to separate internal representations of information from the way that information is presented to or accepted from the user." kilicdagi & yilmaz (2014): 11
 
-	Benefits of using the MVC
-	 Different views and controllers can be substituted to provide alternate user interfaces for the same model.
-	 
-	 It provides multiple simultaneous views of the same model.
-	 
-	 The change propagation mechanism ensures that all views simultaneously reflect the current state of the model.
-	 
-	 Changes affecting just the user interface of the application become easier to make.
-	 
-	 It is easier to test the core of the application, as it is encapsulated by the model.
-	 
-	 One of the great benefits of the MVC pattern is that it allows you to recycle the application's logic when you use different templates. For example, when you want to implement an external API inside a part of your application, it will be very helpful to reuse the application's logic. If the MVC approach of Laravel is followed thoroughly, you will only need to modify the controller to render many different templates/views.
+    Benefits of using the MVC
+     Different views and controllers can be substituted to provide alternate user interfaces for the same model.
+     
+     It provides multiple simultaneous views of the same model.
+     
+     The change propagation mechanism ensures that all views simultaneously reflect the current state of the model.
+     
+     Changes affecting just the user interface of the application become easier to make.
+     
+     It is easier to test the core of the application, as it is encapsulated by the model.
+     
+     One of the great benefits of the MVC pattern is that it allows you to recycle the application's logic when you use different templates. For example, when you want to implement an external API inside a part of your application, it will be very helpful to reuse the application's logic. If the MVC approach of Laravel is followed thoroughly, you will only need to modify the controller to render many different templates/views.
 
-	What is a Model?
-	 "The Model is that part of the Model-View-Controller design pattern that we can simply describe as the layer of the design pattern that handles the management of the data, which is received from the corresponding layers and then sent back to those layers. One thing to note here is that the Model does not know where the data comes from and how it is received. In simple words, we can say that the Model implements the business logic of the application. The Model is responsible for fetching the data and converting it into more meaningful data that can be managed by other layers of the application and sending it back to corresponding layers. The Model is another name for the domain layer or business layer of an application." kilicdagi & yilmaz (2014): 13-14
+    What is a Model?
+     "The Model is that part of the Model-View-Controller design pattern that we can simply describe as the layer of the design pattern that handles the management of the data, which is received from the corresponding layers and then sent back to those layers. One thing to note here is that the Model does not know where the data comes from and how it is received. In simple words, we can say that the Model implements the business logic of the application. The Model is responsible for fetching the data and converting it into more meaningful data that can be managed by other layers of the application and sending it back to corresponding layers. The Model is another name for the domain layer or business layer of an application." kilicdagi & yilmaz (2014): 13-14
 
-	 	Model generics
-	 	"Models represent resources in your application. More often than not, they correspond to records in a data store, most commonly a database table. In this respect, you can think of models as representing entities in your application, be that a user, a news article, or an event, among others. In Laravel, models are classes that usually extend Eloquent's base Model class and are named in CamelCase (that is, NewsArticle). This will correspond to a database table with the same name, but in snake_case and plural (that is, news_articles). By default, Eloquent also expects a primary key named id, and will also look for—and automatically update—the created_at and updated_at columns. Models can also describe the relationships they have with other models. [...] However, models can also refer to data from other data sources, such as an XML file, or the response from a web service or API."
+        Model generics
+        "Models represent resources in your application. More often than not, they correspond to records in a data store, most commonly a database table. In this respect, you can think of models as representing entities in your application, be that a user, a news article, or an event, among others. In Laravel, models are classes that usually extend Eloquent's base Model class and are named in CamelCase (that is, NewsArticle). This will correspond to a database table with the same name, but in snake_case and plural (that is, news_articles). By default, Eloquent also expects a primary key named id, and will also look for—and automatically update—the created_at and updated_at columns. Models can also describe the relationships they have with other models. [...] However, models can also refer to data from other data sources, such as an XML file, or the response from a web service or API."
 
-		Purposes of the Model
-		"The Model in an application manages all of the dynamic data (anything that's not hardcoded and comes from a database driver) and lets other related components of the application know about the changes. [...] This "data" that the Model handles does not always have to be database related. In some implementations, the Model can also be used to handle some temporary session variables." kilicdagi & yilmaz (2014): 14
+        Purposes of the Model
+        "The Model in an application manages all of the dynamic data (anything that's not hardcoded and comes from a database driver) and lets other related components of the application know about the changes. [...] This "data" that the Model handles does not always have to be database related. In some implementations, the Model can also be used to handle some temporary session variables." kilicdagi & yilmaz (2014): 14
 
-		Basic purposes of Model in MVC
-		 To fetch the data using a specified (database) driver
-		 To validate the data
-		 To store the data
-	 	 To update the data
-	 	 To delete the data
-		 To create conditional relations
-		 To monitor the file I/O
-		 To interact with third-party web services
-		 To handle caches and sessions
+        Basic purposes of Model in MVC
+         To fetch the data using a specified (database) driver
+         To validate the data
+         To store the data
+         To update the data
+         To delete the data
+         To create conditional relations
+         To monitor the file I/O
+         To interact with third-party web services
+         To handle caches and sessions
 
-		Model instances
-		 "In your application, there will usually be more than one data structure to manage. [...] Model Instances are simple classes that mostly extend from the Model layer of the application. These instances separate the data logic for each section of your application. [...] the Controller interacts with the Model Instance to fetch data. Since Model Instances extend from the Model itself, instead of raw Model output, the Controller can customize it or add other layers (such as Validation) to the process." kilicdagi & yilmaz (2014): 15-16
+        Model instances
+         "In your application, there will usually be more than one data structure to manage. [...] Model Instances are simple classes that mostly extend from the Model layer of the application. These instances separate the data logic for each section of your application. [...] the Controller interacts with the Model Instance to fetch data. Since Model Instances extend from the Model itself, instead of raw Model output, the Controller can customize it or add other layers (such as Validation) to the process." kilicdagi & yilmaz (2014): 15-16
 
-		Fluent Query Builder
-		 "Fluent is the query builder class of Laravel 4. Fluent Query Builder handles base database query actions using PHP Data Objects in the backend, and it can be used with almost any database driver. [...] the Eloquent Model uses some classes, such as Database, ConnectionInterface, Collection, Grammar, and Processor. All of these are required to standardize database queries in the backend, cache the queries if required, and return the output as a collection object." kilicdagi & yilmaz (2014): 16-17
+        Fluent Query Builder
+         "Fluent is the query builder class of Laravel 4. Fluent Query Builder handles base database query actions using PHP Data Objects in the backend, and it can be used with almost any database driver. [...] the Eloquent Model uses some classes, such as Database, ConnectionInterface, Collection, Grammar, and Processor. All of these are required to standardize database queries in the backend, cache the queries if required, and return the output as a collection object." kilicdagi & yilmaz (2014): 16-17
 
-		Eloquent ORM
-		 "Eloquent ORM is the Active Record implementation in Laravel. It's simple, powerful, and easy to handle and manage. For each database table, you'll need a new Model Instance to benefit from Eloquent. [...] Laravel allows you to assign any table to any Eloquent Model Instance. It's not necessary, but it's a good habit to name Model Instances with the singular name of the corresponding table. This name should be a singular form of the table name it represents. If you have to use a name that does not follow this general rule, you can do so by setting a protected $table variable inside of the Model Instance. [...] This way, you can assign a table to any desired Model Instance. [...] Eloquent uses Illuminate\Database\Query\Builder , which is the Fluent Query Builder that we described earlier, and its methods are defined inside it. Thanks to this, all of the methods that can be defined in Fluent Query Builder can also be used in Eloquent ORM." kilicdagi & yilmaz (2014): 20-21
+        Eloquent ORM
+         "Eloquent ORM is the Active Record implementation in Laravel. It's simple, powerful, and easy to handle and manage. For each database table, you'll need a new Model Instance to benefit from Eloquent. [...] Laravel allows you to assign any table to any Eloquent Model Instance. It's not necessary, but it's a good habit to name Model Instances with the singular name of the corresponding table. This name should be a singular form of the table name it represents. If you have to use a name that does not follow this general rule, you can do so by setting a protected $table variable inside of the Model Instance. [...] This way, you can assign a table to any desired Model Instance. [...] Eloquent uses Illuminate\Database\Query\Builder , which is the Fluent Query Builder that we described earlier, and its methods are defined inside it. Thanks to this, all of the methods that can be defined in Fluent Query Builder can also be used in Eloquent ORM." kilicdagi & yilmaz (2014): 20-21
 
-			Relationships
-			"Eloquent ORM has other benefits in addition to Fluent Query Builder. The major benefit is Model Instance Relations, which allows Fluent Query Builder to form a relationship with other Model Instances easily." kilicdagi & yilmaz (2014):22
+            Relationships
+            "Eloquent ORM has other benefits in addition to Fluent Query Builder. The major benefit is Model Instance Relations, which allows Fluent Query Builder to form a relationship with other Model Instances easily." kilicdagi & yilmaz (2014):22
 
-				One-to-one relationships: These are used when both Models have only one element of each other.
+                One-to-one relationships: These are used when both Models have only one element of each other.
 
-				One-to-many relationships: These are used when a Model has more than one element of another.
+                One-to-many relationships: These are used when a Model has more than one element of another.
 
-				Many-to-many relationships: These are used when two Models have more than one element of each other. [...] For such instances, a pivot table is used along with Many to Many Relationships.
+                Many-to-many relationships: These are used when two Models have more than one element of each other. [...] For such instances, a pivot table is used along with Many to Many Relationships.
 
-			Mass assigment
-			"When creating a new Model Instance (when inserting or updating data), we pass a variable that is set as an array with attribute names and values. These attributes are then assigned to the Model by mass assignment. If we blindly add all of the inputs into mass assignment, this will become a serious security issue. In addition to querying methods, Eloquent ORM also helps us with mass assignment." kilicdagi & yilmaz (2014):25
+            Mass assigment
+            "When creating a new Model Instance (when inserting or updating data), we pass a variable that is set as an array with attribute names and values. These attributes are then assigned to the Model by mass assignment. If we blindly add all of the inputs into mass assignment, this will become a serious security issue. In addition to querying methods, Eloquent ORM also helps us with mass assignment." kilicdagi & yilmaz (2014):25
 
-			Soft deleting
-			"Soft deleting doesn't actually delete the row from the table; instead, it adds a key if the data is actually deleted. When a soft deletion is made, a new column called deleted_at is filled with a timestamp. To enable the soft deletes, you need to first add a timestamp column called deleted_at to your table (you could do this by adding $table->softDeletes() to your migration), then set a variable called $softDelete to true in your Model Instance. [...] Now, when you run the delete() method in this model, instead of actually deleting the column, it will add a deleted_at timestamp to it. Now, when you run the all() or get() method, the soft-deleted columns won't be listed, like they have actually been deleted." kilicdagi & yilmaz (2014):26
+            Soft deleting
+            "Soft deleting doesn't actually delete the row from the table; instead, it adds a key if the data is actually deleted. When a soft deletion is made, a new column called deleted_at is filled with a timestamp. To enable the soft deletes, you need to first add a timestamp column called deleted_at to your table (you could do this by adding $table->softDeletes() to your migration), then set a variable called $softDelete to true in your Model Instance. [...] Now, when you run the delete() method in this model, instead of actually deleting the column, it will add a deleted_at timestamp to it. Now, when you run the all() or get() method, the soft-deleted columns won't be listed, like they have actually been deleted." kilicdagi & yilmaz (2014):26
 
-				trashed()
-				"When fetching rows from a table (including soft deletes), you may want to check whether they have been soft deleted or not. This check is done by running the trashed() method on collection rows. This method will return a Boolean value. If true, it means the row has been soft deleted." kilicdagi & yilmaz (2014):27
+                trashed()
+                "When fetching rows from a table (including soft deletes), you may want to check whether they have been soft deleted or not. This check is done by running the trashed() method on collection rows. This method will return a Boolean value. If true, it means the row has been soft deleted." kilicdagi & yilmaz (2014):27
 
-				withTrashed(), onlyTrashed(), restore(), forceDelete()
-				"After such deletes, you might want to get results along with soft-deleted rows. To do this, use the withTrashed() method [...] In some cases, you may want to fetch only soft-deleted rows. To do this, use the onlyTrashed() method [...] To restore the soft-deleted rows, use the restore() method. [...] To hard delete (totally delete) the soft-deleted rows from a table, use the forceDelete() method" kilicdagi & yilmaz (2014):26-27
+                withTrashed(), onlyTrashed(), restore(), forceDelete()
+                "After such deletes, you might want to get results along with soft-deleted rows. To do this, use the withTrashed() method [...] In some cases, you may want to fetch only soft-deleted rows. To do this, use the onlyTrashed() method [...] To restore the soft-deleted rows, use the restore() method. [...] To hard delete (totally delete) the soft-deleted rows from a table, use the forceDelete() method" kilicdagi & yilmaz (2014):26-27
 
-		Model events
-		"Model events play an important part in the Laravel design pattern. Using Model events, you can call any method right after the event is fired. [...] Models hold the following methods: creating, created, updating, updated, saving, saved, deleting, deleted, restoring, and restored. Whenever a new item is being saved for the first time, the creating and created events will fire. If you are updating a current item on the Model, the updating/updated events will fire. Whether you are creating a new item or updating a current one, the saving / saved events will fire. If false is returned from the creating , updating , saving , or deleting event, the action will be canceled." kilicdagi & yilmaz (2014):29
+        Model events
+        "Model events play an important part in the Laravel design pattern. Using Model events, you can call any method right after the event is fired. [...] Models hold the following methods: creating, created, updating, updated, saving, saved, deleting, deleted, restoring, and restored. Whenever a new item is being saved for the first time, the creating and created events will fire. If you are updating a current item on the Model, the updating/updated events will fire. Whether you are creating a new item or updating a current one, the saving / saved events will fire. If false is returned from the creating , updating , saving , or deleting event, the action will be canceled." kilicdagi & yilmaz (2014):29
 
-		Model observers
-		"Model observers are quite similar to Model Events, but the approach is a little bit different. Instead of defining all events (creating, created, updating, updated, saving, saved, deleting, deleted, restoring, and restored) inside of the Model, it "abstracts" the logic of the events to a different class and "observes" it with the observe() method. [...] you can put this class anywhere in your application. You can even group all of these events in a separate folder for a better architectural pattern. Now, you need to register this event Observer class to a Model. [...] The main advantage of this approach is that you can use observers in more than one Model and register more than one observer to a Model this way." kilicdagi & yilmaz (2014):29-30
+        Model observers
+        "Model observers are quite similar to Model Events, but the approach is a little bit different. Instead of defining all events (creating, created, updating, updated, saving, saved, deleting, deleted, restoring, and restored) inside of the Model, it "abstracts" the logic of the events to a different class and "observes" it with the observe() method. [...] you can put this class anywhere in your application. You can even group all of these events in a separate folder for a better architectural pattern. Now, you need to register this event Observer class to a Model. [...] The main advantage of this approach is that you can use observers in more than one Model and register more than one observer to a Model this way." kilicdagi & yilmaz (2014):29-30
 
-		Migrations
-		 "Migrations are easy tools to version control your database. [...] There are various reasons to use migrations; some of these are as follows:
+        Migrations
+         "Migrations are easy tools to version control your database. [...] There are various reasons to use migrations; some of these are as follows:
 
-			You'll benefit from this versioning system. If you made a mistake or need to roll back to a previous state, you can do so with only a single command using migrations.
+            You'll benefit from this versioning system. If you made a mistake or need to roll back to a previous state, you can do so with only a single command using migrations.
 
-			The use of migrations for alteration will bring about flexibility. The migrations that are written will work on all supported database drivers, so you won't need to rewrite database code again and again for different drivers. Laravel will handle this in the background.
+            The use of migrations for alteration will bring about flexibility. The migrations that are written will work on all supported database drivers, so you won't need to rewrite database code again and again for different drivers. Laravel will handle this in the background.
 
-			They are quite easy to generate. Using the migration commands of the Laravel php client, which is called artisan , you can manage all of your application's migrations." kilicdagi & yilmaz (2014): 30-31
+            They are quite easy to generate. Using the migration commands of the Laravel php client, which is called artisan , you can manage all of your application's migrations." kilicdagi & yilmaz (2014): 30-31
 
-			up() and down()
-			"The up() method runs when the migration is run forward (a new migration). The down() method runs when the migration is run backward, meaning it reverses or resets (reverses and reruns) the migration. After these methods are triggered via the artisan command, it runs the method up or down, corresponding the parameters of the artisan command, and returns the status of the message." kilicdagi & yilmaz (2014): 31
+            up() and down()
+            "The up() method runs when the migration is run forward (a new migration). The down() method runs when the migration is run backward, meaning it reverses or resets (reverses and reruns) the migration. After these methods are triggered via the artisan command, it runs the method up or down, corresponding the parameters of the artisan command, and returns the status of the message." kilicdagi & yilmaz (2014): 31
 
-		Database seeders
-		"Database seeders are some simple classes that fill random data in a specified table. The seeder class has a simple method called run() to make this seeding(s). [...] When you call this class from a terminal using the artisan command, it connects to the database and fills it with the given data. After this attempt, it returns a command message to the user over the terminal about the status of the seeding." kilicdagi & yilmaz (2014): 32
+        Database seeders
+        "Database seeders are some simple classes that fill random data in a specified table. The seeder class has a simple method called run() to make this seeding(s). [...] When you call this class from a terminal using the artisan command, it connects to the database and fills it with the given data. After this attempt, it returns a command message to the user over the terminal about the status of the seeding." kilicdagi & yilmaz (2014): 32
 
-	What is a View?
-	 "The View consists of presentation logic aspects such as templates and caching and the code that involves presentation. Precisely, the View defines exactly what is presented to the user. Usually, Controllers pass data to each View to render in some format. Views collect data from users as well. This is where you're likely to find HTML markup in your MVC application." kilicdagi & yilmaz (2014): 33
+    What is a View?
+     "The View consists of presentation logic aspects such as templates and caching and the code that involves presentation. Precisely, the View defines exactly what is presented to the user. Usually, Controllers pass data to each View to render in some format. Views collect data from users as well. This is where you're likely to find HTML markup in your MVC application." kilicdagi & yilmaz (2014): 33
 
-		Communication
-		"In many MVC implementations, the View layer speaks with Controllers and Models. [...] the View communicates with both the Controller and the Model. At first sight, it seems like a very flexible approach to develop an application with OOP languages. Sharing data between all objects of MVC and accessing them in any layer of application sounds very cool. Unfortunately, the method causes some problems that depend on the project's size." kilicdagi & yilmaz (2014): 34
+        Communication
+        "In many MVC implementations, the View layer speaks with Controllers and Models. [...] the View communicates with both the Controller and the Model. At first sight, it seems like a very flexible approach to develop an application with OOP languages. Sharing data between all objects of MVC and accessing them in any layer of application sounds very cool. Unfortunately, the method causes some problems that depend on the project's size." kilicdagi & yilmaz (2014): 34
 
-		View objects
-		"In your application, there is usually more than one HTML page that contains forms, asset references, and so on; [...] We can group the objects of the View layer as shown:
-			HTML elements (div, header, section, and so on)
-			HTML form elements (input, select, and so on)
-			Asset and JavaScript references ( .css and .js )" kilicdagi & yilmaz (2014): 35
+        View objects
+        "In your application, there is usually more than one HTML page that contains forms, asset references, and so on; [...] We can group the objects of the View layer as shown:
+            HTML elements (div, header, section, and so on)
+            HTML form elements (input, select, and so on)
+            Asset and JavaScript references ( .css and .js )" kilicdagi & yilmaz (2014): 35
 
-			Problems
-			"The foremost problems are the complexity of allocating development tasks between teams/developers. If you don't set the development rules, it will lead to chaotic situations such as unmanageable spaghetti code. Also, we have to consider extra costs of development such as training the developers and comparatively long development processes, which directly affect the cost of the project." kilicdagi & yilmaz (2014): 34
+            Problems
+            "The foremost problems are the complexity of allocating development tasks between teams/developers. If you don't set the development rules, it will lead to chaotic situations such as unmanageable spaghetti code. Also, we have to consider extra costs of development such as training the developers and comparatively long development processes, which directly affect the cost of the project." kilicdagi & yilmaz (2014): 34
 
 
-			Spaghetti code
-			"When you work on a project that has dynamic data, separating the template files does not help simplify the problem because you still need programming language functions to process objects. This causes what we don't want to face—spaghetti code. When a project has inline PHP code in HTML documents, you will face problems in keeping the code simple." kilicdagi & yilmaz (2014): 36
-		
-		Laravel MVC
-		"Laravel ships a different kind of approach to MVC. According to Laravel, the View layer should only communicate with the Controller. The Model communicates with the Controller. [...] the layers of application are completely separated. Thus, you can get easily manageable code and a development team. Generally, we need at least three files in MVCs: the Model file, the Controller file, and the View file." kilicdagi & yilmaz (2014): 35
+            Spaghetti code
+            "When you work on a project that has dynamic data, separating the template files does not help simplify the problem because you still need programming language functions to process objects. This causes what we don't want to face—spaghetti code. When a project has inline PHP code in HTML documents, you will face problems in keeping the code simple." kilicdagi & yilmaz (2014): 36
+        
+        Laravel MVC
+        "Laravel ships a different kind of approach to MVC. According to Laravel, the View layer should only communicate with the Controller. The Model communicates with the Controller. [...] the layers of application are completely separated. Thus, you can get easily manageable code and a development team. Generally, we need at least three files in MVCs: the Model file, the Controller file, and the View file." kilicdagi & yilmaz (2014): 35
 
-		View in Laravel
-		"According to Laravel's MVC approach, the View handles data from the Controller. This means that the View gets the data that is usually already formatted as we need. If the View directly communicates with the Model, we have to format, validate, or filter the data at the View layer [...]" kilicdagi & yilmaz (2014): 37
+        View in Laravel
+        "According to Laravel's MVC approach, the View handles data from the Controller. This means that the View gets the data that is usually already formatted as we need. If the View directly communicates with the Model, we have to format, validate, or filter the data at the View layer [...]" kilicdagi & yilmaz (2014): 37
 
-	What is a Controller?
-	 "The Controller is a part of the Model-View-Controller (MVC) design pattern that we can simply describe as the logical layer of our application. It understands the requests that come from the other end (a user or an API request), makes calls to the corresponding methods, performs primary checks, handles the logic of the request, and then returns the data to the corresponding View or redirects the end user to another route." kilicdagi & yilmaz (2014): 41
+    What is a Controller?
+     "The Controller is a part of the Model-View-Controller (MVC) design pattern that we can simply describe as the logical layer of our application. It understands the requests that come from the other end (a user or an API request), makes calls to the corresponding methods, performs primary checks, handles the logic of the request, and then returns the data to the corresponding View or redirects the end user to another route." kilicdagi & yilmaz (2014): 41
 
-		Purpose of the controller
-		"The following are some of the major roles of the Controller in an MVC structure:
-			Holding the logic of the application and defining which event should be fired upon actions
-			
-			Being the intermediary step between the Model, View, and other components of the application
-			
-			Translating actions and responses that come from the View and Model that can be understood by them and sending them to other layers
+        Purpose of the controller
+        "The following are some of the major roles of the Controller in an MVC structure:
+            Holding the logic of the application and defining which event should be fired upon actions
+            
+            Being the intermediary step between the Model, View, and other components of the application
+            
+            Translating actions and responses that come from the View and Model that can be understood by them and sending them to other layers
 
-			Making a bridge between other components of the application and facilitating communication between them
-			
-			Making primary permission checks in construct methods before any action." kilicdagi & yilmaz (2014): 42
+            Making a bridge between other components of the application and facilitating communication between them
+            
+            Making primary permission checks in construct methods before any action." kilicdagi & yilmaz (2014): 42
 
-		Intermediary
-		"[...] for all interactions, the Controller holds the major role for the communication between the components of the application. In an MVC pattern that follows SOLID principles, without the Controller, the View cannot interact with the Model and vice versa. Although there are some derivations to this architectural pattern, like where View interacts with Model(s) directly, in a perfect SOLID design architecture, the Controller should always be the intermediate element for all interactions." kilicdagi & yilmaz (2014): 42
+        Intermediary
+        "[...] for all interactions, the Controller holds the major role for the communication between the components of the application. In an MVC pattern that follows SOLID principles, without the Controller, the View cannot interact with the Model and vice versa. Although there are some derivations to this architectural pattern, like where View interacts with Model(s) directly, in a perfect SOLID design architecture, the Controller should always be the intermediate element for all interactions." kilicdagi & yilmaz (2014): 42
 
-		Translator
-		"The Controller can also be considered as a translator. It gets input from the View in various ways and converts it to request(s) that can be understood by the Model(s), and vice versa." kilicdagi & yilmaz (2014): 43
+        Translator
+        "The Controller can also be considered as a translator. It gets input from the View in various ways and converts it to request(s) that can be understood by the Model(s), and vice versa." kilicdagi & yilmaz (2014): 43
 
-		Controllers in laravel
-		"In Laravel 4, the Controllers are simple PHP classes with their filenames and classnames ending with the suffix Controller (not forced, but highly recommended; it's a standard between developers), which extends the class BaseController , and are stored in the folder app/controllers as default. This folder structure is defined in the composer.json file's classmap key and is not forced. Thanks to the Composer, as long as you define where the Controllers are stored in your application's structure, you can put them in any folder you like. [...] The Controller holds all the action methods for actions that are defined in routes.php, in which all the actions (every link that the users interact with) are set in Laravel 4." kilicdagi & yilmaz (2014): 43
+        Controllers in laravel
+        "In Laravel 4, the Controllers are simple PHP classes with their filenames and classnames ending with the suffix Controller (not forced, but highly recommended; it's a standard between developers), which extends the class BaseController , and are stored in the folder app/controllers as default. This folder structure is defined in the composer.json file's classmap key and is not forced. Thanks to the Composer, as long as you define where the Controllers are stored in your application's structure, you can put them in any folder you like. [...] The Controller holds all the action methods for actions that are defined in routes.php, in which all the actions (every link that the users interact with) are set in Laravel 4." kilicdagi & yilmaz (2014): 43
 
-		Routes
-		"Routes are a set of rules defined in app/routes.php that tell Laravel, upon receiving an incoming request, which closure functions and/or Controller methods are being called based on the requested URL." kilicdagi & yilmaz (2014): 44
+        Routes
+        "Routes are a set of rules defined in app/routes.php that tell Laravel, upon receiving an incoming request, which closure functions and/or Controller methods are being called based on the requested URL." kilicdagi & yilmaz (2014): 44
 
-			Defining a route
-			"You can use closure functions and set the logic for the action directly from app/routes.php [...] The first parameter is the path of the action [...] The second parameter can be from various selections. It can either be an array that holds the name, filter and action, a string that defines the Controller's method for action, or a closure function which holds the logic directly. [...] The second way to set a route is to pass a second parameter as a string, define which Controller it is passed to, and the action to be called. [...] The third way is to set an array as a second parameter, which gets various keys and values. [...] The array can have more than one parameter that define the route's name, the filter that'll be applied before calling the action, and which Controller and its method(s) will be used." kilicdagi & yilmaz (2014): 44-45
+            Defining a route
+            "You can use closure functions and set the logic for the action directly from app/routes.php [...] The first parameter is the path of the action [...] The second parameter can be from various selections. It can either be an array that holds the name, filter and action, a string that defines the Controller's method for action, or a closure function which holds the logic directly. [...] The second way to set a route is to pass a second parameter as a string, define which Controller it is passed to, and the action to be called. [...] The third way is to set an array as a second parameter, which gets various keys and values. [...] The array can have more than one parameter that define the route's name, the filter that'll be applied before calling the action, and which Controller and its method(s) will be used." kilicdagi & yilmaz (2014): 44-45
 
-				Keys
-				"The before key defines the filter before calling the action, so you can set some filtering parameters before calling each action. [...] The 'as' key defines the name of the route. [...] if you set the links and redirections with names, you only need to change the path once, and all links and redirections will be magically fixed. [...] The uses key [...] holds the name of the Controller and its method(s) upon calling." kilicdagi & yilmaz (2014): 45
+                Keys
+                "The before key defines the filter before calling the action, so you can set some filtering parameters before calling each action. [...] The 'as' key defines the name of the route. [...] if you set the links and redirections with names, you only need to change the path once, and all links and redirections will be magically fixed. [...] The uses key [...] holds the name of the Controller and its method(s) upon calling." kilicdagi & yilmaz (2014): 45
 
-	Design patterns in laravel
+    Design patterns in laravel
 
-		The Builder (Manager) pattern
-		 "This design pattern aims to gain simpler, reusable objects. Its goal is to separate bigger and more convoluted object construction layers from the rest so that the separated layers can be used in different layers of the application." kilicdagi & yilmaz (2014): 53
+        The Builder (Manager) pattern
+         "This design pattern aims to gain simpler, reusable objects. Its goal is to separate bigger and more convoluted object construction layers from the rest so that the separated layers can be used in different layers of the application." kilicdagi & yilmaz (2014): 53
 
-			Why is needed?
-			"In Laravel, the AuthManager class needs to create some secure elements to reuse with selected auth storage drivers such as cookie, session, or custom elements. To achieve this, the AuthManager class needs to use storage functions such as callCustomCreator() and getDrivers() from the Manager class." kilicdagi & yilmaz (2014): 53
+            Why is needed?
+            "In Laravel, the AuthManager class needs to create some secure elements to reuse with selected auth storage drivers such as cookie, session, or custom elements. To achieve this, the AuthManager class needs to use storage functions such as callCustomCreator() and getDrivers() from the Manager class." kilicdagi & yilmaz (2014): 53
 
-				Checkout database configuration
-				"[...] the AuthManager class extends from the Manager class. Laravel ships with a basic auth mechanism. So, we need to store auth credentials in a database. First, the class checks our default database configuration with the AuthManager::setDefaultDriver() function. This function actually uses the Manager class for eloquent operations. All the database and auth options (such as cookie name) are obtained from the application's config file, except the auth model table name." kilicdagi & yilmaz (2014): 56
+                Checkout database configuration
+                "[...] the AuthManager class extends from the Manager class. Laravel ships with a basic auth mechanism. So, we need to store auth credentials in a database. First, the class checks our default database configuration with the AuthManager::setDefaultDriver() function. This function actually uses the Manager class for eloquent operations. All the database and auth options (such as cookie name) are obtained from the application's config file, except the auth model table name." kilicdagi & yilmaz (2014): 56
 
-		The Factory pattern
-		 "The Factory pattern is based on creating template method objects, which is based on defining the algorithm of a class in a subclass to implement an algorithm. [...] While creating a design, developers usually start with using the Factory pattern in their applications. Such a pattern is changed into an abstract Factory, Builder, or Prototype pattern. Unlike the Factory pattern, the Prototype pattern requires initialization once. Due to the pattern's architecture, the methods of the Factory pattern (Factory methods) are usually called inside template methods." kilicdagi & yilmaz (2014): 57
+        The Factory pattern
+         "The Factory pattern is based on creating template method objects, which is based on defining the algorithm of a class in a subclass to implement an algorithm. [...] While creating a design, developers usually start with using the Factory pattern in their applications. Such a pattern is changed into an abstract Factory, Builder, or Prototype pattern. Unlike the Factory pattern, the Prototype pattern requires initialization once. Due to the pattern's architecture, the methods of the Factory pattern (Factory methods) are usually called inside template methods." kilicdagi & yilmaz (2014): 57
 
-			Superclass & subclasses
-			"There is a subclass, which is derived from a big superclass, in this pattern structure. The main class, which we may call a superclass, only holds major and generic logic; the subclasses are derived from this superclass. As a result, there may be more than one subclass inherited from this superclass, which are aimed at different purposes." kilicdagi & yilmaz (2014): 57
+            Superclass & subclasses
+            "There is a subclass, which is derived from a big superclass, in this pattern structure. The main class, which we may call a superclass, only holds major and generic logic; the subclasses are derived from this superclass. As a result, there may be more than one subclass inherited from this superclass, which are aimed at different purposes." kilicdagi & yilmaz (2014): 57
 
-				Laravel benefits
-				"Unlike other design patterns used in Laravel, the Factory method is more customizable. For an extended subclass plus main class, you don't need to set a new class, just a new operation. This method is beneficial if the class or its components usually change, or methods need to be overridden, much like initialization." kilicdagi & yilmaz (2014): 57
+                Laravel benefits
+                "Unlike other design patterns used in Laravel, the Factory method is more customizable. For an extended subclass plus main class, you don't need to set a new class, just a new operation. This method is beneficial if the class or its components usually change, or methods need to be overridden, much like initialization." kilicdagi & yilmaz (2014): 57
 
-			Factory VS abstract factory & prototype pattern
-				"Unlike an Abstract Factory pattern, the Factory pattern can't be implemented using the Prototype pattern.
+            Factory VS abstract factory & prototype pattern
+                "Unlike an Abstract Factory pattern, the Factory pattern can't be implemented using the Prototype pattern.
 
-				Unlike the Prototype pattern, the Factory pattern doesn't need an initialization, but it needs subclassing. This is an advantage when compared with other patterns. Thanks to this approach, the Factory pattern can return an injected subclass instead of an object.
-				
-				Since the classes designed with the Factory pattern may return subclasses directly for other components, no other class or component needs to know and access the constructor methods. Due to this, it's recommended that all constructor methods and variables should be protected or private.
-				
-				As this pattern might return subclasses aimed for the exact need, it's not recommended to make a new instance of the class using this pattern using the key new." kilicdagi & yilmaz (2014): 57
+                Unlike the Prototype pattern, the Factory pattern doesn't need an initialization, but it needs subclassing. This is an advantage when compared with other patterns. Thanks to this approach, the Factory pattern can return an injected subclass instead of an object.
+                
+                Since the classes designed with the Factory pattern may return subclasses directly for other components, no other class or component needs to know and access the constructor methods. Due to this, it's recommended that all constructor methods and variables should be protected or private.
+                
+                As this pattern might return subclasses aimed for the exact need, it's not recommended to make a new instance of the class using this pattern using the key new." kilicdagi & yilmaz (2014): 57
 
-			Why is needed?
-			"Laravel ships various types of validation rules with the Validation class. When we develop applications, we usually need to validate data as we proceed. To do this, a common approach is to set the validation rules in the Model and call them from the Controller. By "rules" here, we mean both validation type and its range. Sometimes, we need to set custom rules and custom error messages to validate the data." kilicdagi & yilmaz (2014): 58
+            Why is needed?
+            "Laravel ships various types of validation rules with the Validation class. When we develop applications, we usually need to validate data as we proceed. To do this, a common approach is to set the validation rules in the Model and call them from the Controller. By "rules" here, we mean both validation type and its range. Sometimes, we need to set custom rules and custom error messages to validate the data." kilicdagi & yilmaz (2014): 58
 
-				Validation
-				"[...] the Validation Factory class is constructed with the Translator class and an IoC container. The addExtensions() function is set after this. This method includes the user-defined extensions to a Validator instance, thus allowing us to write the template (structure) to create the Validator class's extensions. The functions, which are public, allow us to implement the Translator class, and by this we mean that they allow us to write custom validation rules and messages." kilicdagi & yilmaz (2014): 61
+                Validation
+                "[...] the Validation Factory class is constructed with the Translator class and an IoC container. The addExtensions() function is set after this. This method includes the user-defined extensions to a Validator instance, thus allowing us to write the template (structure) to create the Validator class's extensions. The functions, which are public, allow us to implement the Translator class, and by this we mean that they allow us to write custom validation rules and messages." kilicdagi & yilmaz (2014): 61
 
-		The Repository pattern
-		 "The Repository pattern is usually used to create an interface between two distinct layers of an application. In our case, the developers of Laravel use this pattern to create an abstract layer between NamespaceItemResolver (the class that resolves the namespaces and understands which file is in which namespace) and Loader (a class that requires and loads another class into the application). The Loader class simply loads the given namespace's configuration group. As you might know, nearly all of the Laravel Framework code is developed using namespaces." kilicdagi & yilmaz (2014): 61
+        The Repository pattern
+         "The Repository pattern is usually used to create an interface between two distinct layers of an application. In our case, the developers of Laravel use this pattern to create an abstract layer between NamespaceItemResolver (the class that resolves the namespaces and understands which file is in which namespace) and Loader (a class that requires and loads another class into the application). The Loader class simply loads the given namespace's configuration group. As you might know, nearly all of the Laravel Framework code is developed using namespaces." kilicdagi & yilmaz (2014): 61
 
-		 	"The main reason to use a Repository pattern is to provide abstraction and flexibility." kilicdagi & yilmaz (2014): 83
+            "The main reason to use a Repository pattern is to provide abstraction and flexibility." kilicdagi & yilmaz (2014): 83
 
-			Why is needed?
-			"Let's assume you're trying to fetch a product from your database using Eloquent ORM. The method will be something like Product::find(1) in your Controller. For abstraction purposes, this approach is not ideal. If you now put a code such as this, your Controller knows you're using Eloquent, which ideally shouldn't happen in a good and abstracted structure. If you want to contain the changes done to the database scheme so that the calls outside of the class do not reference to the fields directly but through a repository, you have to dig all codes one by one." kilicdagi & yilmaz (2014): 62
+            Why is needed?
+            "Let's assume you're trying to fetch a product from your database using Eloquent ORM. The method will be something like Product::find(1) in your Controller. For abstraction purposes, this approach is not ideal. If you now put a code such as this, your Controller knows you're using Eloquent, which ideally shouldn't happen in a good and abstracted structure. If you want to contain the changes done to the database scheme so that the calls outside of the class do not reference to the fields directly but through a repository, you have to dig all codes one by one." kilicdagi & yilmaz (2014): 62
 
-				"Every time the controller uses a User::find($id) code, it first goes to the interface, and then goes to the binded repository, which is the Eloquent repository in our case. Through this, it goes to the Eloquent ORM. This way, it's impossible for the Controller to know how the data is fetched." kilicdagi & yilmaz (2014): 64
+                "Every time the controller uses a User::find($id) code, it first goes to the interface, and then goes to the binded repository, which is the Eloquent repository in our case. Through this, it goes to the Eloquent ORM. This way, it's impossible for the Controller to know how the data is fetched." kilicdagi & yilmaz (2014): 64
 
-		The Strategy pattern
-		 "In this design pattern, the logic is extracted from complex classes into easier components so that they can be replaced easily with simpler methods. [...] This pattern aims to separate each algorithm into separate components so that they can be reused or combined in other parts of the application easily. This approach also brings flexibility and makes it easy to change an algorithm system wide." kilicdagi & yilmaz (2014): 64
+        The Strategy pattern
+         "In this design pattern, the logic is extracted from complex classes into easier components so that they can be replaced easily with simpler methods. [...] This pattern aims to separate each algorithm into separate components so that they can be reused or combined in other parts of the application easily. This approach also brings flexibility and makes it easy to change an algorithm system wide." kilicdagi & yilmaz (2014): 64
 
-			LoaderInterface()
-			"When we dig the code, the LoaderInterface works will follow a certain structure. The getNamespaces() function loads all namespaces defined in the app\config\app.php file. The addNamespace() method passes the namespaces to the load() function as grouped. If the exist() function returns true, there is at least one configuration group that belongs to a given namespace. For the full structure, you can refer to the repository section of this chapter. As a result, you can easily call the method that you need through an interface of the Loader class to load various configuration options. If we download a package through the composer, or implement a package to an application that is being authored, the pattern makes all of them available and loads them from their own namespaces without any conflicts, though they are inside different namespaces or have the same filenames." kilicdagi & yilmaz (2014): 65
+            LoaderInterface()
+            "When we dig the code, the LoaderInterface works will follow a certain structure. The getNamespaces() function loads all namespaces defined in the app\config\app.php file. The addNamespace() method passes the namespaces to the load() function as grouped. If the exist() function returns true, there is at least one configuration group that belongs to a given namespace. For the full structure, you can refer to the repository section of this chapter. As a result, you can easily call the method that you need through an interface of the Loader class to load various configuration options. If we download a package through the composer, or implement a package to an application that is being authored, the pattern makes all of them available and loads them from their own namespaces without any conflicts, though they are inside different namespaces or have the same filenames." kilicdagi & yilmaz (2014): 65
 
-		The Provider pattern
-		 "The Provider pattern was formulated by Microsoft for use in the ASP.NET Starter Kits and formalized in .NET Version 2.0. It is a mid layer between an API class and the Business Logic/Data Abstraction Layer of the application. The provider is the implementation of the API separated from the API itself. This pattern, its aims, and its usage are quite similar to the Strategy pattern. This is why many developers are already discussing whether to accept this approach as a design pattern." kilicdagi & yilmaz (2014): 65
+        The Provider pattern
+         "The Provider pattern was formulated by Microsoft for use in the ASP.NET Starter Kits and formalized in .NET Version 2.0. It is a mid layer between an API class and the Business Logic/Data Abstraction Layer of the application. The provider is the implementation of the API separated from the API itself. This pattern, its aims, and its usage are quite similar to the Strategy pattern. This is why many developers are already discussing whether to accept this approach as a design pattern." kilicdagi & yilmaz (2014): 65
 
-		The Facade pattern
-		 "The Facade (façade) pattern allows a developer to unite various complicated interfaces into a single class interface. This pattern also allows you to wrap various methods from various classes into a single structure." kilicdagi & yilmaz (2014): 67
+        The Facade pattern
+         "The Facade (façade) pattern allows a developer to unite various complicated interfaces into a single class interface. This pattern also allows you to wrap various methods from various classes into a single structure." kilicdagi & yilmaz (2014): 67
 
-			Why is needed?
-			"In Laravel 4, as you may already know, almost every method looks like a static method, for example, Input::has() , Config::get() , URL::route() , View::make() , and HTML::style() . However, they are not static methods. If they were static methods, it would be quite hard to make tests for them all. They are actually the mimics of this behavior. In the background, with the help of the IoC Container (a way to inject dependencies into a class), Laravel actually calls another class(es) through a Facade class. The Facade base class benefits from PHP's own __callStatic() magic method to call the required methods, such as static methods." kilicdagi & yilmaz (2014): 67
+            Why is needed?
+            "In Laravel 4, as you may already know, almost every method looks like a static method, for example, Input::has() , Config::get() , URL::route() , View::make() , and HTML::style() . However, they are not static methods. If they were static methods, it would be quite hard to make tests for them all. They are actually the mimics of this behavior. In the background, with the help of the IoC Container (a way to inject dependencies into a class), Laravel actually calls another class(es) through a Facade class. The Facade base class benefits from PHP's own __callStatic() magic method to call the required methods, such as static methods." kilicdagi & yilmaz (2014): 67
 
-				"So each time you use a method like this, Laravel first goes to and checks the facade, it then checks what's injected through, and then the real method through the injected class is called." kilicdagi & yilmaz (2014): 69
+                "So each time you use a method like this, Laravel first goes to and checks the facade, it then checks what's injected through, and then the real method through the injected class is called." kilicdagi & yilmaz (2014): 69
 
-	Best practices
-	"As a developer, when you are working on an application, there should be a systematic order to things to prevent confusion and allow flexibility. For example, in an MVC architecture, Controller should only hold the logic and Model should only hold dataflow-related stuff. You should not write database queries in View files. This way, anyone working on the project can find what they are looking for easily and can change, fork, or improve it with greater ease. If this is not followed, the project will turn into a mess as it gets bigger and bigger." kilicdagi & yilmaz (2014): 71
+    Best practices
+    "As a developer, when you are working on an application, there should be a systematic order to things to prevent confusion and allow flexibility. For example, in an MVC architecture, Controller should only hold the logic and Model should only hold dataflow-related stuff. You should not write database queries in View files. This way, anyone working on the project can find what they are looking for easily and can change, fork, or improve it with greater ease. If this is not followed, the project will turn into a mess as it gets bigger and bigger." kilicdagi & yilmaz (2014): 71
 
-		No-repeating yourself
-		"A basic good practice would be to avoid repeating yourself. If you're using a code snippet or a condition a number of times, it'd be better for you to prepare a method or a scope for that action. This way, you wouldn't have to repeat yourself over and over." kilicdagi & yilmaz (2014): 71
+        No-repeating yourself
+        "A basic good practice would be to avoid repeating yourself. If you're using a code snippet or a condition a number of times, it'd be better for you to prepare a method or a scope for that action. This way, you wouldn't have to repeat yourself over and over." kilicdagi & yilmaz (2014): 71
 
-			Query scopes
-			"Query scopes are single functions that help you reuse the logic in Models."
+            Query scopes
+            "Query scopes are single functions that help you reuse the logic in Models."

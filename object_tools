@@ -1,0 +1,94 @@
+PHP and packages
+"A package is a set of related classes, usually grouped togehter in come way. Packages can be used to separate parts of a system from one another. Some programming languages formally recognize packages and provide them with distinct namespaces- PHPhas no native concept of a package, but as of PHP 5.3, it introduced namespaces." zandstra (2016): 99
+
+    "Until PHP 5.3, developers were forced to name their files in a global context. In other words, if you named a class [...] it would become instantly avaliable across your system. This caused two major problems. First, and most damaging, was the possibility of naming collisions. [...]"
+
+    Namespaces
+    "PHP 5.3 introduced namespaces. In essence, a namespace is a bucket in which you can place your classes, functions, and variables. Within a namespace you can access these items without qualification. From outside, you must either import the namespace, or referece it, in order to access the items it contains." zandstra (2016): 101
+
+    class_exists()
+    "The class_exists() function accepts a string representing the class to check for and returns a Boolean true value if the class exist and flase otherwise. [...] Nevertheless, class_exists() does allow you to check that the class exists before you work with it." zandstra (2016): 113
+
+    get_class()
+    "[...] you can constrain the object types of method arguments using class type hinting. Even with this tool, you can't always be certain of an object's type. [...] you can checl the class of an object with the get_class() function. This accepts any object as an argument and returns its class name as a string." zandstra (2016): 113-114
+
+    instanceof
+    "The instanceof operator works with two operands, the object to test on the left of the keyword and the class or interface nameon the right. It resolves to true if the objects is an instance of the given type." zandstra (2016): 114
+
+Accessor methods
+"Even when client programmers need to work with values held by your class, it is often a good idea to deny direct access to properties, providing methods instead that relay the needed values. Such methods are known as accessors or getter and setters. [...] You can also use a setter method to enforce a property type. Type declarations can be used to constrain method arguments, but a property can contain data of any type." zandstra (2016): 42
+
+Identity map
+"An Identity Map component generates and manages a new object only if an object with the same distinguishing characteristics is not already under management. If the target object already exists,it is returned. A factory method like create() would make a good client for a component of this sort." zandstra (2016): 66
+
+Testing for errors
+"When you return an error value to calling code, there is no guarantee that the client will be any better equipped than your method to decide how to handle the error. If this is the case, then the problem begins all over again. The client method will have to determine how to respond to the error condition, maybe even implementing a different error-reporting strategy." zandstra (2016): 70
+
+Exceptions
+"PHP 5 introduced exceptions to PHP, a radically different way of handling error conditions. Different for PHP, that is. [...] An exception is a special object instantiated from the built-in Exception class (or from a derived class). Objects of type Exception are designed to hold and report error information. The Exception class constructor accepts two optional arguments, a message string and an error code. The class provide some useful methods for analyzing error conditions. [...] is fantastically useful for providing error notification and debugging information. In fact, it is almost identical to the PEAR_Error class." zandstra (2016): 70
+
+    Exception class's public methods
+    getMessage()            Get the message string that was passed to the constructor
+    getCode()               Get the code integer that was passed to the constructor
+    getFile()               Get the file in which the exception was generated
+    getLine()               Get the line number at which the exception was generated
+    getPrevious()           Get a nested Exception object
+    getTrace()              Get a multidimensional array tracing the method calls that led to the exception, including method, class, file, and argument data
+    getTraceAsString()      Get a string version of the data returned by getTrace()
+    _toString()             Called automatically when the Exception object is used in string context. Returns a string describing the exception details.
+
+    Throwing an exception
+    "The throw keyword is used in conjunction with an Exception object. It halts execution of the current method and passes responsibility for handling the error back to the calling code." zandstra (2016): 71
+
+        "When you invoke a method that may throw an exception, you can wrap your call in a try clause. A try clause is made up of the try keyword followed by braces. The try clause must be followed by at least one catch clause in which you can handle any error. [...] the catch clause superficially resembles a method declaration. When an exception is trown, the cathc clause in the invoking scope is called. The Exception object is automatically passed in as the argument variable. Just as execution is halted within the throwing method when an exception is thrown, so it is within the try clause -control passes directly to the catch clause." zandstra (2016): 72
+
+    Subclassing exception
+    "You can create classes that extend the Exception class as you would with any user-defined class. There are two reasons why wou might want to do this. First, you can extend the class functionality. Second, the fact that a derived class defines a new class type can aid error handling in itself. You can, in fact, define as many catch clauses as you need for a try statement. The particular catch clause invoked will depend on the type of the thrown exception and the class type hint in theargument list." zandstra (2016): 72
+
+Final classes and methods
+"Inheritance allows for enormous fexibility within a class hierarchy. You can override a class or method so that a call in a client method will achieve radically different effects, according to which class inheritance it has been passed. Sometimes, thoughm a class or method should remain fixed and unchainging. If you have achieved the definitive functionality for your class or method, and you feel that overriding it can only damage the ultimate perfection of your work, you may need the final keyword. final puts a stop to inheritance. A final class cannot be subclassed. Less drastically, a final method cannot be overriden." zandstra (2016): 77
+
+    Use final with care
+    "Good object-oriented code tends to emphasize the well-defined interface. Behind the interface, thourh, implementations will often vary. Different classes or combinations of classes conform to common interfaces but behave differently in different circumstances. By declaring a class or method final, you limit this flexibility. There will be times when thi is desirable [...] However, you should think carefully before declaring something final. [...] You could always change your mind later on, of course, but this might not be so easy if you are distributing a library for others to use."
+
+Internal error class
+"Back when exceptions were first introduce, the world of trying and catching appliedprimarily to code written in PHP and not the core engine. Internally generated errors maintained their own logic. This could get messy if you wanted to manage core errors in the same way as code-generated exceptions. PHP 7 has made a start on addressing this issue with the Error class. This implements Throwable - the same built-in interface that the Exception class implements, and therefore it can be treated in the same way. [...] Error is subclassed for individual error types." zandstra (2016):78
+
+    The built-in error classes introduced by PHP 7
+    ArithmethicError       Thrown for math-related errors - particularly those relatedto bitwise arithmetic
+    AssertError             Thrown when the assert() language construct (used in debugging) fails
+    DivisionByZeroError     Thrown when an attempt is made to divide a number by zero
+    ParseError              Thrown when a runtime attempt to parse PHP (using eval(), for example) fails
+    TypeError               Thrown when an argument of the wrong type is passed to a method, a method returns a value of the wrong type, or an incorrect number of arguments are passed to a method
+
+Interceptors
+"PHP provides built-in interceptor methods that can intercept messages sent to undefined methods and properties. This is also known as overloading, but as that term means something quite different in Java and C++ [...] PHPsupports three built-in interceptor methods." zandstra (2016): 79
+
+    The interceptor methods
+    __get($property)                     Invoked when an undefined property is accessed
+    __set($property, $value)             Invoked when a value is assigned to an undefined property
+    __isset($property)                   Invoked when isset() is called on an undefined property
+    __unset($property)                   Invoked when unset() is called on an undefined property
+    __call($method, $arg_array)          Invoked when an undefined non-static method is called
+    __callStatic($method, $arg_array)    Invoked when an undefined static method  is called
+
+    __get()
+    "The __get() and __set() methods are designed for working with properties that have not been declared in a class (or its parents). __get() is invoked when client code attempts to read an undeclared property. It is called automatically with a single string argument containing the name of theproperty that the client is attempting to access. Whatever you return from the __get() method will be sent back to the client as if the target property exists with that value." zandstra (2016): 80
+
+    __set()
+    "The __set() method is invoked when client code attempts to assign to an undefined property. It is passed two arguments: the name of the property and the value the client is attempting to set. You can then decide how to work with these arguments." zandstra (2016): 81
+
+    __isset()
+    "The _isset() method works in a similar way to __get(). It is invoked after the client calls isset() on an undefined property." zandstra (2016): 81
+
+    __unset()
+    "_unset() mirrors __set(). When __unset() is called on an undefined property, __unset() is invoked with the name of the property. You can then do what you like with the information." zandstra (2016): 82
+
+    __call()
+    "The _call() method is probably the most useful of all the interceptor methods. It is invoked when an undefined method is called by client code. __call() is invoked with the method name and an array holding all arguments passed by the client. Any value that you return from the __call() methodis returned to the client as if it were returned by the method invoked." zandstra (2016): 82
+
+        delegations
+        "The __call() methid can be useful for delegation. Delegation is the mechanism by which one object passes method invocations on to a second. It is similar to inheritance, in that a child class passes on a method call to its parent implementation. With inheritance the relationship between child and parent is fixed, so the ability to switch the receiving object at runtime means that delegation can be more flexible than inheritance." zandstra (2016): 83
+
+
+
