@@ -1,0 +1,5 @@
+mukkamala - 2018 - hands-on data structures and algorithms with javascript
+
+Stacks
+"Stacks are one if the most common data strucures that one can think of. They are ubiquitous in bithpersonal and professional setups. Stacks are a last in first out (LIFO) data structure, that provides some common operations, such as push, pop, peek, clear, and size. In most object-oriented programming (OOP) languages, you would find the stack data structure built-in. JavaScript, on the other hand, was originally designed for the web; it does not have stacks baked into it, yet.
+"

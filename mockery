@@ -1,0 +1,7 @@
+Mockery
+
+"Mockery is a simple yet flexible PHP mock object framwork for use in unit testing with PHPUnit, PHPSpec or any other testing framewrk. Its core goal is to offer a test double framework with a succint API capable of clearly defining all possible object operations and interactions using a human readable DomainSpecific LAnguage (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending." http://docs.mockery.io/en/latest/
+
+Mock Objects
+"In unit tests, mock objects simulate the behaviour of real objects. They are commonly utlilised to offer test isolation, to stand in for objects whichdo not yet exist, or to allow for the exploratory design of class APIs without requiring actual implementation up front. The benefits of a mock object framework are to allow for the flexible generation of such mock objects (and stubs). They allow the setting of expected methid calls and return values using a flexible API which is capable of capturing every possible real object behaviour in way that is stated as close as possible to a natural language description." http://docs.mockery.io/en/latest/
+

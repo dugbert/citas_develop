@@ -4,59 +4,168 @@ Testing
 
 "Laravel's testing setup even has a sample application test that can run successfully the moment you create a new app. That means you don't have to spend any time configuing your testing enviroment, and that's one less barrier to writing your tests." stauffer (2016): 441
 
-	Anatomy of a test
-	"Your application tests will reside in tests/. In this directory, you will find a base test case inside TestCase.php, which is responsible for bootstrapping the application in the testing enviroment. This class extends Laravel's main TestCase class, which inturn extends the PHPUnit_Framework_TestCase class, along with many helpful testing methods." bean (2015): 66
+PHPUnit
+"PHPUnit us a unit testing framework, created by Sebastian Bergmann. Similar to other frameworks, PHPUnit uses assertions to verify that the code under test (or SUT, for system under test) behaves as expected." way (2013): 22
 
-		"In every test. we generally perform the following three distinct tasks:
-		1. We arrange or initialize some data.
-		2. We execute a function to act on this data.
-		3. We assert or verify that the output matches what we expected." bean (2015): 66
+    Signs of untestable code
+        New Operators
+        "The principles of unit testing dictate that we should test in isolation [...] in short, your goal should be to test the current class, and nothing else. [...] Once you begin littering the new operator throughout your classes, you break this rule. Remember: testing in isolation requires that the class, itself, does not instantiate other objects." way (2013): 11
 
-		Assertion
-		"Assertions are the fundamental components of unit tests. Simply put, they are used to compare the expected output of a function with its actual output." bean (2015): 68
+            Exception
+            "The only time when it's acceptable to instantiate a class inside of another class is wwhen that object is what we refer to as a value-object, or a simple container with getters and setters that doesn't do any real work." way (2013): 12
 
-	Unit tests
-	"Unit tests target small, relatively isolated units -a cass or method, usually." stauffer (2016): 441
+        Control-freak constructors
+        "A constructor's only responsibility should be to assign dependencies [...] If you're doing anything beyond that, consider refactoring. [...] The reason why we do this is because, when testing, you'll repeatedly follow the same process:
+            1. Arrange
+            2. Act
+            3. Assert
+        If a class' constructor is littered with its own actions and method calls, each test you write must account for these actions. [...] Keepk it simple: limit your constructors to dependency assigments." way (2013): 12-13
 
-		A possitive effect of using testing is that it forces you to split your code into manageable dependencies, so that you can test them inisolation. The testing of these individual classes and method is referred to as unit testing. Since it relies on the PHPUnit testing framework, which already provides a large number of tools to set up test suites, Laravel does not need to provide any additional helpers for this type of testing. bean (2015): 68
+        Ways to spot a class with too many reponsibilities
+        "1. The simplest wayto determine if your class is doing too much is to speak aloud what the class does. If you find yourself using the word, and, too often, then, chances are, refactoring is in order.
+        2. Train yourself to immediatly analyze the number of lines in each method. Ideally, a methids should be limited to just a few (one is preferable, even). If, on the other hand, every method is dozens of lines long, this a clear indication that too much is going on.
+        3.If you're having trouble choosing a name for a class, this, too, just might be a sign that you've gone off track, and need to restructure."
+        4. If all else fails, show the class to one of your developer friends. If they don't immediatly realize the general purpose of the class, then make some changes." way (2013): 13-14
 
-	Integration tests
-	"Integration tests test the way individual units work together and pass messages." stauffer (2016): 441
+        Too many paths
+        "Polymorphism refers to the act of breaking a complex class into sub-classes which share a common interface, but can have a unique functionality. The easiest possible way to determine if a class could benefit from polymorphism is to hunt down switch statements (or too many repeated conditionals)." way (2013): 15
 
-	Application tests
-	"Often called acceptance or functional tests, application tests test the entire behavior of the application, usually an outer boundary by employing something like a document object model (DOM) crawler -which is exactly what Laravel's application test suite offers." stauffer (2016): 441
+            "Polymorphism allows you to split complex classes into small chunks, often referred to assub-classes. Remember: the smaller the class the easier it is to test." way (2013): 16
 
-	Testing enviroment
-	"Any time Laravel application is running, it has a current "enviroment" name that represents the enviroment it'srunning in. This name may be ser to local, staging, production, or anything else you want. You can retrive this by running app()->enviroment(), or you can run something like if(app()->enviroment('local')) to test wether the current enviroment matches the passed name." stauffer (2016): 445
+        Too many dependencies
+        "[...] dependencies should be inhjected through the class' constructor [...] if you find that a particular class requires four or more dependencies, this is, more often than not, a tell-tale sign that your class is asking for too much. [...] A basic principle of the object-oriented programming is that there's a correlation between the number of paramenters a class or method accepts, and the degree to which it is flexible (and, in effect testable). Each time that you remove a dependency or parameter, you're improving the code. If one of your classes lists too many dependencies, consider refactoring." way (2013): 17
 
-	"When you run tests, Laravel automatically sets the enviroment to testing. This means tou can test for if(app()_>enviroment('testing')) to enable or disable certain behaviors in the testing enviroment. Additionally, Laravel doesn't load the normal enviroment variables from .env for testing. If you want to ser any enviroment variables for your tests edit phpunit.xml and, in the <php> section, add a new <env> for each enviroment variable you want to pass in." stauffer (2016): 445
+        Too many bugs
+        "If you notice that [bugs] crop up in a aprticular class too frequently, then the code just might be screaming for refactoring and sub-classes. Think about it: the reason for the bug's existence is because you couldn't understand the code well enough the first time around [...] Complicated code often signals unestable code. The coupling  may simply be too strong, opening the way for sneaky bugs." way (2013): 17
 
-		withoutMiddleware trait
-		"If you import Illuminate\Foundation\Testinf\WithoutMiddleware into yout test class, it will disable all middleware for any test in that class. This means you won't have to worry about the authentication middleware, or CSRF protections, or anything else might be useful in the real application but distracting in a test." stauffer (2016): 447
+            Coupling
+            "Coupling refers to the degree in which two components in your system are dependent upon one another. If removing one affects the other, then you've unfortunately written tighly coupled code that isn't easy to change." way (2013): 17
 
-		databaseMigrations trait
-		"Laravel provides two tools out of the box to keep your database in the right state between tests:the DatabaseMigrations trait and the DatabaseTransactions trait." stauffer (2016): 448
+            "When presented with such bugs, begin asking yourself how you can split the logic up into smaller (easier to test) classes. In addition to impoved testability, one perk to this pattern is that it allows for significantly more readable production code." way (2013): 17
 
-			"If you import the DatabaseMigrations trair, itwill run your entire set of database migrations up before each test and down after each test. Laravel makes this happen by running php artisan migrate in the setup()methid before every test runs and php artisan migrate:rollback in the tearDown()methid after each test finishes." stauffer (2016): 448
+    Anatomy of a test
+    "Your application tests will reside in tests/. In this directory, you will find a base test case inside TestCase.php, which is responsible for bootstrapping the application in the testing enviroment. This class extends Laravel's main TestCase class, which inturn extends the PHPUnit_Framework_TestCase class, along with many helpful testing methods." bean (2015): 66
 
-			"DatabaseTransactions, on the other hand, expects your database to be properly migrated before your test start. Then, it wraps every test in a database transaction, which it rolls back at the end of each test. This means that, at the end of each test, your database will be returned to the exact same state it was in prior to the test." stauffer (2016): 449
+        "In every test, we generally perform the following three distinct tasks:
+        1. We arrange or initialize some data.
+        2. We execute a function to act on this data.
+        3. We assert or verify that the output matches what we expected." bean (2015): 66
 
-		TestCase
-		"Any application tests should extend the TestCase class (tests/TestCase.php) that's included with Laravel by default. Your application's TestCase class will extend the abstract Illuminate\Foundation\Testing\TestCase class, [...] The first thing the two TestCase classes (yours and its abstract parent) do is handle booting the Illuminate application instance for you, so you have a fully bootstrapped application avaliable. They are also "refresh" the application between each test, which means they're not entirely-creating the application between tests, but rather making sure you don't have any daya lingering." stauffer (2016): 451
+        "Preparing a unit test can be reduced to three simple actions.
+            1. Arrange: Set thestage, instantiate objects, pass in mocks.
+            2. Act: Execute the thing that you wish to test.
+            3. Assert: Compare your expected output to what was returned." way (2013): 51
 
-			parent TestCase
-			"The parent TestCase also sets up a system of hooks that allow callbacks to be run before and after the application is created, and imports a series of traits that provide you with methods forinteracting with every aspect of your application. These traits include InteractsWithContainer, MakesHttpRequests, InteractsWithConsole, and more, and they bring in a broad variety of custom assertions and testinf methods." stauffer (2016): 451
+        Assertion
+        "Assertions are the fundamental components of unit tests. Simply put, they are used to compare the expected output of a function with its actual output." bean (2015): 68
 
-				"[...] your application tests have access to a fully bootstrapped application instance, application-test-minded custom assertions, and a DOM crawler, with a series of simple and powerful wrappers around each to make them easy to use." stauffer (2016): 451
+    Unit tests
+    "Unit tests target small, relatively isolated units -a cass or method, usually." stauffer (2016): 441
 
-			"Visiting" routes
-			"The most complex of Laravel's application testing functionality isalso the simplest -and most powerfull -to use. Using these methods, your tests can interact with ("visit") pages in your application like never before. [...] Visiting a route is at the core of Laravel's application testing. When you call $this.>visit('dashboard'), you're mimicking the action the framework takes when a web request comes in for that same route. The application will create a request object for that request, handle it like normal, and store the response object (an instance of Illuminate\Http\Response) in $this->response." stauffer (2016): 454
+    "Unit testing refers to the smallest testable piece of an application. If I feed a method this set ofdata, then, in return, I expect that. Nothing beyond that class should be touched. Not the database, not a single dependency. This is referred to as testing in isolation." way (2013): 51
 
-			"This is the same response object that would normally be returned and displayed to the browser, but it's just catched for Laravel's application testing assertions to check against (or for your code, if you want to interact with the response)." stauffer (2016): 454
+    "Think of unit testing as going over your classes and methods with a fine-tooth comb, ensuring that eachpiece of code works exactly like you expect. Unit tests should be executed in isolation, to make the process of debugging as easy as possible. 80% of your tests will be in this style. [...] when you think of unit testing, think one object, and one object only. If a test fails, you know exactly where to look." way (2013): 18
 
-		Mocking
-		"Mocks (and their brethren, spies, and stubs and dummies and fakes and who knows what else) are common tools in testing. [...] Essentially, mocks and other similar toools make it possible to create an object that in some way mimics a real class, but for testing purposes isn't the real class. Sometimes this is done because the real class is too difficult to instantiate just to inject it into a test, or maybe the real class communicates with an external service." stauffer (2016): 469
+        A possitive effect of using testing is that it forces you to split your code into manageable dependencies, so that you can test them inisolation. The testing of these individual classes and method is referred to as unit testing. Since it relies on the PHPUnit testing framework, which already provides a large number of tools to set up test suites, Laravel does not need to provide any additional helpers for this type of testing. bean (2015): 68
 
-			"In Laravel, mocks are created using the Mockery library, and they help define the methods that should be called during the test, the argument they should receive, and their return values aswell. Laravel heavily relies on mocks in its own tests. [...] As opposed to stubs,mocks allow us to define which methods need to be called, how many times they should be called, which parameters they should receive, and which parameters they should return. If any of these preconditions are not met, the test will fail. To ensure that we do not have an instance of a mocked object that persists and interferes with future tests, Mockery provides a close() method that needs to be executed after each test. Thanks to this mock, the class can be tested in complete isolation." bean (2015): 70
+        Testing in isolation
+        "A core fundamental to successful unit testing is to test in isolation. This means that all outside dependencies which aren't directly related tothe thing that you're attempting to test should be stubbed or mocked. For example, when unit testing a model, you shouldn't, in the process, be hitting the database. You shouldn't hit a web service. You shouldn't even reference one of your other classes. Instead, stick with one object at a time. You can flex multiple parts of the system in the future, when tou write integration tests." way (2013): 52
 
-		"Laravel can work with any modern PHP testing framework, but it brings in a lot of framework-specific power if you use PHPUnit and if your tests extend Laravel's TestCase. [...] The TestCase class brings in a group pf methods that make it easy to customize how your test interact with your datavase, disable the effects of events, and make assertions against framework-level structure like jobs and facades." stauffer (2016): 473
+        No Order-dependence
+        "Another rule of unit testing is that your tests should never be dependent upon previous tests. For example, beginning developers will often set state in one test, and then continue to depend upon that same state fo assertions in future tests. Don't do this, this is an anti-pattern. What you want to strive for is tests which can easily be executed independently from one another without causing failure. An easy way to detect this is if a particular test passes when the entire suite is executed, but fails whentriggered by itself. In these situations, the failure is due to the test's dependency on some previously set state. Not good." way (2013): 53
+
+        Test-Driven Development
+        "Test-Driven Development is an agile software pattern in which a develper prepares a test before a single line of production code is written. Popularized by KEn Beck, in addition to ensuring that your codeworks as expected, this methodology forces you to think before coding. [...] TDD declares three core rules:
+            1. Write a Failing Test: Youmay not write a single line of production code unless a failing test is present.
+            2. Make it Pass: Once a test has been defined, you may only write the minimum amount of coide to make the test pass -even if this means faking a method's return value. Approach each failing test from the perspective of, "what is the simpliest way to make this test pass?"
+            3. Refactor: Only when the tessts have apssed may you refactor code." way (2013): 53
+
+        
+
+    Integration tests
+    "Integration tests test the way individual units work together and pass messages." stauffer (2016): 441
+
+        "If a unit test verifies that code works correctly in isolation, then an integration test will fall on the other end of the spectrum. These tests will flex multiple parts of your application, and typically won't rely on mocks or stubs. As such, be sure to create a special test database." way (2013): 19
+
+    Application tests
+    "Often called acceptance or functional tests, application tests test the entire behavior of the application, usually an outer boundary by employing something like a document object model (DOM) crawler -which is exactly what Laravel's application test suite offers." stauffer (2016): 441
+
+        "[...] think of functional testing as way for you and your team to ensure that the code does what you expect. While unit tests verify each unit of a class, functional testing is a bit broader and can trigger multiple pieces of your application. Most frequently, these tests will be triggered from the outside in, which is why they're also commonly referred to as System Tests. One important note is that functional tests typically won't require a server to be running." way (2013):19
+
+    Acceptance tests
+    "Your software can pass all unit, functional, and integration tests, but still fail the acceptance tests, if the client or customer realizes that the feature doesn't work as they expected. [...] If functional tests meet a developer's assumptions and requirements, acceptance tests are intended to verify the client's expectations." way (2013): 19
+
+    Testing enviroment
+    "Any time Laravel application is running, it has a current "enviroment" name that represents the enviroment it'srunning in. This name may be ser to local, staging, production, or anything else you want. You can retrive this by running app()->enviroment(), or you can run something like if(app()->enviroment('local')) to test wether the current enviroment matches the passed name." stauffer (2016): 445
+
+    "When you run tests, Laravel automatically sets the enviroment to testing. This means tou can test for if(app()_>enviroment('testing')) to enable or disable certain behaviors in the testing enviroment. Additionally, Laravel doesn't load the normal enviroment variables from .env for testing. If you want to ser any enviroment variables for your tests edit phpunit.xml and, in the <php> section, add a new <env> for each enviroment variable you want to pass in." stauffer (2016): 445
+
+        withoutMiddleware trait
+        "If you import Illuminate\Foundation\Testinf\WithoutMiddleware into yout test class, it will disable all middleware for any test in that class. This means you won't have to worry about the authentication middleware, or CSRF protections, or anything else might be useful in the real application but distracting in a test." stauffer (2016): 447
+
+        databaseMigrations trait
+        "Laravel provides two tools out of the box to keep your database in the right state between tests:the DatabaseMigrations trait and the DatabaseTransactions trait." stauffer (2016): 448
+
+            "If you import the DatabaseMigrations trair, itwill run your entire set of database migrations up before each test and down after each test. Laravel makes this happen by running php artisan migrate in the setup()methid before every test runs and php artisan migrate:rollback in the tearDown()methid after each test finishes." stauffer (2016): 448
+
+            "DatabaseTransactions, on the other hand, expects your database to be properly migrated before your test start. Then, it wraps every test in a database transaction, which it rolls back at the end of each test. This means that, at the end of each test, your database will be returned to the exact same state it was in prior to the test." stauffer (2016): 449
+
+        TestCase
+        "Any application tests should extend the TestCase class (tests/TestCase.php) that's included with Laravel by default. Your application's TestCase class will extend the abstract Illuminate\Foundation\Testing\TestCase class, [...] The first thing the two TestCase classes (yours and its abstract parent) do is handle booting the Illuminate application instance for you, so you have a fully bootstrapped application avaliable. They are also "refresh" the application between each test, which means they're not entirely-creating the application between tests, but rather making sure you don't have any daya lingering." stauffer (2016): 451
+
+            parent TestCase
+            "The parent TestCase also sets up a system of hooks that allow callbacks to be run before and after the application is created, and imports a series of traits that provide you with methods forinteracting with every aspect of your application. These traits include InteractsWithContainer, MakesHttpRequests, InteractsWithConsole, and more, and they bring in a broad variety of custom assertions and testinf methods." stauffer (2016): 451
+
+                "[...] your application tests have access to a fully bootstrapped application instance, application-test-minded custom assertions, and a DOM crawler, with a series of simple and powerful wrappers around each to make them easy to use." stauffer (2016): 451
+
+            "Visiting" routes
+            "The most complex of Laravel's application testing functionality isalso the simplest -and most powerfull -to use. Using these methods, your tests can interact with ("visit") pages in your application like never before. [...] Visiting a route is at the core of Laravel's application testing. When you call $this.>visit('dashboard'), you're mimicking the action the framework takes when a web request comes in for that same route. The application will create a request object for that request, handle it like normal, and store the response object (an instance of Illuminate\Http\Response) in $this->response." stauffer (2016): 454
+
+            "This is the same response object that would normally be returned and displayed to the browser, but it's just catched for Laravel's application testing assertions to check against (or for your code, if you want to interact with the response)." stauffer (2016): 454
+
+        Mocking
+        "A mock object is nothing more than a bit of test jargon that referes to simulating the behavior of real objects. In simpler terms, often, when testing, you won't want to execute a particular method. Instead, you simply need to ensuee that it was, in fact, called." way (2013): 109
+
+        "Mocks (and their brethren, spies, and stubs and dummies and fakes and who knows what else) are common tools in testing. [...] Essentially, mocks and other similar tools make it possible to create an object that in some way mimics a real class, but for testing purposes isn't the real class. Sometimes this is done because the real class is too difficult to instantiate just to inject it into a test, or maybe the real class communicates with an external service." stauffer (2016): 469
+
+            "In Laravel, mocks are created using the Mockery library, and they help define the methods that should be called during the test, the argument they should receive, and their return values as well. Laravel heavily relies on mocks in its own tests. [...] As opposed to stubs, mocks allow us to define which methods need to be called, how many times they should be called, which parameters they should receive, and which parameters they should return. If any of these preconditions are not met, the test will fail. To ensure that we do not have an instance of a mocked object that persists and interferes with future tests, Mockery provides a close() method that needs to be executed after each test. Thanks to this mock, the class can be tested in complete isolation." bean (2015): 70
+
+        "Laravel can work with any modern PHP testing framework, but it brings in a lot of framework-specific power if you use PHPUnit and if your tests extend Laravel's TestCase. [...] The TestCase class brings in a group pf methods that make it easy to customize how your test interact with your datavase, disable the effects of events, and make assertions against framework-level structure like jobs and facades." stauffer (2016): 473
+
+    assert Commands
+        ->assertArrayHasKey            (Key, Array);
+
+        ->assertContains               (Needle, Haystack, Optional Message);
+
+        ->assertEquals                 (Expected, Actual, Optional Message);
+
+        ->assertHasOldInput            ();
+ 
+        ->assertInternalType           (Expected, Actual, Message);
+
+        ->assertInstanceOf             (Expected, Actual, Message);
+
+        ->assertResponseOk             ();
+
+        ->assertResponseStatus         (Code);
+
+        ->assertRedirectedTo           (Uri, Data);
+
+        ->assertRedirectedToAction     (Name, Parameters, Data);
+
+        ->assertRedirectedToRoute      (Name, Parameters, Data);
+
+        ->assertSame                   (Expected, Actual, Optional Message);
+
+        ->assertSessionHas             (Key, Value);
+
+        ->assertSessionHasAll          (Array bidings);
+
+        ->assertSessionHasErrors       (Bindings, Format);
+
+        ->assertTrue                   (Actual, Optional Message);
+
+        ->assertViewHas                (Array bindings);
+
+        ->assertViewMissing            (Key);
+

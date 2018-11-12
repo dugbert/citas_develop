@@ -2,6 +2,22 @@ Git Commands
 
 git add : A multipurpose command - you use it to begin tracking new files, to stage files, and to do other things like marking merge-conflicted files as resolved. Takes a path name for either a file or a directory; if it's a directory, the command adds all the files in that directory recursively.
 
+git branch : List all the branches in your repository.
+
+    git branch <branch> : Create a new branch called <branch>.
+
+    git branch -a : List all remote branches.
+
+    git branch -d <branch> : Delete the specified branch as long as it doesn't have unmerged files.
+
+    git branch -D <branch> : Force to delete a specified branch.
+
+    git branch -m <branch> : Rename the current branch to <branch>.
+
+git checkout : Change working remote branch
+
+    git checkout -b : Create a new branch on your local machine. [git brach + git checkout]
+
 git clone : Gets a copy of an existing Git repository. Git receives a copy of nearly all data that the server has. Every version of every file for the history of the project is pulled down when you run git clone. [if your server disk get corrupted, you can use any of the clones on any client to set the server back to the state it was in when it was cloned] You clone a repository with git clone [url].
 
 git commit : Launches your editor of choice. (set by your shell's EDITOR enviroment variable - you can configure it using the 'git config --global core.editor' command) The default commit message contains the latest output of the git status command commented out and one empty line on top. When you exit the editor, Git creates your commit with that commit message. Then your commit is created with your commit message stripped out of the default comments and diff.
@@ -48,6 +64,8 @@ git log : Lists the commits [with its SHA-1 checksum, its author's name and emai
     git log --stat : Prints below each commit entry a list of modified files, how many files were changed, and how many lines in those files were added and removed. It also puts a summary of the information at the end.
 
 git mv : Renames a file, unstage the file with the oldname and commit the change, then stage the file with the new name.
+
+git remote add : add a new remote for your branch.
 
 git rm : Stages a file removal. Removes the file from your staging area and working directory and then commit. You can pass it files, directories, and file-glob patterns.
 

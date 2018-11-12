@@ -21,7 +21,7 @@ Classes
             "Setting properties to private can be an overzealous strategy. A private property cannot be accessed by a child class." zandstra (2016): 42
 
             Protected
-            "Remember that a protected property or method cannot be accessed from outside the class hierarchy in which it was declared. It can only be accessed from within its originating class or from within childrenof the originating class." zandstra (2016): 42
+            "Remember that a protected property or method cannot be accessed from outside the class hierarchy in which it was declared. It can only be accessed from within its originating class or from within children of the originating class." zandstra (2016): 42
 
             Side on privacy
             "As a general rule, err on the side of privacy. Make properties private or protected at first and relax your restriction onlyas needed. Many (if not most) methods in your classes will be public, but one again, if in doubt, lock it down. A method that provides local functionality for tother methods in yur class has no relevance to your class's users. Make it private or protected." zandstra (2016): 42
@@ -30,7 +30,7 @@ Classes
         "Classes can define special variables called properties. A property, also known as a member variable, holds data that can vary from object to object. [...] A property in a class looks similar to a standard variable except that, in declaring a property, you must precede the property variable with a visibility keyword. This [...] determines the scope from which the property can be accessed." zandstra (2016): 17
 
             Constant Properties
-            "Some properties should not be changed. [...] Error and status flags will often be hard-coded into your classes. Although they should be publicly and statically available, client code should not be able to change them. PHP allows you to define constant properties within a class. Like global constants, class constants cannot be changed once they are set. A constant property is declared with thr const keyword. Constants are not prefixed with a dollar sign like regular properties. By convention, they are often named using only uppercase characters." zandstra (2016): 51
+            "Some properties should not be changed. [...] Error and status flags will often be hard-coded into your classes. Although they should be publicly and statically available, client code should not be able to change them. PHP allows you to define constant properties within a class. Like global constants, class constants cannot be changed once they are set. A constant property is declared with the const keyword. Constants are not prefixed with a dollar sign like regular properties. By convention, they are often named using only uppercase characters." zandstra (2016): 51
 
                 Only primitive values
                 "Constant properties can contain only primitive values. You cannot assign an object to a constant. Like static properties, constant properties are accessed through the class and not an instance. Just as you define a constant without a dollar sign, no leading symbol is required when you refer to one. [...] Attempting to set a value on a constant once it has been declared will cause a parse error. You should use constants when your property needs to be avaliable across all instances of a class, as well as when the property value need to be fixed and unchanging." zandstra (2016): 51
@@ -45,7 +45,7 @@ Classes
             "In most circumstances, you will invoke a method using an object variable in conjunction with the object operator, ->, and the method name. You must use parentheses in your method call as you would if you were calling a function (even if you are not passing any arguments to the method)." http://php.net/manual/en/language.oop5.basic.php
 
     Objects
-     "If a class is a template for generating objects, it follows that an object is data that has been structured according to the temmplate defined in a class. An object is said to be an instance of its class. It is of the type defined by the class. [...] Every object that is created in a PHP script is also given its own unique identifier. (Note that the identifier is unique for the life of the object; that is, PHP reuses identifiers, even within a process)."zandstra (2016): 16
+     "If a class is a template for generating objects, it follows that an object is data that has been structured according to the template defined in a class. An object is said to be an instance of its class. It is of the type defined by the class. [...] Every object that is created in a PHP script is also given its own unique identifier. (Note that the identifier is unique for the life of the object; that is, PHP reuses identifiers, even within a process)."zandstra (2016): 16
 
         Instantiation
         "To create an instance of a class, the 'new' keyword must be used. An object will always be created unless the object has a constructor defined that throws an exception on error. Classes should be defined before instantiation (and in some cases this is a requirement). If a string containing the name of a class is used with new, a new instance of that class will be created. If the class is in a namespace, its fully qualified name must be used when doing this." http://php.net/manual/en/language.oop5.basic.php

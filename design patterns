@@ -83,6 +83,11 @@ Pattern language
                 Abstract factory pattern
                  "This is your problem: you need to generate a different set of objects according to thecircumstances, andyou want this to be more or less transparent to otehr components in the system. It just so happens that the Gang of Four defined the following problem in their book's summary page for the pattern Abstract Factory, "Provide an interface for creating families of related or dependent objects withpur specifying their concrete classes". [...] That fits nicely. It is the nature of our problem that determines and shapes our use of this pattern. [...]" zandstra (2016): 158
 
+                    "In large applications, youmay need factories that produce related sets of classes. The Abstract Factory pattern addresses this problem." zandstra (2016): 193
+
+                    Consequences
+                    "Many implementations of the Abstract Factory pattern use the Factory Method pattern. This may be because most examples are written  in Java or C++. PHP, however, does not have to enforce a return type for a method (though it now can), which afford us some flexibility that we might leverage." zandstra (2016): 197
+
                 The Factory pattern
                  "Object-oriented design emphasizes the abstract class over the implementation. That is, it works with generalizations rather than specializations. The Factory Method pattern address the problem of how to create object instances when your code focuses on abstract types." zandstra (2016): 188
 
@@ -93,9 +98,21 @@ Pattern language
                         -Eachproduct type is associated with a context that requires other customized operations
                     [...] The Factory Method pattern enables you to use inheritance and polymorphism to encapsulate the creation of concrete products." zandstra (2016): 190-191
 
+                    Implementation
+                    "The Factory Method pattern splits creator classes from the products ther are designed to generate. The creator is a factory class that defines a method for generating a product object. If no default implementation is provided, it is left to creator child classes to perform instantiation. Typically, each creator subclass instantiates a parallel product child class." zandstra (2016): 191
+
+                    Consequences
+                    "[...] the creator classes mirror the product hierarchy. This is a common consequence of the Factory Method pattern and disliked by someone as a special kind of code duplication. Another issue is the possibility that the pattern could encourage unnecessary subclassing." zandstra (2016): 193
+
                 The Builder (Manager) pattern
 
                 The Prototype pattern
+                "The emergence of parallel inheritance hierarchies can be a problem with the Factory Method pattern. This is a kind of coupling that makes some programmers uncomfortable. Every time you add a product family, you are forced to create an associated concrete creator. In a system that groes fast enough to encompass many products. maintaining this kind of relationship can quickly become tiresome. One way of avoiding this dependency is to use PHP's clone keyword to duplicate existing concrete products. The concrete product classes themselves then become the basis of their own generation. This is the Prototype pattern. It enables you to replace inheritance with composition. This in turn promotes runtime flexibility and reduces the number of classes you must create." zandstra (2016): 199
+
+                    "[...] the Prototype pattern allows you to take advantage of the flexibility afforded by composition. We get more than that, though. Because you are storing and cloning objects at runtime, you reproduce object state when you generate new products." zandstra (2016): 202
+
+                    Implementation
+                    "When you work with the Abstract Factory/Factory Method patterns, you must decide, at some point, which concrete creatoryou wich to use, probably by checking some kind of preference flag. As you must do this anyway, why not simply create a class that stores concrete products, and then populate this during initialization? You can cut down on a couple of classes this way and [...] take advantage of other benefits." zandstra (2016): 200
 
                 The Singleton pattern
                     Global variables
@@ -117,10 +134,37 @@ Pattern language
 
             Composition
             "This composes objects into a tree structure (whole hierarchies). Composition allows customers to be uniformly treated as individual objects according to their composition." kilicdagi & yilmaz (2014):10
-            
+
+                "The Composite pattern is perhaps the most extreme example of inheritance deployed in the service of composition. It is a simple and yet breathtaking elegant design. [...] is a simple way of aggregating and then managing groups of similar objects so that an individual object is indistinguishable to a client from a collection of objects. The pattern is, in fact, very simple, but it is also often confusing. One reason for this is the similarity in structure of the classes in the pattern to the organization of its objects. Inheritance hierarchies are trees, beginning with the super class at the root, and branching out into specialized subclasses. The inheritance tree of classes laid down by the Composite pattern is designed to allow the easy generation and traversalof a tree of objects." zandstra (2016): 211-212
+
+                "[...] the Composite pattern is useful when you need to treat a collection of things in the same way as you would an individual, ither because the collection is intrisically like a component, or because the context gives the collection the same characteristics as the component. Composites are arranged in trees, so an operation on the whole can affect the parts, and data from the parts is transparent to the client. Trees are easy to traverse. It is easy to add new component types to Composite structures. On the downside, Composites rely on the similarity of their parts. As soon as we introduce complex rules as to which composite object can hld which set of components, our code can become hard to manage. Composites do not lend themselves well to storage in relational databases, but are well suite to XML persistence." zandstra (2016): 222
+
+                The problem
+                "Managing groups of objects can be quite a complex task, especially if the objects in question might also contain objects of their own. This kind of problem is very common in coding. Think of invoices, with line items that summarize additional products or services, or thingd-to-do lists with items that themselves can contain multiple subtasks. In content management, we can't move for trees of sections, pages, artivles, or media components. Managing these structures from the outside can quickly become daunting." zandstra (2016): 212
+
+                Implementation
+                "The Composite pattern defines a single inheritances hierarchy that lays down two distinct sets of responsibilities. [...] Classes in the pattern must supposrt a common ser of operations as their primary responsibility. [...] Classes must also support methods for adding and removing child objects." zandstra (2016): 214
+
+                Benefits
+                "Flexibility: Because everything in the Composite pattern shares a common supertype,it is very easy to add new composite or leaf objects to the design without changing a program's wider context.
+                Simplicity: A client using a Composite structure has a straightforward interface. There is no need for a client to distinguish between an object that is composed of others and a leaf object (excepr when adding new components). [...]
+                Implixir reach: Objectsinthe Composite pattern are organized in a tree. Each composite holds references to its children. An operation on a particular part of the tree, therefore, can have a wide effect. [...]
+                Explicit reach: Tree structures are easy to traverse. They can be iterated in order to gain information or to perform transformations." zandstra (2016): 217-218
+
+                Consequences
+                "Simplicity is achieved by ensuring that all classes are derived from a common base. The benefit of simplicity is sometimes bought at a cost to type safety. The more complex your model becomes, the more manual type checking you are likely to have to do." zandstra (2016): 221
+
+                    Persistence
+                    "The composite pattern is elegant, but it doesn't lend itself neatly to storage in a relational database. This is beacuse, by default, you access the entire structure only through a cascade of references. To construct a Composite structure from a database in the natural way, you would have to make multiple expensive queries. You can get around this porblem by assigning an ID to the whole treem so that all components can be drawn from the database in one go. Having acquired all the objects, however, you would stull have the task of recreating the parent/child references, which themselves would have to be stored in the database. This is not difficult, but it is somewhat messy." zandstra (2016):222
+
             Decorator
             "This dynamically adds options to an object. A Decorator is a flexible alternative embodiment to extend functionality." kilicdagi & yilmaz (2014): 10
-            
+
+                "While the Composite pattern helps us to create a flexible representation of aggregated components, the Decorator patternuses a similar structure to help us to modify the functionlaity of concrete components. Once again, the key to this patternlies in the importance of composition at runtime. Inheritance is a neat way of building on characteristics laid down by a parent class. This neatness can lead you to hard-code variation into your inheritance hierarchies, often causing inflexibility." zandstra (2016): 222
+
+                The problem
+                "Building all your functionality into an inheritance structure can result in an explosion of classes in a system. Even worse, as you try to apply similar modifications to different branches of your inheritance tree, you are likely to see duplication emerge." zandstra (2016): 222
+
             Flies
             "This is a share of small objects (objects without conditions) that prevent overproduction." kilicdagi & yilmaz (2014): 10
             
@@ -188,6 +232,10 @@ Pattern language
             Strategy pattern
             Template pattern
             Visitor pattern
+
+Service Locator
+"The particular concrete creator that a system chooses is often decided according to the value of a configuration switch of some kind. This could be located in a database, a configuration file, or a server file , or it could even be hard-coded as a PHP variable or property. Because PHP applications must be reconfigured for every request, you need script initialization to be as painless as possible." zandstra (2016): 203
+
 
     What is MVC?
      "The MVC triad of classes were used to build user interfaces in Smalltalk-80 in 1988. MVC is an architectural pattern that is used in software engineering, whose fundamental principle is based on the idea that the logic of an application should be separated from its presentation. It divides a given software application into three interconnected parts, so as to separate internal representations of information from the way that information is presented to or accepted from the user." kilicdagi & yilmaz (2014): 11
