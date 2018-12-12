@@ -1,0 +1,34 @@
+TCP/IP (Transmission Control Protocol/Internet Protocol)
+"TCP/IP is a suite of communication protocols used to interconnect network devices on the internet. TCP/IP can also be used as a communications protocol in a private network."
+
+"TCP/IP specifies how data is exchanged over the internet by providing end-to-end communications that identify how it should be broken into packets, addressed, transmitted, routed and received at the destination. TCP/IP requires little central management, and it is designed to make networks reliable, with the ability to recover automatically from the failure of any device on the network."
+
+"The two main protocols in the internet protocol suite serve specific functions." 
+
+    "TCP defines how applications can create channels of communication across a network. It also manages how a message is assembled into smaller packets before they are then transmitted over the internet and reassembled in the right order at the destination address."
+
+        "A packet is the unit of data that is routed between an origin and a destination on the Internet or any other packet-switched network. When any file (e-mail message, HTML file, Graphics Interchange Format file, Uniform Resource Locator request, and so forth) is sent from one place to another on the internet, the Transmission Control Protocol (TCP) layer of TCP/IP divides the file into "chunks" of an efficient size for routing. Each of these pakets is separately numbered and includes the Internet address of the destination. The individual packets for a given file may travel different routes through the Internet. When they all arrived, they are reassembled into the original file (by the TCP layer at the receiving end)."
+
+    "IP defines how to address and route each packet to make sure it reaches the right destination. Each gateway computer on the network checks this IP address to determine where to foward the message."
+
+"TCP/IP uses the client/server model of communication in which auser or machine (a client) is provided a service (like sending a webpage) by another computer (a server) in the network."
+
+"Collectively, the TCP/IP suite of protocols is classified as stateless, which means each client request is considered new because it is unrelated to previous requests. Being stateless frees up network paths so they can be used continuously."
+
+"The transport layer itself, however, is stateful. It transmits a single message, and its connection remains in place until all the packets in a message have been received and reassembled at the destination."
+
+"The TCP/IP model differs slightly from the seven-layer Open System Interconnection (OSI) networking model designed after it, which defines how applications can communicate over a network."
+
+TCP/IP model layers
+"TCP/IP functionality is divided into four layers, each of which include specific protocols."
+
+    "The application layer provides applications with standarized data exchange. Its protocols include the Hypertext Transfer Protocol (HTTP), File Transfer Protocol (FTP), Post Office Protocol 3 (POP3), Simple Mail Transfer Protocol (SMTP) and Simple Network Management Protocol (SNMP)."
+
+    "The transport layer is responsible for maintaining end-to-end communications across the network. TCP handles communications between hosts and provides flow control, multiplexing and reliability. The transport protocols include TCP and User Datagram Protocol (UDP), which is sometimes used instead of TCP for special purposes."
+
+    "The network layer, also called the internet layer, deals with packets and connects independent networks to transport the packats across network boundaries. The network layer protocols are the IP and the Internet Control Message Protocol (ICMP), which is used for error reporting."
+
+    "The physical layer consists of protocols that operate only on a link -- the network component that interconnects nodes or hosts in the network. The protocols in this layer include Ethernet for local area networks (LANs) and the Address Resolution Protocol (ARP)."
+
+Advantages
+"TCP/IP is nonpropietary and, as a result, is not controlled by any single company. Therefore, the internet protocol suite can be modified easily. It is compatible with all operating systems, so it can communicate with any other system. The internet protocol suit is also compatible with all types of computer hardware and networks."
